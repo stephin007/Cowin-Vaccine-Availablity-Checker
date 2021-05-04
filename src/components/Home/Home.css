@@ -16,11 +16,12 @@ body{
   padding: 15px;
   color: #BB86FC;
   margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 5px;
 }
 
 .home__optionLeft > .MuiSlider-root {
-  color: #e33060;
+  color: #e35060;
   width: 600px;
 }
 
