@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Slider, Typography } from "@material-ui/core";
 import { MenuItem, FormControl, Select } from "@material-ui/core";
@@ -8,10 +8,22 @@ function valuetext(value) {
 }
 
 const Home = () => {
+  const [state, setState] = useState([]);
+  const [stateName, setStateName] = useState("State");
+
+  useEffect(() => {
+    fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
+      .then((res) => res.json())
+      .then((data) => {
+        setState(data);
+      });
+  }, [setState]);
+
+  console.info(state);
+
   return (
     <div className="home">
       <h2>CoWIN Vaccination Slot Availablity</h2>
-
       <div className="home__info">
         <p>
           The CoWIN APIs are geo fenced, so sometimes you may not see an output!
@@ -33,10 +45,17 @@ const Home = () => {
           />
         </div>
         <div className="home__optionRight">
-          <Typography>Select District</Typography>
+          <Typography>Select State</Typography>
           <FormControl>
-            <Select variant="outlined" defaultValue="districts">
-              <MenuItem value="worldwide">Districts</MenuItem>
+            <Select
+              variant="outlined"
+              value={() => stateName()}
+              onChange={(e) => setStateName(e.target.value)}
+            >
+              <MenuItem value="state">State</MenuItem>
+              {state.map((state) => (
+                <MenuItem value={state.state_id}>{state.state_name}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>

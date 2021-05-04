@@ -1,6 +1,11 @@
 .home {
   color: white;
-  margin: 20px;
+  background-image: url(https://bioengineering.stanford.edu/sites/g/files/sbiybj17086/files/styles/breakpoint_2xl_2x/public/media/image/covid-19-5000501_1920_0.jpg?itok=s9XVFV61);
+  background-position: center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  padding: 10px;
 }
 
 .home__info {
@@ -32,6 +37,7 @@
   background-color: #31333f;
   color: white !important;
   width: 600px;
+  outline: 0 !important;
   border-radius: 10px;
 }
 
@@ -50,4 +56,12 @@
   .home__info {
     border-radius: 10px;
   }
+  .home {
+    background-size: 300%;
+    height: 100vh;
+  }
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
