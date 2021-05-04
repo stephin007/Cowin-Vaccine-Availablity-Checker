@@ -1,18 +1,22 @@
+body{
+  background-color: #121212;
+  background-image: url(https://bioengineering.stanford.edu/sites/g/files/sbiybj17086/files/styles/breakpoint_2xl_2x/public/media/image/covid-19-5000501_1920_0.jpg?itok=s9XVFV61);
+}
 .home {
   color: white;
-  background-image: url(https://bioengineering.stanford.edu/sites/g/files/sbiybj17086/files/styles/breakpoint_2xl_2x/public/media/image/covid-19-5000501_1920_0.jpg?itok=s9XVFV61);
   background-position: center center;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: calc(100vh - 20px);
   padding: 10px;
 }
 
 .home__info {
-  background-color: #122338;
+  background-color: #121212;
   padding: 15px;
-  color: #006bee;
+  color: #BB86FC;
   margin-top: 20px;
+  border-radius: 5px;
 }
 
 .home__optionLeft > .MuiSlider-root {
