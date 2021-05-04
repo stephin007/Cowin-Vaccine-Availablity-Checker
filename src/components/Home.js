@@ -15,7 +15,7 @@ const Home = () => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
       .then((res) => res.json())
       .then((data) => {
-        setState(data);
+        setState(data.states);
       });
   }, [setState]);
 
@@ -49,7 +49,7 @@ const Home = () => {
           <FormControl>
             <Select
               variant="outlined"
-              value={() => stateName()}
+              value={"state"}
               onChange={(e) => setStateName(e.target.value)}
             >
               <MenuItem value="state">State</MenuItem>
