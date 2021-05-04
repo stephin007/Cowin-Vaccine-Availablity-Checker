@@ -9,7 +9,6 @@ function valuetext(value) {
 
 const Home = () => {
   const [state, setState] = useState([]);
-  const [stateName, setStateName] = useState("State");
 
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
@@ -47,11 +46,7 @@ const Home = () => {
         <div className="home__optionRight">
           <Typography>Select State</Typography>
           <FormControl>
-            <Select
-              variant="outlined"
-              value={"state"}
-              onChange={(e) => setStateName(e.target.value)}
-            >
+            <Select variant="outlined" value={"state"}>
               <MenuItem value="state">State</MenuItem>
               {state.map((state) => (
                 <MenuItem value={state.state_id}>{state.state_name}</MenuItem>
