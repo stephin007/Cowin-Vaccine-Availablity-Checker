@@ -1,15 +1,54 @@
 .home {
   color: white;
   margin: 20px;
-}
-
-.home > h2 {
+  width: 100%;
 }
 
 .home__info {
   background-color: #122338;
   padding: 15px;
   color: #006bee;
-  border-radius: 5px;
   margin-top: 20px;
+}
+
+.home__optionLeft > .MuiSlider-root {
+  color: #e33060;
+  width: 600px;
+}
+
+.home__optionLeft {
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: -15px;
+}
+
+.home__option {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home__optionRight > .MuiFormControl-root {
+  background-color: #31333f;
+  color: white !important;
+  width: 600px;
+  border-radius: 10px;
+}
+
+.MuiSelect-root {
+  color: white !important;
+}
+
+@media (max-width: 600px) {
+  .home__optionLeft > .MuiSlider-root {
+    color: #e33060;
+    width: 150px;
+  }
+  .home__optionRight > .MuiFormControl-root {
+    width: 150px;
+  }
+  .home__info {
+    border-radius: 10px;
+  }
 }

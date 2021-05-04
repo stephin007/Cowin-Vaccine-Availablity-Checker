@@ -1,6 +1,11 @@
 import React from "react";
 import "./Home.css";
-import { Grid, Slider } from "@material-ui/core";
+import { Slider, Typography } from "@material-ui/core";
+import { MenuItem, FormControl, Select } from "@material-ui/core";
+
+function valuetext(value) {
+  return `${value}°C`;
+}
 
 const Home = () => {
   return (
@@ -14,13 +19,27 @@ const Home = () => {
         </p>
       </div>
 
-      <div>
-        <label></label>
-        <Grid container spacing={2}>
-          <Grid item xs>
-            <Slider aria-labelledby="continuous-slider" />
-          </Grid>
-        </Grid>
+      <div className="home__option">
+        <div className="home__optionLeft">
+          <Typography>Select Date Range</Typography>
+          <Slider
+            defaultValue={30}
+            valueLabelDisplay="on"
+            step={10}
+            marks={true}
+            min={10}
+            max={110}
+            getAriaValueText={valuetext}
+          />
+        </div>
+        <div className="home__optionRight">
+          <Typography>Select District</Typography>
+          <FormControl>
+            <Select variant="outlined" defaultValue="districts">
+              <MenuItem value="worldwide">Districts</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
       </div>
     </div>
   );
