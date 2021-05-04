@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
+import Home from "./components/Home";
 
 const App = () => {
   return (
     <div className="app">
-      <h3> Cowin-Vaccine-Availablity-Checker</h3>
+      <Home />
     </div>
   );
 };

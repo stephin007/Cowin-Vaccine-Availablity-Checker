@@ -1,0 +1,15 @@
+.home {
+  color: white;
+  margin: 20px;
+}
+
+.home > h2 {
+}
+
+.home__info {
+  background-color: #122338;
+  padding: 15px;
+  color: #006bee;
+  border-radius: 5px;
+  margin-top: 20px;
+}
