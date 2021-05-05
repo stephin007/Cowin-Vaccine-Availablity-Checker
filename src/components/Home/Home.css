@@ -1,4 +1,4 @@
-body{
+body {
   background-color: #121212;
   background-image: url(https://bioengineering.stanford.edu/sites/g/files/sbiybj17086/files/styles/breakpoint_2xl_2x/public/media/image/covid-19-5000501_1920_0.jpg?itok=s9XVFV61);
 }
@@ -14,15 +14,10 @@ body{
 .home__info {
   background-color: #121212;
   padding: 15px;
-  color: #BB86FC;
+  color: #bb86fc;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
-}
-
-.home__optionLeft > .MuiSlider-root {
-  color: #e35060;
-  width: 600px;
 }
 
 .home__optionLeft {
@@ -32,16 +27,13 @@ body{
 }
 
 .home__option {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin: 10px;
 }
 
-.home__optionRight > .MuiFormControl-root {
+.text > .MuiFormControl-root {
   background-color: #31333f;
   color: white !important;
-  width: 600px;
+  width: 500px;
   outline: 0 !important;
   border-radius: 10px;
 }
@@ -50,13 +42,10 @@ body{
   color: white !important;
 }
 
-@media (max-width: 600px) {
-  .home__optionLeft > .MuiSlider-root {
-    color: #e33060;
-    width: 150px;
-  }
+@media (max-width: 800px) {
   .home__optionRight > .MuiFormControl-root {
-    width: 150px;
+    width: 280px;
+    margin-left: 10px;
   }
   .home__info {
     border-radius: 10px;
@@ -65,8 +54,31 @@ body{
     background-size: 300%;
     height: 100vh;
   }
+
+  .home__optionRight {
+    display: flex;
+    flex-direction: column;
+  }
+  .text > .MuiFormControl-root {
+    background-color: #31333f;
+    color: white !important;
+    width: 280px;
+    outline: 0 !important;
+    border-radius: 10px;
+  }
 }
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+.home__optionRight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
 }
