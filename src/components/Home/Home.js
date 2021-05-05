@@ -136,46 +136,44 @@ const Home = () => {
                 </Select>
               </FormControl>
             </div>
-          </div>
-        </div>
-        <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
-            <Grid container justify="space-around" spacing={2}>
-              <Grid item>
-                <Paper className={classes.paper} elevation={3}>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
+            <div style={{ padding: "10px" }}>
+              <Grid item xs={12} className="date__picker">
+                <Grid item>
+                  <Paper className={classes.paper} elevation={3}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <KeyboardDatePicker
+                        margin="normal"
+                        id="date-picker-dialog"
+                        label="Date picker dialog"
+                        format="dd-MM-yyyy"
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        InputProps={{ className: classes.input }}
+                        KeyboardButtonProps={{
+                          "aria-label": "change date",
+                        }}
+                      />
+                    </MuiPickersUtilsProvider>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.paper} elevation={3}>
+                    <TextField
+                      id="outlined-number"
                       margin="normal"
-                      id="date-picker-dialog"
-                      label="Date picker dialog"
-                      format="dd-MM-yyyy"
-                      value={selectedDate}
-                      onChange={handleDateChange}
-                      InputProps={{ className: classes.input }}
-                      KeyboardButtonProps={{
-                        "aria-label": "change date",
+                      label="Pin Code"
+                      type="number"
+                      variant="outlined"
+                      InputProps={{
+                        className: classes.textfield,
                       }}
                     />
-                  </MuiPickersUtilsProvider>
-                </Paper>
+                  </Paper>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Paper className={classes.paper} elevation={3}>
-                  <TextField
-                    id="outlined-number"
-                    margin="normal"
-                    label="Pin Code"
-                    type="number"
-                    variant="outlined"
-                    InputProps={{
-                      className: classes.textfield,
-                    }}
-                  />
-                </Paper>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+            </div>
+          </div>
+        </div>
       </div>
     </Container>
   );
