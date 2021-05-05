@@ -65,7 +65,7 @@ const Home = () => {
     const stateCode = e.target.value;
     const url =
       stateCode === "States"
-        ? "https://cdn-api.co-vin.in/api/v2/admin/location/states"
+        ? "https://cdn-api.co-vin.in/api/v2/admin/location/districts/6"
         : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
     await fetch(url)
       .then((response) => response.json())
@@ -79,7 +79,7 @@ const Home = () => {
     const stateCode = e.target.value;
     const url =
       stateCode === "Districts"
-        ? "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=512&date=31-03-2021"
+        ? null
         : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${stateCode}&date=31-03-2021
         `;
     await fetch(url)
