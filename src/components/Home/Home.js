@@ -65,7 +65,7 @@ const Home = () => {
     const stateCode = e.target.value;
     const url =
       stateCode === "States"
-        ? "https://cdn-api.co-vin.in/api/v2/admin/location/districts/6"
+        ? "https://cdn-api.co-vin.in/api/v2/admin/location/districts/99"
         : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
     await fetch(url)
       .then((response) => response.json())
