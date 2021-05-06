@@ -51,9 +51,9 @@ const Home = () => {
   const a = JSON.stringify(vaccineData);
 
   const GetFormattedDate = ()=> {
-    var month = selectedDate .getMonth() + 1;
-    var day = selectedDate .getDate();
-    var year = selectedDate .getFullYear();
+    var month = selectedDate.getMonth() + 1;
+    var day = selectedDate.getDate();
+    var year = selectedDate.getFullYear();
     var finalDate =  day + "-" + month + "-" + year;
 
     setFormattedDate(finalDate)
@@ -62,6 +62,7 @@ const Home = () => {
 
   useEffect(() => {
     GetFormattedDate()
+    // eslint-disable-next-line
   }, [selectedDate, formattedDate]);
 
   console.log(formattedDate, vaccineData);
