@@ -17,7 +17,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 
-import VaccineData from "../VaccineData/VaccineData";
+import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
 import "./Home.css";
 
@@ -57,7 +57,6 @@ const Home = () => {
     var finalDate =  day + "-" + month + "-" + year;
 
     setFormattedDate(finalDate)
-    console.log(finalDate)
   }
 
   useEffect(() => {
@@ -103,8 +102,7 @@ const Home = () => {
       .then((data) => {
         setDistrictCode(districtCode);
         setVaccineData(data.sessions);
-          console.log(data.sessions)
-
+        console.log(data.sessions)
       });
   };
 
@@ -190,7 +188,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-          <VaccineData vaccineData={vaccineData}/>
+          <VaccineDataMain vaccineData={vaccineData}/>
       </div>
     </Container>
   );
