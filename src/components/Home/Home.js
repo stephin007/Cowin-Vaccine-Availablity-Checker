@@ -45,16 +45,27 @@ const Home = () => {
   const [district, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState("Districts");
   const [vaccineData, setVaccineData] = useState([]);
-  const [formatedDate, setFormatedDate] = useState("");
+  const [formattedDate, setFormattedDate] = useState("");
   const classes = useStyles();
 
   const a = JSON.stringify(vaccineData);
 
-  useEffect(() => {
-    setFormatedDate(selectedDate.toLocaleDateString().split("/").join("-"));
-  }, [selectedDate, formatedDate]);
+  const GetFormattedDate = ()=> {
+    var month = selectedDate.getMonth() + 1;
+    var day = selectedDate.getDate();
+    var year = selectedDate.getFullYear();
+    var finalDate =  day + "-" + month + "-" + year;
 
-  console.log(formatedDate, vaccineData);
+    setFormattedDate(finalDate)
+    console.log(finalDate)
+  }
+
+  useEffect(() => {
+    GetFormattedDate()
+    // eslint-disable-next-line
+  }, [selectedDate, formattedDate]);
+
+  console.log(formattedDate, vaccineData);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -87,7 +98,7 @@ const Home = () => {
     const url =
       stateCode === "Districts"
         ? null
-        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${stateCode}&date=${formatedDate}
+        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${stateCode}&date=${formattedDate}
         `;
     await fetch(url)
       .then((response) => response.json())
@@ -135,6 +146,7 @@ const Home = () => {
                   value={districtCode}
                   onChange={onDistrictChange}
                 >
+                  <MenuItem value="States">Select State First</MenuItem>
                   {district.map((state) => (
                     <MenuItem value={state?.district_id}>
                       {state?.district_name}
@@ -169,7 +181,7 @@ const Home = () => {
                       type="number"
                       variant="outlined"
                       InputProps={{
-                        className: classes.textfield,
+                        className: classes.textfield
                       }}
                     />
                   </Paper>
