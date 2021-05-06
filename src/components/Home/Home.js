@@ -40,12 +40,21 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const [state, setState] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date("2021-04-30"));
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [stateCode, setStateCode] = useState("States");
   const [district, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState("Districts");
-  const [vaccinedData, setVaccinatedData] = useState([]);
+  const [vaccineData, setVaccineData] = useState([]);
+  const [formatedDate, setFormatedDate] = useState("");
   const classes = useStyles();
+
+  const a = JSON.stringify(vaccineData);
+
+  useEffect(() => {
+    setFormatedDate(selectedDate.toLocaleDateString().split("/").join("-"));
+  }, [selectedDate, formatedDate]);
+
+  console.log(formatedDate, vaccineData);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -58,8 +67,6 @@ const Home = () => {
         setState(data.states);
       });
   }, [setState]);
-
-  console.log(vaccinedData);
 
   const onStateChange = async (e) => {
     const stateCode = e.target.value;
@@ -80,13 +87,13 @@ const Home = () => {
     const url =
       stateCode === "Districts"
         ? null
-        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${stateCode}&date=31-03-2021
+        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${stateCode}&date=${formatedDate}
         `;
     await fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setDistrictCode(stateCode);
-        setVaccinatedData(data);
+        setVaccineData(data);
       });
   };
 
@@ -149,9 +156,6 @@ const Home = () => {
                         value={selectedDate}
                         onChange={handleDateChange}
                         InputProps={{ className: classes.input }}
-                        KeyboardButtonProps={{
-                          "aria-label": "change date",
-                        }}
                       />
                     </MuiPickersUtilsProvider>
                   </Paper>
@@ -174,6 +178,11 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {a === "[]" ? (
+          <span style={{ display: "none" }}></span>
+        ) : (
+          <span>{a}</span>
+        )}
       </div>
     </Container>
   );
