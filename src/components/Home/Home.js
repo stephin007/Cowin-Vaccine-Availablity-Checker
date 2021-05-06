@@ -17,6 +17,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 
+import VaccineDataMain from "../VaccineData/VaccineDataMain";
+
 import "./Home.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -40,12 +42,27 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const [state, setState] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date("2021-04-30"));
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [stateCode, setStateCode] = useState("States");
   const [district, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState("Districts");
-  const [vaccinedData, setVaccinatedData] = useState([]);
+  const [vaccineData, setVaccineData] = useState([]);
+  const [formattedDate, setFormattedDate] = useState("");
   const classes = useStyles();
+
+  const GetFormattedDate = ()=> {
+    var month = selectedDate.getMonth() + 1;
+    var day = selectedDate.getDate();
+    var year = selectedDate.getFullYear();
+    var finalDate =  day + "-" + month + "-" + year;
+
+    setFormattedDate(finalDate)
+  }
+
+  useEffect(() => {
+    GetFormattedDate()
+    // eslint-disable-next-line
+  }, [selectedDate, formattedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -55,17 +72,15 @@ const Home = () => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
       .then((res) => res.json())
       .then((data) => {
-        setState(data.states);
+        setState(data.states)
       });
   }, [setState]);
-
-  console.log(vaccinedData);
 
   const onStateChange = async (e) => {
     const stateCode = e.target.value;
     const url =
       stateCode === "States"
-        ? "https://cdn-api.co-vin.in/api/v2/admin/location/districts/99"
+        ? "https://cdn-api.co-vin.in/api/v2/admin/location/districts/9"
         : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
     await fetch(url)
       .then((response) => response.json())
@@ -76,17 +91,18 @@ const Home = () => {
   };
 
   const onDistrictChange = async (e) => {
-    const stateCode = e.target.value;
+    const districtCode = e.target.value;
     const url =
       stateCode === "Districts"
         ? null
-        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${stateCode}&date=31-03-2021
+        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${formattedDate}
         `;
     await fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setDistrictCode(stateCode);
-        setVaccinatedData(data);
+        setDistrictCode(districtCode);
+        setVaccineData(data.sessions);
+        console.log(data.sessions)
       });
   };
 
@@ -113,7 +129,7 @@ const Home = () => {
                 >
                   <MenuItem value="States">States</MenuItem>
                   {state.map((state) => (
-                    <MenuItem value={state?.state_id}>
+                    <MenuItem key={state?.state_id} value={state?.state_id}>
                       {state?.state_name}
                     </MenuItem>
                   ))}
@@ -128,9 +144,10 @@ const Home = () => {
                   value={districtCode}
                   onChange={onDistrictChange}
                 >
-                  {district.map((state) => (
-                    <MenuItem value={state?.district_id}>
-                      {state?.district_name}
+                  <MenuItem value="States">Select State First</MenuItem>
+                  {district.map((district) => (
+                    <MenuItem key={district?.district_id} value={district?.district_id}>
+                      {district?.district_name}
                     </MenuItem>
                   ))}
                 </Select>
@@ -149,9 +166,6 @@ const Home = () => {
                         value={selectedDate}
                         onChange={handleDateChange}
                         InputProps={{ className: classes.input }}
-                        KeyboardButtonProps={{
-                          "aria-label": "change date",
-                        }}
                       />
                     </MuiPickersUtilsProvider>
                   </Paper>
@@ -165,7 +179,7 @@ const Home = () => {
                       type="number"
                       variant="outlined"
                       InputProps={{
-                        className: classes.textfield,
+                        className: classes.textfield
                       }}
                     />
                   </Paper>
@@ -174,6 +188,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+          <VaccineDataMain vaccineData={vaccineData}/>
       </div>
     </Container>
   );
