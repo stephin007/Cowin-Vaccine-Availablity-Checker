@@ -109,7 +109,7 @@ const Home = () => {
   return (
     <Container>
       <div className="home">
-        <h2>CoWIN Vaccination Slot Availablity</h2>
+        <h2>CoWIN Vaccination Slot Availability</h2>
         <div className="home__info">
           <p>
             The CoWIN APIs are geo fenced, so sometimes you may not see an
@@ -144,7 +144,7 @@ const Home = () => {
                   value={districtCode}
                   onChange={onDistrictChange}
                 >
-                  <MenuItem value="States">Select State First</MenuItem>
+                  <MenuItem value="States" disabled={true}>Select State First</MenuItem>
                   {district.map((district) => (
                     <MenuItem key={district?.district_id} value={district?.district_id}>
                       {district?.district_name}
