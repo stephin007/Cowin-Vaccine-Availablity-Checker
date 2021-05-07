@@ -90,6 +90,7 @@
     .paper-left .paper-left_time {
         display: flex;
         flex-direction: column;
+        text-align: center;
     }
 
     .paper-left .paper-left_time .time{
