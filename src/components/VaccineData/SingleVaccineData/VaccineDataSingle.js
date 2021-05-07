@@ -1,15 +1,13 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-
 import "./VaccineDataSingle.css"
 
-const useStyles = makeStyles((theme) => ({
-    paperMainDiv:{
-        width: "100%"
-    },
-}));
+import Paper from '@material-ui/core/Paper';
+import {makeStyles} from '@material-ui/core/styles';
 
-const VaccineDataSingle = (vaccine)=> {
+const useStyles = makeStyles((theme) => ({
+                               paperMainDiv : {width : "100%"},
+                             }));
+
+const VaccineDataSingle = (vaccine) => {
     const classes = useStyles();
 
     return(
