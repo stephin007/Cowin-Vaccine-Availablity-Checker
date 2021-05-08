@@ -1,7 +1,7 @@
 .wrapper {
-  display: flex;
-  background-color: #333333;
-  height: 30vh;
+    display: flex;
+    background-color: #333333;
+    height: 27vh
 }
 
 .wrapper > * {
@@ -18,10 +18,34 @@
   font-family: monospace;
 }
 
-.paper-left .paper-left_content {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+.paper-left_vaccine_head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.paper-left_vaccine_head h3{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    font-family: "Fira Code Medium", "monospace";
+}
+
+.paper-left_vaccine_head p{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    font-family: monospace;
+    background-color: #009E60;
+    padding: 10px;
+    border-radius: 7px;
+    text-align: center;
+}
+
+.paper-left .paper-left_content{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .paper-left .paper-left_content h3 {
@@ -64,36 +88,181 @@
   width: 50%;
 }
 
+.paper-right_Badges{
+    display: flex;
+    justify-content: space-between;
+}
+
+.paper-right_Badges h5{
+    margin-right: 10px;
+    color: aquamarine;
+    font-family: monospace;
+    font-size: 22px;
+}
+
+.paper-right_Badges .healing_icon{
+    color: white;
+}
+
+.paper-right_Badges p {
+    color: whitesmoke;
+    font-size: 15px;
+}
+
+.paper-right_Badges p span{
+    color: aquamarine;
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.paper-right_age{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.paper-right_age .age_text h3{
+    color: aquamarine;
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.paper-right_age .age_content p{
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.paper-right_age .age_content{
+    background-color: rgb(222,49,99);
+    height: 25px;
+    width: 75px;
+    padding: 5px;
+    border-radius: 3px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paper-right_slots h3{
+    text-align: center;
+    font-weight: 700;
+    color: #BB86FC;
+    margin: 5px;
+}
+
+.paper-right_slots p{
+    color: whitesmoke;
+    font-size: 17px;
+    text-align: center;
+}
+
+
 /*Media Queries*/
 @media screen and (max-width: 500px) {
-  .wrapper {
-    height: 50vh;
-    flex-direction: column;
-  }
+    .wrapper {
+        height: 70vh;
+        flex-direction: column;
+    }
 
-  .paper-left {
-    width: 90%;
-  }
+    .paper-left {
+        width: 90%;
+    }
 
-  .paper-left p {
-    width: 100%;
-  }
+    .paper-left_vaccine_head{
+        flex-direction: column;
+    }
 
-  .paper-left .paper-left_content {
-    display: flex;
-    flex-direction: column;
-  }
+    .paper-left_vaccine_head h3{
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
 
-  .paper-left .paper-left_time {
-    display: flex;
-    flex-direction: column;
-  }
+    .paper-left_vaccine_head p{
+        padding: 5px;
+        font-size: 15px;
+        border-radius: 7px;
+        text-align: center;
+    }
 
-  .paper-left .paper-left_time .time {
-    margin-top: 5px;
-  }
+    .paper-left p {
+        width: 100%;
+    }
 
-  .paper-right {
-    width: 90%;
-  }
+    .paper-left .paper-left_content{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .paper-left .paper-left_time {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .paper-left .paper-left_time .time{
+        margin-top: 5px;
+    }
+
+    .paper-right {
+        width: 90%;
+    }
+
+    .paper-right_Badges h5{
+        margin-top: 5px;
+        margin-right: 3px;
+        color: aquamarine;
+        font-weight: bold;
+        font-size: 11px;
+    }
+
+    .paper-right_Badges .healing_icon{
+        font-size: 20px;
+    }
+
+    .paper-right_Badges p {
+        margin-top: 5px;
+        color: whitesmoke;
+        font-size: 15px;
+    }
+
+    .paper-right_Badges p span{
+        font-size: 15px;
+    }
+
+    .paper-right_age{
+        margin-top: 3px;
+    }
+
+    .paper-right_age .age_text h3{
+        font-size: 13px;
+    }
+
+    .paper-right_age .age_content{
+        background-color: rgb(222,49,99);
+        height: 15px;
+        width: 65px;
+        padding: 3px;
+        border-radius: 3px;
+        color: white;
+    }
+
+    .paper-right_age .age_content p{
+        margin-bottom: 1px;
+        font-size: 13px;
+    }
+
+    .paper-right_slots h3{
+        text-align: center;
+        font-weight: 700;
+        color: #BB86FC;
+        margin: 3px;
+    }
+
+    .paper-right_slots p{
+        color: whitesmoke;
+        font-size: 15px;
+        text-align: center;
+    }
 }
