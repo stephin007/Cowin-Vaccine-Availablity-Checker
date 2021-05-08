@@ -42,4 +42,16 @@
 
 .home__optionBottom {
   border: 2px solid black;
+  margin-top: 10px;
+}
+
+.home__optionBottom > div > .MuiFormControl-root {
+  margin-left: 20px;
+  width: 150px;
+  padding: 10px;
+}
+
+.home__selects {
+  display: flex;
+  justify-content: space-between;
 }
