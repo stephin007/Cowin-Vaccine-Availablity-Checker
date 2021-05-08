@@ -6,6 +6,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import ToggleOnIcon from "@material-ui/icons/ToggleOn";
 import ToggleOffIcon from "@material-ui/icons/ToggleOff";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -27,8 +34,22 @@ const Home = () => {
   const [districtCode, setDistrictCode] = useState(
     "PLEASE SELECT A STATE FIRST!!!"
   );
-  const [formatedDate] = useState("");
+  const [pin, setPin] = useState("");
+  const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const GetFormattedDate = () => {
+    var month = selectedDate.getMonth() + 1;
+    var day = selectedDate.getDate();
+    var year = selectedDate.getFullYear();
+    var finalDate = day + "-" + month + "-" + year;
+
+    setFormattedDate(finalDate);
+  };
+
+  console.log(formattedDate);
+
+  console.log(pin);
 
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
@@ -36,7 +57,10 @@ const Home = () => {
       .then((data) => {
         setState(data.states);
       });
-  }, [setState, formatedDate]);
+
+    GetFormattedDate();
+    // eslint-disable-next-line
+  }, [setState, selectedDate, formattedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -45,11 +69,13 @@ const Home = () => {
   const onStateChange = async (e) => {
     const stateCode = e.target.value;
 
+    setDistricts([]);
+
     console.log(stateCode);
 
     const url =
       stateCode === "States"
-        ? "https://cdn-api.co-vin.in/api/v2/admin/location/districts/9"
+        ? null
         : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
 
     await fetch(url)
@@ -76,6 +102,18 @@ const Home = () => {
       });
   };
 
+  const fetchDataUsingPincode = () => {
+    if (pin.length <= 6) {
+      alert("Please enter correct pincode");
+    } else {
+      fetch(
+        `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=31-05-2021`
+      )
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    }
+  };
+
   return (
     <div className="home">
       <div className="home__intro">
@@ -86,19 +124,21 @@ const Home = () => {
         <div className="home__optionsTop">
           <h4>Select State</h4>
           <h4>Select District</h4>
+
+          <h4>Pincode</h4>
           {pincodeMenu === true ? (
             <ToggleOffIcon
               fontSize="large"
               onClick={() => setPincodeMenu(false)}
+              style={{ marginLeft: -70 }}
             />
           ) : (
             <ToggleOnIcon
               onClick={() => setPincodeMenu(true)}
               fontSize="large"
-              style={{ color: "red" }}
+              style={{ color: "red", marginLeft: -70 }}
             />
           )}
-          <h4>Pincode</h4>
           <div className="home__optionsAlign">
             <h4>Date</h4>
             <DateRangeIcon />
@@ -127,6 +167,9 @@ const Home = () => {
                   value={districtCode}
                   onChange={onDistrictChange}
                 >
+                  {districts.length === 0 ? (
+                    <MenuItem disabled={true}>Select a State First</MenuItem>
+                  ) : null}
                   {districts?.map((districtData) => (
                     <MenuItem value={districtData?.district_id}>
                       {districtData?.district_name}
@@ -135,7 +178,7 @@ const Home = () => {
                 </Select>
               </FormControl>
             ) : (
-              <div>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <TextField
                   id="outlined-number"
                   margin="normal"
@@ -145,20 +188,37 @@ const Home = () => {
                   InputProps={{
                     className: classes.text,
                   }}
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value)}
+                />
+                <SearchIcon
+                  onClick={fetchDataUsingPincode}
+                  style={{
+                    margin: 10,
+                    background: "#347edd",
+                    color: "white",
+                    padding: 5,
+                    cursor: "pointer",
+                    width: 30,
+                    height: 43,
+                    marginBottom: 12,
+                    borderRadius: "2px",
+                  }}
+                  fontSize="medium"
                 />
               </div>
             )}
 
-            <TextField
-              id="date"
-              type="date"
-              defaultValue={selectedDate}
-              onChange={handleDateChange}
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                format="dd-MM-yyyy"
+                value={selectedDate}
+                onChange={handleDateChange}
+                InputProps={{ className: classes.input }}
+              />
+            </MuiPickersUtilsProvider>
           </div>
         </div>
       </div>

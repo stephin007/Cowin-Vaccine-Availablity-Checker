@@ -1,9 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
 .home__intro > h2 {
   margin-top: 50px;
   font-weight: 400;
-  border: 5px solid black;
   padding: 10px;
-  font-size: 25px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "Nunito", sans-serif;
+  font-size: 35px;
 }
 
 .home__optionsTop {
@@ -47,7 +51,7 @@
 
 .home__optionBottom > div > .MuiFormControl-root {
   margin-left: 20px;
-  width: 150px;
+  width: 200px;
   padding: 10px;
 }
 
