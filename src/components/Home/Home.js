@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
@@ -21,6 +21,60 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const [pincodeMenu, setPincodeMenu] = useState(true);
+  const [state, setState] = useState([]);
+  const [stateCode, setStateCode] = useState("States");
+  const [districts, setDistricts] = useState([]);
+  const [districtCode, setDistrictCode] = useState(
+    "PLEASE SELECT A STATE FIRST!!!"
+  );
+  const [formatedDate, setFormatedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  useEffect(() => {
+    fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
+      .then((res) => res.json())
+      .then((data) => {
+        setState(data.states);
+      });
+  }, [setState, formatedDate]);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const onStateChange = async (e) => {
+    const stateCode = e.target.value;
+
+    console.log(stateCode);
+
+    const url =
+      stateCode === "States"
+        ? "https://cdn-api.co-vin.in/api/v2/admin/location/districts/9"
+        : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
+
+    await fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setStateCode(stateCode);
+        setDistricts(data.districts);
+      });
+  };
+
+  const onDistrictChange = async (e) => {
+    const districtCode = e.target.value;
+
+    const url =
+      districtCode === "PLEASE SELECT A STATE FIRST!!!"
+        ? null
+        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=03-06-2021`;
+
+    await fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setDistrictCode(districtCode);
+        console.log(data);
+      });
+  };
 
   return (
     <div className="home">
@@ -53,16 +107,31 @@ const Home = () => {
         <div className="home__optionBottom">
           <div className="home__selects">
             <FormControl>
-              <Select variant="outlined">
+              <Select
+                variant="outlined"
+                value={stateCode}
+                onChange={onStateChange}
+              >
                 <MenuItem value="States">States</MenuItem>
-                <MenuItem value="1">Delhi</MenuItem>
+                {state?.map((stateData) => (
+                  <MenuItem value={stateData?.state_id}>
+                    {stateData?.state_name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
             {pincodeMenu === true ? (
               <FormControl>
-                <Select variant="outlined">
-                  <MenuItem value="States">States</MenuItem>
-                  <MenuItem value="1">Delhi</MenuItem>
+                <Select
+                  variant="outlined"
+                  value={districtCode}
+                  onChange={onDistrictChange}
+                >
+                  {districts?.map((districtData) => (
+                    <MenuItem value={districtData?.district_id}>
+                      {districtData?.district_name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             ) : (
@@ -83,7 +152,8 @@ const Home = () => {
             <TextField
               id="date"
               type="date"
-              defaultValue="2017-05-24"
+              defaultValue={selectedDate}
+              onChange={handleDateChange}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
