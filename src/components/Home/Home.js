@@ -23,10 +23,10 @@ import "./Home.css";
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    color: "#BB86FC",
+    color: "#bb86fc",
   },
   textfield: {
-    color: "#BB86FC",
+    color: "#bb86fc",
     height: "50px",
     width: "248px",
     padding: "0px 0px 0px 0px",
