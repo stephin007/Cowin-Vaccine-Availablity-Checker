@@ -1,5 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Badge from '@material-ui/core/Badge';
+
+import HealingIcon from '@material-ui/icons/Healing';
+import VerifiedUserRoundedIcon from '@material-ui/icons/VerifiedUserRounded';
 
 import "./VaccineDataSingle.css"
 
@@ -16,7 +20,9 @@ const VaccineDataSingle = (vaccine)=> {
         <div className={classes.paperMainDiv}>
             <Paper variant="outlined" className="wrapper" style={{backgroundColor: "#333333"}}>
                 <div className="paper-left">
-                    <h1>{vaccine.name}</h1>
+                    <div>
+                        <h1>{vaccine.name} <VerifiedUserRoundedIcon style={{color: "#009E60"}}/></h1>
+                    </div>
                     <hr/>
                     <br/>
                     <div className="paper-left_content">
@@ -37,6 +43,19 @@ const VaccineDataSingle = (vaccine)=> {
                     </div>
                 </div>
                 <div className="paper-right">
+                    <div className="paper-right_Badges">
+                        <div className="paper-right_capacity">
+                            <Badge color="secondary" badgeContent={vaccine.available_capacity}>
+                                <h5>Available Capacity</h5> <HealingIcon className="healing_icon"/>
+                            </Badge>
+                        </div>
+                        <div>
+                            <p><span>Date:</span>{vaccine.date}</p>
+                        </div>
+                    </div>
+                    <div className="paper-right_date">
+
+                    </div>
                 </div>
             </Paper>
         </div>
