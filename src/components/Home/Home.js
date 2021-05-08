@@ -92,7 +92,7 @@ const Home = () => {
     const url =
       districtCode === "PLEASE SELECT A STATE FIRST!!!"
         ? null
-        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=03-06-2021`;
+        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${formattedDate}`;
 
     await fetch(url)
       .then((res) => res.json())
@@ -107,7 +107,7 @@ const Home = () => {
       alert("Please enter correct pincode");
     } else {
       fetch(
-        `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=31-05-2021`
+        `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${formattedDate}`
       )
         .then((res) => res.json())
         .then((data) => console.log(data));
@@ -167,7 +167,7 @@ const Home = () => {
                   value={districtCode}
                   onChange={onDistrictChange}
                 >
-                  {districts.length === 0 ? (
+                  {districts?.length === 0 ? (
                     <MenuItem disabled={true}>Select a State First</MenuItem>
                   ) : null}
                   {districts?.map((districtData) => (
