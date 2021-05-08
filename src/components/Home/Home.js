@@ -27,7 +27,7 @@ const Home = () => {
   const [districtCode, setDistrictCode] = useState(
     "PLEASE SELECT A STATE FIRST!!!"
   );
-  const [formatedDate, setFormatedDate] = useState("");
+  const [formatedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
