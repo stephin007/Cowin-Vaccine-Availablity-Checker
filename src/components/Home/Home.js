@@ -103,7 +103,7 @@ const Home = () => {
   };
 
   const fetchDataUsingPincode = () => {
-    if (pin.length <= 6) {
+    if (pin.length >= 6) {
       alert("Please enter correct pincode");
     } else {
       fetch(
