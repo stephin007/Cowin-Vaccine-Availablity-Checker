@@ -25,6 +25,11 @@ const VaccineDataSingle = (vaccine)=> {
                     </div>
                     <hr/>
                     <br/>
+                    <div className="paper-left_vaccine_head">
+                        <h3>Vaccine Name</h3>
+                        <p>{vaccine.vaccine}</p>
+                    </div>
+
                     <div className="paper-left_content">
                         <h3>address</h3>
                         <p>{vaccine.block_name}, {vaccine.district_name}, {vaccine.state_name}</p>
@@ -53,8 +58,25 @@ const VaccineDataSingle = (vaccine)=> {
                             <p><span>Date:</span>{vaccine.date}</p>
                         </div>
                     </div>
-                    <div className="paper-right_date">
-
+                    <div className="paper-right_age">
+                        <div className="age_text">
+                             <h3>Minimum Age</h3>
+                        </div>
+                        <div className="age_content">
+                            <p>{vaccine.min_age_limit} years</p>
+                        </div>
+                    </div>
+                    <div className="paper-right_age">
+                        <div className="age_text">
+                             <h3>Minimum Fare(₹)</h3>
+                        </div>
+                        <div className="age_content">
+                            <p>{vaccine.fee_type} </p>
+                        </div>
+                    </div>
+                    <div className="paper-right_slots">
+                        <h3>Slots Available</h3>
+                        <p>{vaccine.slots.join(",")}</p>
                     </div>
                 </div>
             </Paper>
