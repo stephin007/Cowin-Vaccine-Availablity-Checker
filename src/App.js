@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Test from "./components/Test";
+import Main from "./components/Main";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
@@ -12,7 +12,7 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact={true} path="/">
-            <Test />
+            <Main />
           </Route>
           <Route path="/vaccines" exact={true}>
             <Home />
