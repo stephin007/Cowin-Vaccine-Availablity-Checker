@@ -39,3 +39,7 @@
   padding: 10px;
   margin-left: 10px;
 }
+
+.home__optionBottom {
+  border: 2px solid black;
+}
