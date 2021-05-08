@@ -14,8 +14,10 @@ const Home = () => {
           <h4>Select State</h4>
           <h4>Select District</h4>
           <h4>Pincode</h4>
-          <h4>Date </h4>
-          <DateRangeIcon />
+          <div className="home__optionsAlign">
+            <h4>Date</h4>
+            <DateRangeIcon />
+          </div>
         </div>
       </div>
     </div>

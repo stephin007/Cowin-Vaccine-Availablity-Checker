@@ -11,10 +11,31 @@
   align-items: center;
   border: 3px solid black;
   margin-top: 10px;
+  text-align: center;
 }
 
 .home {
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: -90px;
+}
+
+.home__optionsTop > h4 {
+  margin: 10px;
+  font-weight: 500;
+  width: 200px;
+}
+
+.home__optionsAlign > h4 {
+  font-weight: 500;
+  margin-top: -1px;
+}
+
+.home__optionsAlign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-left: 10px;
 }
