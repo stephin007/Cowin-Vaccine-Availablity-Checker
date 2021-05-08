@@ -1,5 +1,6 @@
 import React from "react";
 import "./Home.css";
+import DateRangeIcon from "@material-ui/icons/DateRange";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
           <h4>Select District</h4>
           <h4>Pincode</h4>
           <h4>Date </h4>
+          <DateRangeIcon />
         </div>
       </div>
     </div>

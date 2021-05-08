@@ -1,9 +1,20 @@
 .home__intro > h2 {
-  text-align: center;
   margin-top: 50px;
   font-weight: 400;
   border: 5px solid black;
-  margin: auto 500px;
   padding: 10px;
   font-size: 25px;
+}
+
+.home__optionsTop {
+  display: flex;
+  align-items: center;
+  border: 3px solid black;
+  margin-top: 10px;
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
