@@ -108,9 +108,8 @@ const Home = () => {
     } else {
       fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${formattedDate}`
-      )
-        .then((res) => res.json())
-        .then((data) => console.log(data));
+      ).then((res) => res.json());
+      // .then((data) => console.log(data));
     }
   };
 
