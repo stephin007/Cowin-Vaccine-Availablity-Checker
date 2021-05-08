@@ -78,9 +78,10 @@ const Home = () => {
 
   const onStateChange = async (e) => {
     const stateCode = e.target.value;
+    setVaccineData([]);
     const url =
       stateCode === "States"
-        ? "https://cdn-api.co-vin.in/api/v2/admin/location/districts/9"
+        ? null
         : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
     await fetch(url)
       .then((response) => response.json())
@@ -102,7 +103,6 @@ const Home = () => {
       .then((data) => {
         setDistrictCode(districtCode);
         setVaccineData(data.sessions);
-        console.log(data.sessions);
       });
   };
 
@@ -128,7 +128,8 @@ const Home = () => {
                   onChange={onStateChange}
                 >
                   <MenuItem value="States">States</MenuItem>
-                  {state.map((state) => (
+
+                  {state?.map((state) => (
                     <MenuItem key={state?.state_id} value={state?.state_id}>
                       {state?.state_name}
                     </MenuItem>
@@ -144,10 +145,13 @@ const Home = () => {
                   value={districtCode}
                   onChange={onDistrictChange}
                 >
-                  <MenuItem value="States" disabled={true}>
-                    Select State First
-                  </MenuItem>
-                  {district.map((district) => (
+                  {district.length === 0 ? (
+                    <MenuItem value="States" disabled={true}>
+                      Select State First
+                    </MenuItem>
+                  ) : null}
+
+                  {district?.map((district) => (
                     <MenuItem
                       key={district?.district_id}
                       value={district?.district_id}
