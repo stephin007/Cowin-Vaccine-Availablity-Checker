@@ -50,17 +50,17 @@ const Home = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const classes = useStyles();
 
-  const GetFormattedDate = ()=> {
+  const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
     var day = selectedDate.getDate();
     var year = selectedDate.getFullYear();
-    var finalDate =  day + "-" + month + "-" + year;
+    var finalDate = day + "-" + month + "-" + year;
 
-    setFormattedDate(finalDate)
-  }
+    setFormattedDate(finalDate);
+  };
 
   useEffect(() => {
-    GetFormattedDate()
+    GetFormattedDate();
     // eslint-disable-next-line
   }, [selectedDate, formattedDate]);
 
@@ -72,7 +72,7 @@ const Home = () => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
       .then((res) => res.json())
       .then((data) => {
-        setState(data.states)
+        setState(data.states);
       });
   }, [setState]);
 
@@ -102,7 +102,7 @@ const Home = () => {
       .then((data) => {
         setDistrictCode(districtCode);
         setVaccineData(data.sessions);
-        console.log(data.sessions)
+        console.log(data.sessions);
       });
   };
 
@@ -144,9 +144,14 @@ const Home = () => {
                   value={districtCode}
                   onChange={onDistrictChange}
                 >
-                  <MenuItem value="States" disabled={true}>Select State First</MenuItem>
+                  <MenuItem value="States" disabled={true}>
+                    Select State First
+                  </MenuItem>
                   {district.map((district) => (
-                    <MenuItem key={district?.district_id} value={district?.district_id}>
+                    <MenuItem
+                      key={district?.district_id}
+                      value={district?.district_id}
+                    >
                       {district?.district_name}
                     </MenuItem>
                   ))}
@@ -179,7 +184,7 @@ const Home = () => {
                       type="number"
                       variant="outlined"
                       InputProps={{
-                        className: classes.textfield
+                        className: classes.textfield,
                       }}
                     />
                   </Paper>
@@ -188,7 +193,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-          <VaccineDataMain vaccineData={vaccineData}/>
+        <VaccineDataMain vaccineData={vaccineData} />
       </div>
     </Container>
   );
