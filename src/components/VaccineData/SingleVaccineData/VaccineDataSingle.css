@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     background-color: #333333;
-    height: 27vh
+    height: 32vh
 }
 
 .wrapper > * {
@@ -161,6 +161,18 @@
 
 
 /*Media Queries*/
+@media screen and (max-width: 1024px){
+    .wrapper {
+        height: 35vh;
+    }
+}
+
+@media screen and (max-width: 850px){
+    .wrapper {
+        height: 40vh;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .wrapper {
         height: 70vh;
@@ -265,5 +277,17 @@
         color: whitesmoke;
         font-size: 15px;
         text-align: center;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .wrapper {
+        height: 82vh;
+    }
+}
+
+@media screen and (max-width: 360px){
+    .wrapper {
+        height: 100vh;
     }
 }
