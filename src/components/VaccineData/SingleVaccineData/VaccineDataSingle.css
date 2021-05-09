@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     background-color: #333333;
-    height: 27vh
+    height: 32vh
 }
 
 .wrapper > * {
