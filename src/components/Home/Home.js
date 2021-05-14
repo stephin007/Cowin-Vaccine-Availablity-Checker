@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Home.css";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,6 +12,8 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import SearchIcon from "@material-ui/icons/Search";
+
+import "./Home.css";
 
 const useStyles = makeStyles((theme) => ({
   textField: {

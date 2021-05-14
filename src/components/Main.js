@@ -15,7 +15,7 @@ const Test = () => {
           style={{ textDecorationLine: "none", color: "black" }}
           to="/vaccines"
         >
-          <h3 className="test__homeText">Vaccine Availablity</h3>
+          <h3 className="test__homeText">Vaccine Availability</h3>
         </Link>
       </div>
     </div>

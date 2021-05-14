@@ -9,6 +9,7 @@
   justify-content: space-between;
   padding: 10px;
   width: 100%;
+  font-family: "Fira Code Medium", "monospace";
 }
 .header__right {
   display: flex;

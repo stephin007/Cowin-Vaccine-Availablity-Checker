@@ -17,7 +17,9 @@ const Header = () => {
       <div className="header__rightNav">
         <div className="header__right">
           <h3>Contribute</h3>
-          <h3>About</h3>
+          <Link to="/about" style={{ textDecoration: "none", color: "black", fontSize: "19px" }}>
+              <p>About</p>
+          </Link>
         </div>
       </div>
     </div>
