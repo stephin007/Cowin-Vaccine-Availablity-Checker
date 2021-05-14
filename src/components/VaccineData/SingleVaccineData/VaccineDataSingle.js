@@ -1,4 +1,3 @@
-
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Badge from '@material-ui/core/Badge';
@@ -6,16 +5,17 @@ import Badge from '@material-ui/core/Badge';
 import HealingIcon from '@material-ui/icons/Healing';
 import VerifiedUserRoundedIcon from '@material-ui/icons/VerifiedUserRounded';
 
-import "./VaccineDataSingle.css";
+import "./VaccineDataSingle.css"
 
 const useStyles = makeStyles((theme) => ({
-  paperMainDiv: {
-    width: "100%",
-  },
+    paperMainDiv:{
+        width: "100%"
+    },
 }));
 
-const VaccineDataSingle = (vaccine) => {
-  const classes = useStyles();
+const VaccineDataSingle = (vaccine)=> {
+    const classes = useStyles();
+
     return(
         <div className={classes.paperMainDiv}>
             <Paper variant="outlined" className="wrapper" style={{backgroundColor: "#333333"}}>
@@ -60,7 +60,7 @@ const VaccineDataSingle = (vaccine) => {
                     </div>
                     <div className="paper-right_age">
                         <div className="age_text">
-                             <h3>Minimum Age</h3>
+                            <h3>Minimum Age</h3>
                         </div>
                         <div className="age_content">
                             <p>{vaccine.min_age_limit} years</p>
@@ -68,7 +68,7 @@ const VaccineDataSingle = (vaccine) => {
                     </div>
                     <div className="paper-right_age">
                         <div className="age_text">
-                             <h3>Minimum Fare(₹)</h3>
+                            <h3>Minimum Fare(₹)</h3>
                         </div>
                         <div className="age_content">
                             <p>{vaccine.fee_type} </p>
@@ -81,10 +81,7 @@ const VaccineDataSingle = (vaccine) => {
                 </div>
             </Paper>
         </div>
-        <div className="paper-right"></div>
-      </Paper>
-    </div>
-  );
-};
+    )
+}
 
-export default VaccineDataSingle;
+export default VaccineDataSingle

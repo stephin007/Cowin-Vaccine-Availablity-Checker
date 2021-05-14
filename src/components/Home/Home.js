@@ -14,6 +14,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import SearchIcon from "@material-ui/icons/Search";
 
 import "./Home.css";
+import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -38,6 +39,7 @@ const Home = () => {
   const [pin, setPin] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [vaccineData, setVaccineData] = useState([]);
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
@@ -99,6 +101,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         setDistrictCode(districtCode);
+        setVaccineData(data.sessions);
         console.log(data);
       });
   };
@@ -222,6 +225,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <VaccineDataMain vaccineData={vaccineData}/>
     </div>
   );
 };
