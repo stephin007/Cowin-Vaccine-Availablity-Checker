@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FormControl, MenuItem, Select } from "@material-ui/core";
-
-import InputLabel from "@material-ui/core/InputLabel";
-import TextField from "@material-ui/core/TextField";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
+  TextField,
+  Container,
+} from "@material-ui/core";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -10,13 +14,11 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import SearchIcon from "@material-ui/icons/Search";
-import Container from "@material-ui/core/Container";
 
 import "./Home.css";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
 const Home = () => {
-  // const [pincodeMenu, setPincodeMenu] = useState(true);
   const [state, setState] = useState([]);
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
@@ -42,11 +44,10 @@ const Home = () => {
     var finalDate = day + "-" + month + "-" + year;
 
     setFormattedDate(finalDate);
+    // setSelectedDate(finalDate);
   };
 
   console.log(formattedDate);
-
-  console.log(pin);
 
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
@@ -54,7 +55,6 @@ const Home = () => {
       .then((data) => {
         setState(data.states);
       });
-
     GetFormattedDate();
     // eslint-disable-next-line
   }, [setState, selectedDate, formattedDate]);
@@ -157,6 +157,11 @@ const Home = () => {
               </Select>
             </FormControl>
           </div>
+
+          {toSearchValue === "" && (
+            <h3 className="empty_error">Please Select an Option</h3>
+          )}
+
           {toSearchValue === "Find By District" ? (
             <div className="home_selectedHeaders">
               <FormControl className="form-control">
@@ -201,9 +206,7 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
-          {toSearchValue === "" && (
-            <h3 className="empty_error">Please Select an Option</h3>
-          )}
+
           {toSearchValue === "Find By Pincode & Date(Slots for next 7 days)" ? (
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
@@ -244,6 +247,7 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
+
           {toSearchValue === "Find By PinCode & Date" ? (
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
@@ -284,6 +288,7 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
+
           <VaccineDataMain vaccineData={vaccineData} />
         </div>
       </Container>
