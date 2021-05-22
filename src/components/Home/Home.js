@@ -21,7 +21,7 @@ const Home = () => {
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState(
-    "PLEASE SELECT A STATE FIRST!!!"
+    "PLEASE SELECT A STATE FIRST"
   );
   const [pin, setPin] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
@@ -102,10 +102,24 @@ const Home = () => {
 
   const fetchDataUsingCalendarByPin = () => {
     if (pin.length !== 6) {
-      alert("Please enter correct pincode");
+      alert("A Pincode must be of 6 digits");
     } else {
       fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${formattedDate}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+  };
+
+  const fetchDataUsingByPin = () => {
+    if (pin.length !== 6) {
+      alert("A Pincode must be of 6 digits");
+    } else {
+      fetch(
+        `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=${pin}&date=${formattedDate}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -122,7 +136,6 @@ const Home = () => {
             <h2>Vaccine Availablity</h2>
             <hr />
           </div>
-
           <div className="home_selectionHeader">
             <h4>Select a method to search for slots</h4>
             <FormControl>
@@ -143,8 +156,8 @@ const Home = () => {
                 })}
               </Select>
             </FormControl>
+            {/* {toSearchValue} */}
           </div>
-
           {toSearchValue === "Find By District" ? (
             <div className="home_selectedHeaders">
               <FormControl className="form-control">
@@ -179,11 +192,9 @@ const Home = () => {
               </FormControl>
             </div>
           ) : null}
-
           {toSearchValue === "" && (
             <h3 className="empty_error">Please Select an Option</h3>
           )}
-
           {toSearchValue === "Find By Pincode & Date(for next 7 days)" ? (
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
@@ -199,6 +210,46 @@ const Home = () => {
                 />
                 <SearchIcon
                   onClick={fetchDataUsingCalendarByPin}
+                  style={{
+                    background: "#3f51b5",
+                    color: "#fff",
+                    padding: 5,
+                    cursor: "pointer",
+                    width: 30,
+                    height: 45,
+                    marginTop: 16,
+                    borderRadius: "0 5px 5px 0",
+                  }}
+                  fontSize="medium"
+                />
+              </div>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  format="dd-MM-yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  className="input"
+                />
+              </MuiPickersUtilsProvider>
+            </div>
+          ) : null}
+          {toSearchValue === "Find By PinCode" ? (
+            <div className="home_selectedPin">
+              <div className="home_selectedpincontainer">
+                <TextField
+                  id="outlined-number"
+                  margin="normal"
+                  label="Pin Code"
+                  type="number"
+                  variant="outlined"
+                  className="textField"
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value)}
+                />
+                <SearchIcon
+                  onClick={fetchDataUsingByPin}
                   style={{
                     background: "#3f51b5",
                     color: "#fff",
