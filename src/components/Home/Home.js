@@ -30,9 +30,9 @@ const Home = () => {
   const [toSearchValue, setToSearchValue] = useState("");
   const [toSearch] = useState([
     "Find By District",
-    "Find By PinCode",
-    "Find By Pincode & Date(for next 7 days)",
-    "Find By District & Date(for next 7 days)",
+    "Find By PinCode & Date",
+    "Find By Pincode & Date(Slots for next 7 days)",
+    "Find By District & Date(Slots for next 7 days)",
   ]);
 
   const GetFormattedDate = () => {
@@ -83,11 +83,11 @@ const Home = () => {
       });
   };
 
-  const onDistrictChange = async (e) => {
+  const findByDistrict = async (e) => {
     const districtCode = e.target.value;
 
     const url =
-      districtCode === "PLEASE SELECT A STATE FIRST!!!"
+      districtCode === "PLEASE SELECT A STATE FIRST"
         ? null
         : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${formattedDate}`;
 
@@ -156,7 +156,6 @@ const Home = () => {
                 })}
               </Select>
             </FormControl>
-            {/* {toSearchValue} */}
           </div>
           {toSearchValue === "Find By District" ? (
             <div className="home_selectedHeaders">
@@ -178,7 +177,7 @@ const Home = () => {
                 <Select
                   variant="outlined"
                   value={districtCode}
-                  onChange={onDistrictChange}
+                  onChange={findByDistrict}
                 >
                   {districts?.length === 0 ? (
                     <MenuItem disabled={true}>Select a State First</MenuItem>
@@ -190,12 +189,22 @@ const Home = () => {
                   ))}
                 </Select>
               </FormControl>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  format="dd-MM-yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  className="districtDateInput"
+                />
+              </MuiPickersUtilsProvider>
             </div>
           ) : null}
           {toSearchValue === "" && (
             <h3 className="empty_error">Please Select an Option</h3>
           )}
-          {toSearchValue === "Find By Pincode & Date(for next 7 days)" ? (
+          {toSearchValue === "Find By Pincode & Date(Slots for next 7 days)" ? (
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
                 <TextField
@@ -235,7 +244,7 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
-          {toSearchValue === "Find By PinCode" ? (
+          {toSearchValue === "Find By PinCode & Date" ? (
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
                 <TextField
