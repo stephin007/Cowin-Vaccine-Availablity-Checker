@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import DateRangeIcon from "@material-ui/icons/DateRange";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+
+import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
-import ToggleOnIcon from "@material-ui/icons/ToggleOn";
-import ToggleOffIcon from "@material-ui/icons/ToggleOff";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -12,24 +10,13 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import SearchIcon from "@material-ui/icons/Search";
+import Container from "@material-ui/core/Container";
 
 import "./Home.css";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    margin: 10,
-    width: 200,
-  },
-
-  text: {
-    marginTop: -10,
-  },
-}));
-
 const Home = () => {
-  const classes = useStyles();
-  const [pincodeMenu, setPincodeMenu] = useState(true);
+  // const [pincodeMenu, setPincodeMenu] = useState(true);
   const [state, setState] = useState([]);
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
@@ -40,6 +27,13 @@ const Home = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [vaccineData, setVaccineData] = useState([]);
+  const [toSearchValue, setToSearchValue] = useState("");
+  const [toSearch] = useState([
+    "Find By District",
+    "Find By PinCode",
+    "Find By Pincode & Date(for next 7 days)",
+    "Find By District & Date(for next 7 days)",
+  ]);
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
@@ -106,65 +100,68 @@ const Home = () => {
       });
   };
 
-  const fetchDataUsingPincode = () => {
-    if (pin.length >= 6) {
+  const fetchDataUsingCalendarByPin = () => {
+    if (pin.length !== 6) {
       alert("Please enter correct pincode");
     } else {
       fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${formattedDate}`
-      ).then((res) => res.json());
-      // .then((data) => console.log(data));
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
     }
   };
 
   return (
-    <div className="home">
-      <div className="home__intro">
-        <h2>Vaccine Availablity</h2>
-      </div>
-
-      <div className="home__options">
-        <div className="home__optionsTop">
-          <h4>Select State</h4>
-          <h4>Select District</h4>
-
-          <h4>Pincode</h4>
-          {pincodeMenu === true ? (
-            <ToggleOffIcon
-              fontSize="large"
-              onClick={() => setPincodeMenu(false)}
-              style={{ marginLeft: -70 }}
-            />
-          ) : (
-            <ToggleOnIcon
-              onClick={() => setPincodeMenu(true)}
-              fontSize="large"
-              style={{ color: "red", marginLeft: -70 }}
-            />
-          )}
-          <div className="home__optionsAlign">
-            <h4>Date</h4>
-            <DateRangeIcon />
+    <>
+      <Container maxWidth="md">
+        <div className="home">
+          <div className="home__intro">
+            <h2>Vaccine Availablity</h2>
+            <hr />
           </div>
-        </div>
-        <div className="home__optionBottom">
-          <div className="home__selects">
+
+          <div className="home_selectionHeader">
+            <h4>Select a method to search for slots</h4>
             <FormControl>
+              <InputLabel id="select-outlined-label">
+                Search Criteria
+              </InputLabel>
               <Select
-                variant="outlined"
-                value={stateCode}
-                onChange={onStateChange}
+                variant="filled"
+                value={toSearchValue}
+                onChange={(e) => setToSearchValue(e.target.value)}
               >
-                <MenuItem value="States">States</MenuItem>
-                {state?.map((stateData) => (
-                  <MenuItem value={stateData?.state_id}>
-                    {stateData?.state_name}
-                  </MenuItem>
-                ))}
+                {toSearch.map((functionName, index) => {
+                  return (
+                    <MenuItem key={index} value={functionName}>
+                      {functionName}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
-            {pincodeMenu === true ? (
-              <FormControl>
+          </div>
+
+          {toSearchValue === "Find By District" ? (
+            <div className="home_selectedHeaders">
+              <FormControl className="form-control">
+                <Select
+                  variant="outlined"
+                  value={stateCode}
+                  onChange={onStateChange}
+                >
+                  <MenuItem value="States">Select a State</MenuItem>
+                  {state?.map((stateData) => (
+                    <MenuItem value={stateData?.state_id}>
+                      {stateData?.state_name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl className="form-control">
                 <Select
                   variant="outlined"
                   value={districtCode}
@@ -180,53 +177,57 @@ const Home = () => {
                   ))}
                 </Select>
               </FormControl>
-            ) : (
-              <div style={{ display: "flex", alignItems: "center" }}>
+            </div>
+          ) : null}
+
+          {toSearchValue === "" && (
+            <h3 className="empty_error">Please Select an Option</h3>
+          )}
+
+          {toSearchValue === "Find By Pincode & Date(for next 7 days)" ? (
+            <div className="home_selectedPin">
+              <div className="home_selectedpincontainer">
                 <TextField
                   id="outlined-number"
                   margin="normal"
                   label="Pin Code"
                   type="number"
                   variant="outlined"
-                  InputProps={{
-                    className: classes.text,
-                  }}
+                  className="textField"
                   value={pin}
                   onChange={(e) => setPin(e.target.value)}
                 />
                 <SearchIcon
-                  onClick={fetchDataUsingPincode}
+                  onClick={fetchDataUsingCalendarByPin}
                   style={{
-                    margin: 10,
-                    background: "#347edd",
-                    color: "white",
+                    background: "#3f51b5",
+                    color: "#fff",
                     padding: 5,
                     cursor: "pointer",
                     width: 30,
-                    height: 43,
-                    marginBottom: 12,
-                    borderRadius: "2px",
+                    height: 45,
+                    marginTop: 16,
+                    borderRadius: "0 5px 5px 0",
                   }}
                   fontSize="medium"
                 />
               </div>
-            )}
-
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                margin="normal"
-                id="date-picker-dialog"
-                format="dd-MM-yyyy"
-                value={selectedDate}
-                onChange={handleDateChange}
-                InputProps={{ className: classes.input }}
-              />
-            </MuiPickersUtilsProvider>
-          </div>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  format="dd-MM-yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  className="input"
+                />
+              </MuiPickersUtilsProvider>
+            </div>
+          ) : null}
+          <VaccineDataMain vaccineData={vaccineData} />
         </div>
-      </div>
-      <VaccineDataMain vaccineData={vaccineData}/>
-    </div>
+      </Container>
+    </>
   );
 };
 

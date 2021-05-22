@@ -2,61 +2,205 @@
 
 .home__intro > h2 {
   margin-top: 50px;
-  font-weight: 400;
   padding: 10px;
   text-transform: uppercase;
   font-weight: bold;
+  text-align: center;
   font-family: "Nunito", sans-serif;
   font-size: 35px;
 }
 
-.home__optionsTop {
+.home_selectionHeader {
   display: flex;
-  align-items: center;
-  border: 3px solid black;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.home {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: -90px;
-}
-
-.home__optionsTop > h4 {
-  margin: 10px;
-  font-weight: 500;
-  width: 200px;
-}
-
-.home__optionsAlign > h4 {
-  font-weight: 500;
-  margin-top: -1px;
-}
-
-.home__optionsAlign {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 10px;
-  margin-left: 10px;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 15px;
 }
 
-.home__optionBottom {
-  border: 2px solid black;
+.home_selectionHeader h4 {
+  margin-bottom: 10px;
+  font-family: "Nunito", sans-serif !important;
+}
+
+.home_selectedHeaders {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home_selectedHeaders .form-control {
+  min-width: 450px !important;
+  margin-top: 15px;
+}
+
+.empty_error {
   margin-top: 10px;
+  border-radius: 5px;
+  background-color: #5f235f;
+  color: whitesmoke;
+  padding: 10px 10px;
+  font-family: "Nunito", sans-serif !important;
 }
 
-.home__optionBottom > div > .MuiFormControl-root {
-  margin-left: 20px;
-  width: 200px;
-  padding: 10px;
-}
-
-.home__selects {
+.home_selectedPin {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
+
+.home_selectedPin .home_selectedpincontainer .textField {
+  width: 500px;
+}
+
+.home_selectedPin .input {
+  width: 330px;
+  margin-bottom: -10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 925px;
+  }
+  .home__intro > h2 {
+    margin-top: 20px;
+    font-size: 25px;
+  }
+
+  .home_selectedHeaders {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home_selectedHeaders .form-control {
+    min-width: 270px !important;
+    margin-top: 15px;
+  }
+
+  .home_selectedPin .home_selectedpincontainer .textField {
+    width: 300px;
+  }
+
+  .home_selectedPin .input {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .home_selectedPin .home_selectedpincontainer .textField {
+    width: 250px;
+  }
+
+  .home_selectedPin .input {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 410px;
+  }
+  .home__intro > h2 {
+    margin-top: 20px;
+    font-size: 25px;
+  }
+
+  .home_selectedHeaders {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home_selectedHeaders .form-control {
+    min-width: 40px !important;
+    margin-top: 15px;
+  }
+
+  .home_selectedPin {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 10px;
+  }
+
+  .home_selectedPin .home_selectedpincontainer .textField {
+    width: 370px;
+  }
+
+  .home_selectedPin .input {
+    margin-top: 15px;
+    width: 410px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .home {
+    width: 380px;
+  }
+
+  .home_selectedPin .home_selectedpincontainer .textField {
+    width: 340px;
+  }
+
+  .home_selectedPin .input {
+    width: 380px;
+  }
+}
+
+/*.home__optionsTop {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  border: 3px solid black;*/
+/*  margin-top: 10px;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.home {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  flex-direction: column;*/
+/*  margin-top: -90px;*/
+/*}*/
+
+/*.home__optionsTop > h4 {*/
+/*  margin: 10px;*/
+/*  font-weight: 500;*/
+/*  width: 200px;*/
+/*}*/
+
+/*.home__optionsAlign > h4 {*/
+/*  font-weight: 500;*/
+/*  margin-top: -1px;*/
+/*}*/
+
+/*.home__optionsAlign {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  padding: 10px;*/
+/*  margin-left: 10px;*/
+/*}*/
+
+/*.home__optionBottom {*/
+/*  border: 2px solid black;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.home__optionBottom > div > .MuiFormControl-root {*/
+/*  margin-left: 20px;*/
+/*  width: 200px;*/
+/*  padding: 10px;*/
+/*}*/
+
+/*.home__selects {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*}*/
