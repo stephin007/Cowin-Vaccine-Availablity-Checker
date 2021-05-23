@@ -18,6 +18,13 @@ import SearchIcon from "@material-ui/icons/Search";
 import "./Home.css";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
+const toSearch = [
+  "Find By District",
+  "Find By PinCode & Date",
+  "Find By Pincode & Date(Slots for next 7 days)",
+  "Find By District & Date(Slots for next 7 days)",
+];
+
 const Home = () => {
   const [state, setState] = useState([]);
   const [stateCode, setStateCode] = useState("States");
@@ -30,23 +37,14 @@ const Home = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [vaccineData, setVaccineData] = useState([]);
   const [toSearchValue, setToSearchValue] = useState("");
-  const [toSearch] = useState([
-    "Find By District",
-    "Find By PinCode & Date",
-    "Find By Pincode & Date(Slots for next 7 days)",
-    "Find By District & Date(Slots for next 7 days)",
-  ]);
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
     var day = selectedDate.getDate();
     var year = selectedDate.getFullYear();
     var finalDate = day + "-" + month + "-" + year;
-
     setFormattedDate(finalDate);
   };
-
-  console.log(formattedDate);
 
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
@@ -68,8 +66,6 @@ const Home = () => {
     const stateCode = e.target.value;
 
     setDistricts([]);
-
-    console.log(stateCode);
 
     const url =
       stateCode === "States"
@@ -125,6 +121,7 @@ const Home = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          setVaccineData(data.sessions);
         });
     }
   };
