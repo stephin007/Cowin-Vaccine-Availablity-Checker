@@ -183,11 +183,63 @@ const Home = () => {
                 </Select>
               </FormControl>
               <FormControl className="form-control">
-                {/* <Select
+                {districts?.length !== 0 ? (
+                  <>
+                    <Select
+                      variant="outlined"
+                      value={districtCode}
+                      onChange={findByDistrict}
+                    >
+                      {districts?.map((districtData) => (
+                        <MenuItem value={districtData?.district_id}>
+                          {districtData?.district_name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </>
+                ) : (
+                  <>
+                    <Select
+                      variant="outlined"
+                      value={districtCode}
+                      onChange={findByDistrict}
+                    >
+                      <MenuItem disabled={true}>Select a State First</MenuItem>
+                    </Select>
+                  </>
+                )}
+              </FormControl>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  format="dd-MM-yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  className="districtDateInput"
+                />
+              </MuiPickersUtilsProvider>
+            </div>
+          ) : null}
+
+          {toSearchValue ===
+          "Find By District & Date(Slots for next 7 days)" ? (
+            <div className="home_selectedHeaders">
+              <FormControl className="form-control">
+                <Select
                   variant="outlined"
-                  value={districtCode}
-                  onChange={findByDistrict}
-                > */}
+                  value={stateCode}
+                  onChange={onStateChange}
+                >
+                  <MenuItem value="States">Select a State</MenuItem>
+                  {state?.map((stateData) => (
+                    <MenuItem value={stateData?.state_id}>
+                      {stateData?.state_name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl className="form-control">
                 {districts?.length !== 0 ? (
                   <>
                     <Select
