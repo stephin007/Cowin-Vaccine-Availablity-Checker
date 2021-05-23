@@ -10,9 +10,7 @@ const VaccineDataMain = ({ vaccineData }) => {
             return <VaccineDataSingle key={center_id} {...vaccine} />;
           })}
         </>
-      ) : (
-        <p>No data found</p>
-      )}
+      ) : null}
     </>
   );
 };

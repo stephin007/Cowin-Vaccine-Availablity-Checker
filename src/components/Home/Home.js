@@ -146,7 +146,10 @@ const Home = () => {
               <Select
                 variant="filled"
                 value={toSearchValue}
-                onChange={(e) => setToSearchValue(e.target.value)}
+                onChange={(e) => {
+                  setToSearchValue(e.target.value);
+                  setVaccineData([]);
+                }}
               >
                 {toSearch.map((functionName, index) => {
                   return (
