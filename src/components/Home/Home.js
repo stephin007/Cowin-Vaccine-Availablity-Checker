@@ -44,7 +44,6 @@ const Home = () => {
     var finalDate = day + "-" + month + "-" + year;
 
     setFormattedDate(finalDate);
-    // setSelectedDate(finalDate);
   };
 
   console.log(formattedDate);
@@ -57,10 +56,12 @@ const Home = () => {
       });
     GetFormattedDate();
     // eslint-disable-next-line
-  }, [setState, selectedDate, formattedDate]);
+  }, [selectedDate, formattedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    setVaccineData([]);
+    setDistricts([]);
   };
 
   const onStateChange = async (e) => {
@@ -179,20 +180,36 @@ const Home = () => {
                 </Select>
               </FormControl>
               <FormControl className="form-control">
-                <Select
+                {/* <Select
                   variant="outlined"
                   value={districtCode}
                   onChange={findByDistrict}
-                >
-                  {districts?.length === 0 ? (
-                    <MenuItem disabled={true}>Select a State First</MenuItem>
-                  ) : null}
-                  {districts?.map((districtData) => (
-                    <MenuItem value={districtData?.district_id}>
-                      {districtData?.district_name}
-                    </MenuItem>
-                  ))}
-                </Select>
+                > */}
+                {districts?.length !== 0 ? (
+                  <>
+                    <Select
+                      variant="outlined"
+                      value={districtCode}
+                      onChange={findByDistrict}
+                    >
+                      {districts?.map((districtData) => (
+                        <MenuItem value={districtData?.district_id}>
+                          {districtData?.district_name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </>
+                ) : (
+                  <>
+                    <Select
+                      variant="outlined"
+                      value={districtCode}
+                      onChange={findByDistrict}
+                    >
+                      <MenuItem disabled={true}>Select a State First</MenuItem>
+                    </Select>
+                  </>
+                )}
               </FormControl>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
