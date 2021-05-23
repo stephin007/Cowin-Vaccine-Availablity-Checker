@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FormControl, MenuItem, Select } from "@material-ui/core";
-
-import InputLabel from "@material-ui/core/InputLabel";
-import TextField from "@material-ui/core/TextField";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
+  TextField,
+  Container,
+} from "@material-ui/core";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -10,13 +14,11 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import SearchIcon from "@material-ui/icons/Search";
-import Container from "@material-ui/core/Container";
 
 import "./Home.css";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
 const Home = () => {
-  // const [pincodeMenu, setPincodeMenu] = useState(true);
   const [state, setState] = useState([]);
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
@@ -30,9 +32,9 @@ const Home = () => {
   const [toSearchValue, setToSearchValue] = useState("");
   const [toSearch] = useState([
     "Find By District",
-    "Find By PinCode",
-    "Find By Pincode & Date(for next 7 days)",
-    "Find By District & Date(for next 7 days)",
+    "Find By PinCode & Date",
+    "Find By Pincode & Date(Slots for next 7 days)",
+    "Find By District & Date(Slots for next 7 days)",
   ]);
 
   const GetFormattedDate = () => {
@@ -46,21 +48,20 @@ const Home = () => {
 
   console.log(formattedDate);
 
-  console.log(pin);
-
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
       .then((res) => res.json())
       .then((data) => {
         setState(data.states);
       });
-
     GetFormattedDate();
     // eslint-disable-next-line
-  }, [setState, selectedDate, formattedDate]);
+  }, [selectedDate, formattedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    setVaccineData([]);
+    setDistricts([]);
   };
 
   const onStateChange = async (e) => {
@@ -83,11 +84,11 @@ const Home = () => {
       });
   };
 
-  const onDistrictChange = async (e) => {
+  const findByDistrict = async (e) => {
     const districtCode = e.target.value;
 
     const url =
-      districtCode === "PLEASE SELECT A STATE FIRST!!!"
+      districtCode === "PLEASE SELECT A STATE FIRST"
         ? null
         : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${formattedDate}`;
 
@@ -156,8 +157,12 @@ const Home = () => {
                 })}
               </Select>
             </FormControl>
-            {/* {toSearchValue} */}
           </div>
+
+          {toSearchValue === "" && (
+            <h3 className="empty_error">Please Select an Option</h3>
+          )}
+
           {toSearchValue === "Find By District" ? (
             <div className="home_selectedHeaders">
               <FormControl className="form-control">
@@ -175,27 +180,51 @@ const Home = () => {
                 </Select>
               </FormControl>
               <FormControl className="form-control">
-                <Select
+                {/* <Select
                   variant="outlined"
                   value={districtCode}
-                  onChange={onDistrictChange}
-                >
-                  {districts?.length === 0 ? (
-                    <MenuItem disabled={true}>Select a State First</MenuItem>
-                  ) : null}
-                  {districts?.map((districtData) => (
-                    <MenuItem value={districtData?.district_id}>
-                      {districtData?.district_name}
-                    </MenuItem>
-                  ))}
-                </Select>
+                  onChange={findByDistrict}
+                > */}
+                {districts?.length !== 0 ? (
+                  <>
+                    <Select
+                      variant="outlined"
+                      value={districtCode}
+                      onChange={findByDistrict}
+                    >
+                      {districts?.map((districtData) => (
+                        <MenuItem value={districtData?.district_id}>
+                          {districtData?.district_name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </>
+                ) : (
+                  <>
+                    <Select
+                      variant="outlined"
+                      value={districtCode}
+                      onChange={findByDistrict}
+                    >
+                      <MenuItem disabled={true}>Select a State First</MenuItem>
+                    </Select>
+                  </>
+                )}
               </FormControl>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  format="dd-MM-yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  className="districtDateInput"
+                />
+              </MuiPickersUtilsProvider>
             </div>
           ) : null}
-          {toSearchValue === "" && (
-            <h3 className="empty_error">Please Select an Option</h3>
-          )}
-          {toSearchValue === "Find By Pincode & Date(for next 7 days)" ? (
+
+          {toSearchValue === "Find By Pincode & Date(Slots for next 7 days)" ? (
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
                 <TextField
@@ -235,7 +264,8 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
-          {toSearchValue === "Find By PinCode" ? (
+
+          {toSearchValue === "Find By PinCode & Date" ? (
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
                 <TextField
@@ -275,6 +305,7 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
+
           <VaccineDataMain vaccineData={vaccineData} />
         </div>
       </Container>

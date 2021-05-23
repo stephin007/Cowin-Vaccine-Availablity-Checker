@@ -29,8 +29,12 @@
 }
 
 .home_selectedHeaders .form-control {
-  min-width: 450px !important;
+  min-width: 300px !important;
   margin-top: 15px;
+}
+
+.districtDateInput {
+  margin-top: 37px !important;
 }
 
 .empty_error {
@@ -74,6 +78,10 @@
   .home_selectedHeaders {
     display: flex;
     flex-direction: column;
+  }
+
+  .districtDateInput {
+    margin-top: 20px !important;
   }
 
   .home_selectedHeaders .form-control {
