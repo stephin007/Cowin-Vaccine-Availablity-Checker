@@ -1,6 +1,6 @@
 import VaccineDataSingle from "./SingleVaccineData/VaccineDataSingle";
 
-const VaccineDataMain = ({vaccineData}) => {
+const VaccineDataMain = ({ vaccineData }) => {
   return (
     <>
       {vaccineData.length !== 0 ? (
