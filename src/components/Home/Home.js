@@ -61,7 +61,7 @@ const Home = () => {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setVaccineData([]);
-    setDistricts([]);
+    setDistrictCode("");
   };
 
   const onStateChange = async (e) => {
@@ -158,7 +158,6 @@ const Home = () => {
               </Select>
             </FormControl>
           </div>
-
           {toSearchValue === "" && (
             <h3 className="empty_error">Please Select an Option</h3>
           )}
