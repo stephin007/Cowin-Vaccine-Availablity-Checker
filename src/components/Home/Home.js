@@ -61,7 +61,7 @@ const Home = () => {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setVaccineData([]);
-    setDistricts([]);
+    setDistrictCode("");
   };
 
   const onStateChange = async (e) => {
