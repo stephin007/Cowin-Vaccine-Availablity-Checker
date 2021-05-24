@@ -15,7 +15,7 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
@@ -23,8 +23,9 @@ const Home = () => {
   const [state, setState] = useState([]);
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
-  const [districtCode, setDistrictCode] =
-      useState("PLEASE SELECT A STATE FIRST");
+  const [districtCode, setDistrictCode] = useState(
+    "PLEASE SELECT A STATE FIRST"
+  );
   const [pin, setPin] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -50,11 +51,13 @@ const Home = () => {
 
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
-        .then((res) => res.json())
-        .then((data) => { setState(data.states); });
+      .then((res) => res.json())
+      .then((data) => {
+        setState(data.states);
+      });
     GetFormattedDate();
     // eslint-disable-next-line
-  }, [ selectedDate, formattedDate ]);
+  }, [selectedDate, formattedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -70,31 +73,33 @@ const Home = () => {
     console.log(stateCode);
 
     const url =
-        stateCode === "States"
-            ? null
-            : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${
-                  stateCode}`;
+      stateCode === "States"
+        ? null
+        : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
 
-    await fetch(url).then((res) => res.json()).then((data) => {
-      setStateCode(stateCode);
-      setDistricts(data.districts);
-    });
+    await fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setStateCode(stateCode);
+        setDistricts(data.districts);
+      });
   };
 
   const findByDistrict = async (e) => {
     const districtCode = e.target.value;
 
     const url =
-        districtCode === "PLEASE SELECT A STATE FIRST"
-            ? null
-            : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${
-                  districtCode}&date=${formattedDate}`;
+      districtCode === "PLEASE SELECT A STATE FIRST"
+        ? null
+        : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${formattedDate}`;
 
-    await fetch(url).then((res) => res.json()).then((data) => {
-      setDistrictCode(districtCode);
-      setVaccineData(data.sessions);
-      console.log(data);
-    });
+    await fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setDistrictCode(districtCode);
+        setVaccineData(data.sessions);
+        console.log(data);
+      });
   };
 
   const fetchDataUsingCalendarByPin = () => {
@@ -102,34 +107,34 @@ const Home = () => {
       alert("A Pincode must be of 6 digits");
     } else {
       fetch(
-          `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${
-              pin}&date=${formattedDate}`)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            const arena = data?.centers?.map(
-                (res) => ({
-                  name : res?.name,
-                  vaccine :
-                      res?.sessions?.slice(0, 1).map((res) => res?.vaccine),
-                  block_name : res?.block_name,
-                  district_name : res?.district_name,
-                  state_name : res?.state_name,
-                  pincode : res?.pincode,
-                  from : res?.from,
-                  to : res?.to,
-                  available_capacity : res?.sessions?.slice(0, 1).map(
-                      (res) => res?.available_capacity),
-                  date : res?.sessions?.slice(0, 1).map((res) => res?.date),
-                  min_age_limit : res?.sessions?.slice(0, 1).map(
-                      (res) => res?.min_age_limit),
-                  fee_type : res?.fee_type,
-                  slots : res?.sessions?.slice(0, 1).map((res) => res.slots),
-                }));
-            console.log(arena);
+        `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${formattedDate}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          const arena = data?.centers?.map((res) => ({
+            name: res?.name,
+            vaccine: res?.sessions?.slice(0, 1).map((res) => res?.vaccine),
+            block_name: res?.block_name,
+            district_name: res?.district_name,
+            state_name: res?.state_name,
+            pincode: res?.pincode,
+            from: res?.from,
+            to: res?.to,
+            available_capacity: res?.sessions
+              ?.slice(0, 1)
+              .map((res) => res?.available_capacity),
+            date: res?.sessions?.slice(0, 1).map((res) => res?.date),
+            min_age_limit: res?.sessions
+              ?.slice(0, 1)
+              .map((res) => res?.min_age_limit),
+            fee_type: res?.fee_type,
+            slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
+          }));
+          console.log(arena);
 
-            setVaccineData(arena);
-          });
+          setVaccineData(arena);
+        });
     }
   };
 
@@ -138,26 +143,30 @@ const Home = () => {
       alert("A Pincode must be of 6 digits");
     } else {
       fetch(
-          `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=${
-              pin}&date=${formattedDate}`)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            setVaccineData(data.sessions);
-          });
+        `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=${pin}&date=${formattedDate}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setVaccineData(data.sessions);
+        });
     }
   };
 
   return (
-      <><Container maxWidth = "md"><div className = "home">
-      <div className = "home__intro">
-      <h2>Vaccine Availablity</h2>
+    <>
+      <Container maxWidth="md">
+        <div className="home">
+          <div className="home__intro">
+            <h2>Vaccine Availablity</h2>
             <hr />
-      </div>
+          </div>
           <div className="home_selectionHeader">
             <h4>Select a method to search for slots</h4>
-      <FormControl><InputLabel id = "select-outlined-label">Search Criteria<
-          /InputLabel>
+            <FormControl>
+              <InputLabel id="select-outlined-label">
+                Search Criteria
+              </InputLabel>
               <Select
                 variant="filled"
                 value={toSearchValue}
@@ -170,22 +179,22 @@ const Home = () => {
                   return (
                     <MenuItem key={index} value={functionName}>
                       {functionName}
-                    </MenuItem>);
-                })
-}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
           </div>
 
           {toSearchValue === "" && (
             <h3 className="empty_error">Please Select an Option</h3>
-          )
-              }
+          )}
 
-              {toSearchValue === "Find By District"
-               ? (<div className = "home_selectedHeaders">
-                  <FormControl className = "form-control">< Select
-              variant = "outlined"
+          {toSearchValue === "Find By District" ? (
+            <div className="home_selectedHeaders">
+              <FormControl className="form-control">
+                <Select
+                  variant="outlined"
                   value={stateCode}
                   onChange={onStateChange}
                 >
@@ -201,7 +210,7 @@ const Home = () => {
                 {districts?.length !== 0 ? (
                   <>
                     <Select
-                  variant = "outlined"
+                      variant="outlined"
                       value={districtCode}
                       onChange={findByDistrict}
                     >
@@ -242,7 +251,7 @@ const Home = () => {
             <div className="home_selectedHeaders">
               <FormControl className="form-control">
                 <Select
-                      variant = "outlined"
+                  variant="outlined"
                   value={stateCode}
                   onChange={onStateChange}
                 >
@@ -258,7 +267,7 @@ const Home = () => {
                 {districts?.length !== 0 ? (
                   <>
                     <Select
-                  variant = "outlined"
+                      variant="outlined"
                       value={districtCode}
                       onChange={findByDistrict}
                     >
@@ -298,15 +307,14 @@ const Home = () => {
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
                 <TextField
-                      id = "outlined-number"
-                      margin = "normal"
-                      label = "Pin Code"
-                      type = "number"
-                      variant = "outlined"
-                      className = "textField"
+                  id="outlined-number"
+                  margin="normal"
+                  label="Pin Code"
+                  type="number"
+                  variant="outlined"
+                  className="textField"
                   value={pin}
-                  onChange={
-  (e) => setPin(e.target.value)}
+                  onChange={(e) => setPin(e.target.value)}
                 />
                 <SearchIcon
                   onClick={fetchDataUsingCalendarByPin}
@@ -340,15 +348,14 @@ const Home = () => {
             <div className="home_selectedPin">
               <div className="home_selectedpincontainer">
                 <TextField
-                  id = "outlined-number"
-                  margin = "normal"
-                  label = "Pin Code"
-                  type = "number"
-                  variant = "outlined"
-                  className = "textField"
+                  id="outlined-number"
+                  margin="normal"
+                  label="Pin Code"
+                  type="number"
+                  variant="outlined"
+                  className="textField"
                   value={pin}
-                  onChange={
-  (e) => setPin(e.target.value)}
+                  onChange={(e) => setPin(e.target.value)}
                 />
                 <SearchIcon
                   onClick={fetchDataUsingByPin}
@@ -383,7 +390,5 @@ const Home = () => {
       </Container>
     </>
   );
-                  }
-                  ;
-
-                  export default Home;
+};
+export default Home;
