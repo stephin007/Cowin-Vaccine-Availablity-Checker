@@ -18,13 +18,13 @@ Thank you for taking your time and considering to contribute! Before contributin
   4. ### Setting up local environment:
       * #### Fork the repository
          * First you need your own copy of the project to work on. To do that you have to `fork` the repository. You can find the fork button on the top-right side of the browser(refer to the attached image)
-         * ![Fork](images/Fork.jpeg)
+         * ![Fork](images/Fork.jpg)
       * #### Clone repository
          * Now you have to copy this file into your local system to work on
          * Copy the fork url(refer to attached image)
          * Go to the location on your device where you want to clone the project
          * Open the terminal window and type command `git clone <your-fork-url>`
-         * ![Clone](images/Clone.jpeg)
+         * ![Clone](images/Clone.jpg)
   5. ### Setting up the project:
       * #### Using `npm`
         * Open the cloned folder in a text editor
