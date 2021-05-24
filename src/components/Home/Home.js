@@ -204,7 +204,7 @@ const Home = () => {
                       value={districtCode}
                       onChange={findByDistrict}
                     >
-                      <MenuItem disabled={true}>Select a Statee First</MenuItem>
+                      <MenuItem disabled={true}>Select a State First</MenuItem>
                     </Select>
                   </>
                 )}
