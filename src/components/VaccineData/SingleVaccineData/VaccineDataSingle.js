@@ -12,13 +12,11 @@ const useStyles = makeStyles((theme) => ({
         width: "100%"
     },
 }));
-
 const VaccineDataSingle = (vaccine)=> {
     const classes = useStyles();
-
     return(
         <div className={classes.paperMainDiv}>
-            <Paper variant="outlined" className="wrapper" style={{backgroundColor: "#333333"}}>
+            <Paper variant="outlined" className="wrapper" style={{backgroundColor: "#E5E7EB", margin:"10px 0px"}}>
                 <div className="paper-left">
                     <div>
                         <h1>{vaccine.name} <VerifiedUserRoundedIcon style={{color: "#009E60"}}/></h1>
@@ -27,7 +25,11 @@ const VaccineDataSingle = (vaccine)=> {
                     <br/>
                     <div className="paper-left_vaccine_head">
                         <h3>Vaccine Name</h3>
-                        <p>{vaccine.vaccine}</p>
+                        {vaccine.vaccine==="COVISHIELD"?(
+                            <p style={{backgroundColor:"skyblue",color:"white"}}>{vaccine.vaccine}</p>
+                        ):(
+                            <p style={{backgroundColor:"slateblue",color:"white"}}>{vaccine.vaccine}</p>
+                        )}
                     </div>
 
                     <div className="paper-left_content">
@@ -71,7 +73,12 @@ const VaccineDataSingle = (vaccine)=> {
                             <h3>Minimum Fare(₹)</h3>
                         </div>
                         <div className="age_content">
-                            <p>{vaccine.fee_type} </p>
+                            {vaccine.fee_type==="Free"?(
+                                <p style={{color:"green"}}>{vaccine.fee_type} </p>
+                            ):(
+                                <p style={{color:"red"}}>{vaccine.fee_type} </p>
+
+                            )}
                         </div>
                     </div>
                     <div className="paper-right_slots">
