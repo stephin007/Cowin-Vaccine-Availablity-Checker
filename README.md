@@ -6,16 +6,20 @@ Thank you for taking your time and considering to contribute! Before contributin
 # Tech Stack
   1. ### System Requirements:
       * Operating System : Windows/Linux/Mac  
-  3. ### Software Requirements:
+  2. ### Software Requirements:
       * Updated Browser
       * Node js installed
       * Any text editor(VS Code preferred)
-  5. ### Pre-requisites:
+  3. ### Pre-requisites:
       * Basic knowledge of git and github
       * Javascript
       * React js
       * Material UI
-
+  4. ### Setting up local environment:
+      * Fork the repository
+            * First you need your own copy of the project to work on. To do that you have to fork the repository. You can find the fork button on the top-right side of the browser               window. (Refer to the attached image)
+            * After that your own copy will look like `<your-user-name>/Cowin-Vaccine-Availablity-Checker`
+  
 _MORE INFO YET TO BE ADDED... STAY TUNED_
 
 # DON'T JUST CLONE, PLEASE LEAVE A STAR, MOTIVATES US TO ADD MORE FEATURES TO THE PROJECT.
