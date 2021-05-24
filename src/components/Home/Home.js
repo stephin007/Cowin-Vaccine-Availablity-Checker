@@ -111,6 +111,28 @@ const Home = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          const arena = data?.centers?.map((res) => ({
+            name: res?.name,
+            vaccine: res?.sessions?.slice(0, 1).map((res) => res?.vaccine),
+            block_name: res?.block_name,
+            district_name: res?.district_name,
+            state_name: res?.state_name,
+            pincode: res?.pincode,
+            from: res?.from,
+            to: res?.to,
+            available_capacity: res?.sessions
+              ?.slice(0, 1)
+              .map((res) => res?.available_capacity),
+            date: res?.sessions?.slice(0, 1).map((res) => res?.date),
+            min_age_limit: res?.sessions
+              ?.slice(0, 1)
+              .map((res) => res?.min_age_limit),
+            fee_type: res?.fee_type,
+            slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
+          }));
+          console.log(arena);
+
+          setVaccineData(arena);
         });
     }
   };
@@ -125,6 +147,7 @@ const Home = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          setVaccineData(data.sessions);
         });
     }
   };
