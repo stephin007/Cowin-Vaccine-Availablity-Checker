@@ -1,105 +1,163 @@
-body {
-  background-color: #121212;
-}
-.home {
-  color: white;
-  background-position: center center;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  height: calc(100vh - 20px);
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+.home__intro > h2 {
+  margin-top: 50px;
   padding: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-size: 35px;
 }
 
-.home__info {
-  background-color: #352f44;
-  padding: 15px;
-  color: #bb86fc;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.home_selectionHeader {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 15px;
+}
+
+.home_selectionHeader h4 {
+  margin-bottom: 10px;
+  font-family: "Nunito", sans-serif !important;
+}
+
+.home_selectedHeaders {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home_selectedHeaders .form-control {
+  min-width: 300px !important;
+  margin-top: 15px;
+}
+
+.districtDateInput {
+  margin-top: 37px !important;
+}
+
+.empty_error {
+  margin-top: 10px;
   border-radius: 5px;
+  background-color: #5f235f;
+  color: whitesmoke;
+  padding: 10px 10px;
+  font-family: "Nunito", sans-serif !important;
 }
 
-.home__optionLeft {
-  padding: 10px;
+.home_selectedPin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 10px;
-  margin-left: -15px;
 }
 
-.home__option {
-  margin: 10px;
+.home_selectedPin .home_selectedpincontainer .textField {
+  width: 500px;
 }
 
-.text > .MuiFormControl-root {
-  background-color: #31333f;
-  color: white !important;
-  width: 300px;
-  outline: 0 !important;
-  border-radius: 10px;
-  margin: 10px;
+.home_selectedPin .input {
+  width: 330px;
+  margin-bottom: -10px;
 }
 
-.MuiSelect-root {
-  color: white !important;
-}
-.MuiPaper-root {
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-@media (max-width: 800px) {
-  .home__optionRight > .MuiFormControl-root {
-    width: 280px;
-    margin-left: 10px;
-  }
-  .home__info {
-    border-radius: 10px;
-  }
+@media screen and (max-width: 1024px) {
   .home {
-    background-size: 300%;
-    height: 100vh;
-  }
-
-  .home__optionRight {
-    display: flex;
-    flex-direction: column;
-  }
-  .text > .MuiFormControl-root {
-    background-color: #31333f;
-    color: white !important;
-    width: 280px;
-    outline: 0 !important;
-    border-radius: 10px;
-  }
-
-  .date__picker {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: stretch;
+    max-width: 925px;
+  }
+  .home__intro > h2 {
+    margin-top: 20px;
+    font-size: 25px;
   }
 
-  .MuiPaper-root {
-    margin-left: -5px;
+  .home_selectedHeaders {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .districtDateInput {
+    margin-top: 20px !important;
+  }
+
+  .home_selectedHeaders .form-control {
+    min-width: 270px !important;
+    margin-top: 15px;
+  }
+
+  .home_selectedPin .home_selectedpincontainer .textField {
+    width: 300px;
+  }
+
+  .home_selectedPin .input {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .home_selectedPin .home_selectedpincontainer .textField {
+    width: 250px;
+  }
+
+  .home_selectedPin .input {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 410px;
+  }
+  .home__intro > h2 {
+    margin-top: 20px;
+    font-size: 25px;
+  }
+
+  .home_selectedHeaders {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home_selectedHeaders .form-control {
+    min-width: 40px !important;
+    margin-top: 15px;
+  }
+
+  .home_selectedPin {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     margin-top: 10px;
   }
+
+  .home_selectedPin .home_selectedpincontainer .textField {
+    width: 370px;
+  }
+
+  .home_selectedPin .input {
+    margin-top: 15px;
+    width: 410px;
+  }
 }
 
-body::-webkit-scrollbar {
-  display: none;
-}
+@media screen and (max-width: 400px) {
+  .home {
+    width: 380px;
+  }
 
-.home__optionRight {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .home_selectedPin .home_selectedpincontainer .textField {
+    width: 340px;
+  }
 
-.text {
-  display: flex;
-  flex-direction: column;
-}
-
-.date__picker {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
+  .home_selectedPin .input {
+    width: 380px;
+  }
 }
