@@ -46,8 +46,6 @@ const Home = () => {
     setFormattedDate(finalDate);
   };
 
-  console.log(formattedDate);
-
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
       .then((res) => res.json())
@@ -97,7 +95,6 @@ const Home = () => {
       .then((data) => {
         setDistrictCode(districtCode);
         setVaccineData(data.sessions);
-        console.log(data);
       });
   };
 
@@ -110,7 +107,6 @@ const Home = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           const pincodeData = data?.centers?.map((res) => ({
             name: res?.name,
             vaccine: res?.sessions?.slice(0, 1).map((res) => res?.vaccine),
@@ -130,8 +126,6 @@ const Home = () => {
             fee_type: res?.fee_type,
             slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
           }));
-          console.log(pincodeData);
-
           setVaccineData(pincodeData);
         });
     }
