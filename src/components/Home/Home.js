@@ -111,7 +111,7 @@ const Home = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          const arena = data?.centers?.map((res) => ({
+          const pincodeData = data?.centers?.map((res) => ({
             name: res?.name,
             vaccine: res?.sessions?.slice(0, 1).map((res) => res?.vaccine),
             block_name: res?.block_name,
@@ -130,9 +130,9 @@ const Home = () => {
             fee_type: res?.fee_type,
             slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
           }));
-          console.log(arena);
+          console.log(pincodeData);
 
-          setVaccineData(arena);
+          setVaccineData(pincodeData);
         });
     }
   };
