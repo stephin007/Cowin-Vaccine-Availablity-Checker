@@ -17,6 +17,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import './Home.css';
 import VaccineDataMain from '../VaccineData/VaccineDataMain';
+import NullState from '../NullState';
 
 const Home = () => {
   const [state, setState] = useState([]);
@@ -29,6 +30,7 @@ const Home = () => {
   const [formattedDate, setFormattedDate] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [vaccineData, setVaccineData] = useState([]);
+  const [pinCodeSearch, setPinCodeSearch] = useState(false);
   const [toSearchValue, setToSearchValue] = useState('');
   const [toSearch] = useState([
     'Find By District',
@@ -127,6 +129,7 @@ const Home = () => {
             slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
           }));
           setVaccineData(pincodeData);
+          setPinCodeSearch(true);
         });
     }
   };
@@ -142,6 +145,7 @@ const Home = () => {
         .then((data) => {
           console.log(data);
           setVaccineData(data.sessions);
+          setPinCodeSearch(true);
         });
     }
   };
@@ -166,6 +170,7 @@ const Home = () => {
                 onChange={(e) => {
                   setToSearchValue(e.target.value);
                   setVaccineData([]);
+                  setPinCodeSearch(false);
                 }}
               >
                 {toSearch.map((functionName, index) => {
@@ -307,7 +312,10 @@ const Home = () => {
                   variant='outlined'
                   className='textField'
                   value={pin}
-                  onChange={(e) => setPin(e.target.value)}
+                  onChange={(e) => {
+                    setPinCodeSearch(false);
+                    setPin(e.target.value);
+                  }}
                 />
                 <SearchIcon
                   onClick={fetchDataUsingCalendarByPin}
@@ -348,7 +356,10 @@ const Home = () => {
                   variant='outlined'
                   className='textField'
                   value={pin}
-                  onChange={(e) => setPin(e.target.value)}
+                  onChange={(e) => {
+                    setPinCodeSearch(false);
+                    setPin(e.target.value);
+                  }}
                 />
                 <SearchIcon
                   onClick={fetchDataUsingByPin}
@@ -377,15 +388,15 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
-          {districtCode === 'PLEASE SELECT A STATE FIRST' &&
-          stateCode === 'States' ? (
-            ''
-          ) : vaccineData.length > 0 ? (
-            <VaccineDataMain vaccineData={vaccineData} />
-          ) : (
-            'No results found for the entered State, Pin code or Date, Please Try Again'
-          )}
-          {/* <VaccineDataMain vaccineData={vaccineData} /> */}
+
+          <NullState
+            toSearchValue={toSearchValue}
+            vaccineData={vaccineData}
+            districtCode={districtCode}
+            VaccineDataMain={VaccineDataMain}
+            pin={pin}
+            pinCodeSearch={pinCodeSearch}
+          />
         </div>
       </Container>
     </>
