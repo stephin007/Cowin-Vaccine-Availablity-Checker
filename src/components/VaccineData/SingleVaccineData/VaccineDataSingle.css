@@ -195,21 +195,120 @@ font-family: 'Ubuntu', sans-serif; */
 }
 
 /*Media Queries*/
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1496px) {
   .wrapper {
-    height: 35vh;
+    height: 37vh;
   }
 }
-
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    height: 37vh;
+  }
+}
+@media screen and (max-width: 916px){
+  .paper-left .paper-left_content p {
+    font-size: 15px;
+  }
+  .paper-left .paper-left_time .open-time{
+    font-size: 15px;
+  }
+  .paper-left .paper-left_time .close-time{
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 890px) {
+  .paper-left h1{
+    font-size: 16px;
+  }
+  .paper-left .paper-left_time .open-time{
+    font-size: 13px;
+  }
+  .paper-left .paper-left_time .close-time{
+    font-size: 13px;
+  }
+  .MuiSvgIcon-root {
+    font-size: 1.18rem;
+}
+}
+@media screen and (max-width: 812px) {
   .wrapper {
     height: 40vh;
   }
+  .paper-left .paper-left_content p {
+    font-size: 12px;
+  }
+  .paper-left .paper-left_time{
+    margin-top: 20px;
+  }
+  .paper-left h1{
+    font-size: 14px;
+  }
+  .paper-right_Badges h5{
+    font-size: 16px;
+  }
+  .paper-right_slots p{
+    font-size: 15px;
+  }
+  .paper-left .paper-left_time .open-time{
+    font-size: 11px;
+  }
+  .paper-left .paper-left_time .close-time{
+    font-size: 11px;
+  }
 }
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 722px) {
   .wrapper {
-    height: 70vh;
+    height: 42vh;
+  }
+ 
+  .paper-left .paper-left_time .open-time{
+    font-size: 10px;
+  }
+  .paper-left .paper-left_time .close-time{
+    font-size: 10px;
+  }
+  .paper-left .paper-left_content p {
+    font-size: 11px;
+  }
+  .paper-right_Badges p{
+    font-size: 12px;
+  }
+  .paper-left .paper-left_time{
+    margin-top: 30px;
+  }
+}
+@media screen and (max-width: 690px) {
+  .wrapper {
+    height: 47vh;
+  }
+  .paper-left_vaccine_head h3{
+    font-size: 15px;
+  }
+  .paper-right_Badges h5 {
+    font-size: 14px;
+  }
+  .paper-right_Badges p {
+    font-size: 10px;
+  }
+  .paper-left .paper-left_content h3{
+    font-size: 13px;
+  }
+  .paper-left .paper-left_time .open-time{
+    font-size: 10px;
+  }
+  .paper-left .paper-left_time .close-time{
+    font-size: 10px;
+  }
+  .paper-left .paper-left_content p {
+    font-size: 11px;
+  }
+  .paper-right_Badges p{
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 646px) {
+  .wrapper {
+    height: 80vh;
     flex-direction: column;
   }
 
@@ -225,18 +324,24 @@ font-family: 'Ubuntu', sans-serif; */
     font-size: 15px;
     margin-bottom: 10px;
   }
-
+  .paper-left .paper-left_content h3{
+    font-size: 15px;
+  }
   .paper-left_vaccine_head p {
     padding: 5px;
     font-size: 15px;
     border-radius: 7px;
     text-align: center;
   }
-
+  .paper-left .paper-left_content p {
+    font-size: 15px;
+  }
   .paper-left p {
     width: 100%;
   }
-
+  .paper-left .paper-left_time{
+    margin-top: 20px;
+  }
   .paper-left .paper-left_content {
     display: flex;
     flex-direction: column;
@@ -246,6 +351,7 @@ font-family: 'Ubuntu', sans-serif; */
     display: flex;
     flex-direction: column;
     text-align: center;
+    letter-spacing: 2px;
   }
 
   .paper-left .paper-left_time .time {
@@ -259,7 +365,6 @@ font-family: 'Ubuntu', sans-serif; */
   .paper-right_Badges h5 {
     margin-top: 5px;
     margin-right: 3px;
-    color: aquamarine;
     font-weight: bold;
     font-size: 11px;
   }
@@ -270,7 +375,6 @@ font-family: 'Ubuntu', sans-serif; */
 
   .paper-right_Badges p {
     margin-top: 5px;
-    color: whitesmoke;
     font-size: 15px;
   }
 
@@ -287,13 +391,10 @@ font-family: 'Ubuntu', sans-serif; */
   }
 
   .paper-right_age .age_content {
-    /* background-color: rgb(222,49,99); */
-    background-color: red;
     height: 15px;
     width: 65px;
     padding: 3px;
     border-radius: 3px;
-    color: white;
   }
 
   .paper-right_age .age_content p {
@@ -304,25 +405,19 @@ font-family: 'Ubuntu', sans-serif; */
   .paper-right_slots h3 {
     text-align: center;
     font-weight: 700;
-    color: #bb86fc;
     margin: 3px;
   }
 
   .paper-right_slots p {
-    color: whitesmoke;
     font-size: 15px;
     text-align: center;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 502px) {
   .wrapper {
     height: 82vh;
   }
 }
 
-@media screen and (max-width: 360px) {
-  .wrapper {
-    height: 100vh;
-  }
-}
+
