@@ -2,15 +2,15 @@ import "./VaccineDataSingle.css";
 
 import Badge from "@material-ui/core/Badge";
 import Paper from "@material-ui/core/Paper";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import HealingIcon from "@material-ui/icons/Healing";
 import VerifiedUserRoundedIcon from "@material-ui/icons/VerifiedUserRounded";
 
 const useStyles = makeStyles((theme) => ({
-                               paperMainDiv : {
-                                 width : "100%",
-                               },
-                             }));
+  paperMainDiv: {
+    width: "100%",
+  },
+}));
 const VaccineDataSingle = (vaccine) => {
   const classes = useStyles();
   return (
