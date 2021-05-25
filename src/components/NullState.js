@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const NullState = ({
   toSearchValue,
@@ -9,10 +9,10 @@ const NullState = ({
   pinCodeSearch,
 }) => {
   if (
-    toSearchValue === 'Find By District' ||
-    toSearchValue === 'Find By District & Date(Slots for next 7 days)'
+    toSearchValue === "Find By District" ||
+    toSearchValue === "Find By District & Date(Slots for next 7 days)"
   ) {
-    if (districtCode === 'PLEASE SELECT A STATE FIRST') {
+    if (districtCode === "PLEASE SELECT A STATE FIRST") {
       return <div></div>;
     } else if (vaccineData.length > 0) {
       return (
@@ -29,8 +29,8 @@ const NullState = ({
       );
     }
   } else if (
-    toSearchValue === 'Find By PinCode & Date' ||
-    toSearchValue === 'Find By Pincode & Date(Slots for next 7 days)'
+    toSearchValue === "Find By PinCode & Date" ||
+    toSearchValue === "Find By Pincode & Date(Slots for next 7 days)"
   ) {
     if (vaccineData.length > 0) {
       return (
