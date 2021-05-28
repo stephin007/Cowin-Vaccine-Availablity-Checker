@@ -1,18 +1,17 @@
-import React from "react";
 import "./App.css";
-import Main from "./components/Main";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { ThemeProvider } from "styled-components";
-import { useDarkMode } from './components/useDarkMode';
-import { lightTheme, darkTheme } from './components/themes'
-import { GlobalStyles } from './components/globalStyles'
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles'
+import React from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {ThemeProvider} from "styled-components";
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-
-import Home from "./components/Home/Home";
-import Header from "./components/Header/Header";
 import About from "./components/About/About";
+import {GlobalStyles} from './components/globalStyles'
+import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
+import Main from "./components/Main";
+import {darkTheme, lightTheme} from './components/themes'
+import {useDarkMode} from './components/useDarkMode';
 
 const App = () => {
   const [theme, toggleTheme] = useDarkMode();
