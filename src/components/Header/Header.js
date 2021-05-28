@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from './HeaderStyles'
 import "./Header.css";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div className="header">
       <div className="header__left">
@@ -20,6 +21,7 @@ const Header = () => {
           <Link to="/about" style={{ textDecoration: "none", color: "black", fontSize: "19px" }}>
               <p>About</p>
           </Link>
+          <Button onClick={props.toggleTheme}> {props.theme === 'light' ? 'Dark Mode' : 'Light Mode'}</Button>
         </div>
       </div>
     </div>
