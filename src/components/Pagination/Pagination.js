@@ -2,7 +2,7 @@ import "./Pagination.css";
 
 import React from "react";
 
-const Pagination = ({totalVaccine, vaccinePerPage, paginate}) => {
+const Pagination = ({ totalVaccine, vaccinePerPage, paginate }) => {
   const pageNumber = [];
 
   for (let i = 1; i <= Math.ceil(totalVaccine / vaccinePerPage); i++) {
