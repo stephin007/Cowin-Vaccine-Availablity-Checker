@@ -1,7 +1,8 @@
-import VaccineDataSingle from './SingleVaccineData/VaccineDataSingle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const VaccineDataMain = ({ vaccineData, loading }) => {
+import VaccineDataSingle from './SingleVaccineData/VaccineDataSingle';
+
+const VaccineDataMain = ({vaccineData, loading}) => {
 	return (
 		<>
 			{loading === false ? (
