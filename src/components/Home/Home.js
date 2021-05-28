@@ -38,7 +38,7 @@ const Home = () => {
   ]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [vaccinePerPage] = useState(10);
+  const [vaccinePerPage] = useState(5);
 
   const indexOfLastVaccine = currentPage * vaccinePerPage;
   const indexOfFirstVaccine = indexOfLastVaccine - vaccinePerPage;
