@@ -7,7 +7,11 @@ const VaccineDataMain = ({ vaccineData }) => {
         <>
           {vaccineData.map((vaccine) => {
             const { center_id } = vaccine;
-            return <VaccineDataSingle key={center_id} {...vaccine} />;
+            return (
+              <>
+                <VaccineDataSingle key={center_id} {...vaccine} />
+              </>
+            );
           })}
         </>
       ) : null}

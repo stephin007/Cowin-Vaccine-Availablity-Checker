@@ -14,9 +14,9 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import SearchIcon from "@material-ui/icons/Search";
-
 import "./Home.css";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
+import Pagination from "../Pagination/Pagination";
 
 const Home = () => {
   const [state, setState] = useState([]);
@@ -36,6 +36,18 @@ const Home = () => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [vaccinePerPage] = useState(10);
+
+  const indexOfLastVaccine = currentPage * vaccinePerPage;
+  const indexOfFirstVaccine = indexOfLastVaccine - vaccinePerPage;
+  const currentVaccine = vaccineData.slice(
+    indexOfFirstVaccine,
+    indexOfLastVaccine
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
@@ -97,6 +109,8 @@ const Home = () => {
         setVaccineData(data.sessions);
       });
   };
+
+  console.log(currentVaccine);
 
   const fetchDataUsingCalendarByPin = () => {
     if (pin.length !== 6) {
@@ -378,7 +392,16 @@ const Home = () => {
             </div>
           ) : null}
 
-          <VaccineDataMain vaccineData={vaccineData} />
+          {vaccineData.length === 0 ? null : (
+            <>
+              <Pagination
+                vaccinePerPage={vaccinePerPage}
+                totalVaccine={vaccineData.length}
+                paginate={paginate}
+              />
+              <VaccineDataMain vaccineData={currentVaccine} />
+            </>
+          )}
         </div>
       </Container>
     </>

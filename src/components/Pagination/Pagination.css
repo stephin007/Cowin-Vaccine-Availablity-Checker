@@ -1,0 +1,23 @@
+.pagination {
+  background-color: #f2f2f2;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination > a {
+  width: 100px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  transition: 0.3s linear;
+}
+
+.pagination > a:hover {
+  color: #eb4d4b;
+}
