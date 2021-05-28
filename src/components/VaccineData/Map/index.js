@@ -1,12 +1,14 @@
-import * as React from "react";
-import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-
 import "../SingleVaccineData/VaccineDataSingle.css";
-import { Button } from "@material-ui/core";
-import { CloseSharp } from "@material-ui/icons";
+
+import mapboxgl from
+    "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import {Button} from "@material-ui/core";
+import {CloseSharp} from "@material-ui/icons";
+import * as React from "react";
+
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-export const Map = ({ lng: _lng, lat: _lat, close }) => {
+export const Map = ({lng : _lng, lat : _lat, close}) => {
   const mapContainer = React.useRef(null);
   const map = React.useRef(null);
   const [lng, setLng] = React.useState(_lng);

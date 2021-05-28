@@ -1,40 +1,42 @@
-import * as React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+import "./VaccineDataSingle.css";
+
+import {Button} from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
+import Paper from "@material-ui/core/Paper";
+import {makeStyles} from "@material-ui/core/styles";
+import {MapSharp} from "@material-ui/icons";
 import HealingIcon from "@material-ui/icons/Healing";
 import VerifiedUserRoundedIcon from "@material-ui/icons/VerifiedUserRounded";
+import * as React from "react";
 
-import "./VaccineDataSingle.css";
-import { Map } from "../Map";
-import { Button } from "@material-ui/core";
-import { MapSharp } from "@material-ui/icons";
+import {Map} from "../Map";
 
 const useStyles = makeStyles((theme) => ({
-  paperMainDiv: {
-    width: "100%",
-  },
-}));
+                               paperMainDiv : {
+                                 width : "100%",
+                               },
+                             }));
 const VaccineDataSingle = (vaccine) => {
   const classes = useStyles();
   const [showMap, setShowMap] = React.useState(false);
 
-  React.useEffect(() => {
-    console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN);
-  }, []);
+  React.useEffect(
+      () => { console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN); }, []);
 
   return (
     <div className={classes.paperMainDiv}>
       <Paper
-        variant="outlined"
+  variant = "outlined"
         className={`wrapper ${showMap ? "wrapper-w-map" : "wrapper-wo-map"}`}
-        style={{ backgroundColor: "#E5E7EB", margin: "10px 0px" }}
+        style={{
+    backgroundColor: "#E5E7EB", margin: "10px 0px" }}
       >
         <div className="paper-left">
           <div>
             <h1>
               {vaccine?.name}{" "}
-              <VerifiedUserRoundedIcon style={{ color: "#009E60" }} />
+              <VerifiedUserRoundedIcon style={
+    { color: "#009E60" }} />
             </h1>
           </div>
           <hr />
@@ -46,7 +48,8 @@ const VaccineDataSingle = (vaccine) => {
                 {vaccine?.vaccine}
               </p>
             ) : (
-              <p style={{ backgroundColor: "slateblue", color: "white" }}>
+              <p style={{
+    backgroundColor: "slateblue", color: "white" }}>
                 {vaccine?.vaccine}
               </p>
             )}
@@ -60,7 +63,7 @@ const VaccineDataSingle = (vaccine) => {
             </p>
             <Button
               onClick={() => {
-                setShowMap((old) => !old);
+    setShowMap((old) => !old);
               }}
             >
               <MapSharp />
@@ -109,7 +112,8 @@ const VaccineDataSingle = (vaccine) => {
               {vaccine.fee_type === "Free" ? (
                 <p style={{ color: "green" }}>{vaccine?.fee_type} </p>
               ) : (
-                <p style={{ color: "red" }}>{vaccine?.fee_type} </p>
+                <p style={{
+    color: "red" }}>{vaccine?.fee_type} </p>
               )}
             </div>
           </div>
@@ -130,6 +134,7 @@ const VaccineDataSingle = (vaccine) => {
       </Paper>
     </div>
   );
-};
+}
+;
 
 export default VaccineDataSingle;
