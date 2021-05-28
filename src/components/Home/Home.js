@@ -79,6 +79,7 @@ const Home = () => {
 
     setDistricts([]);
 
+    setVaccineData([]);
     console.log(stateCode);
 
     const url =
