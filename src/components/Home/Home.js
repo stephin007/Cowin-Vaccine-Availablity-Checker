@@ -377,7 +377,6 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
-
           <VaccineDataMain vaccineData={vaccineData} />
         </div>
       </Container>
