@@ -1,13 +1,15 @@
 # CoWIN Vaccination Slots Checking App.
 
-CoWIN Vaccination Slots Checking App is a user-friendly website
-that allow users to find vaccine in nearby available Center.
+CoWIN Vaccination Slots Checking App is a user-friendly website that allow users
+to find vaccine in nearby available Center.
 
 ## Features
 
 - Easy to use
-- Ability to search for vaccines based on both pincode and state-disctrict combination
-- Installable: can be installed as a native app on any mobile device. [Learn More](https://medium.com/progressivewebapps/how-to-install-a-pwa-to-your-device-68a8d37fadc1)
+- Ability to search for vaccines based on both pincode and state-disctrict
+  combination
+- Installable: can be installed as a native app on any mobile device.
+  [Learn More](https://medium.com/progressivewebapps/how-to-install-a-pwa-to-your-device-68a8d37fadc1)
 
 ## Technologies Used
 
@@ -25,10 +27,12 @@ CoWIN Vaccination Slots Checking App uses a number of open source projects :
 
 ## Contribution
 
-Please see our [Contribution Guidelines](https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/CONTRIBUTING.md).
+Please see our
+[Contribution Guidelines](https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/CONTRIBUTING.md).
 
 ---
 
-> _DON'T JUST CLONE, PLEASE LEAVE A STAR 🌟, MOTIVATES US TO ADD MORE FEATURES TO THE PROJECT_
+> _DON'T JUST CLONE, PLEASE LEAVE A STAR 🌟, MOTIVATES US TO ADD MORE FEATURES
+> TO THE PROJECT_
 
 ---
