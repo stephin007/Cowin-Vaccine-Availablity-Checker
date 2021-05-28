@@ -25,7 +25,7 @@ CoWIN Vaccination Slots Checking App uses a number of open source projects :
 
 ## Contribution
 
-Please see our [Contribution Guidelines](https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/CONTRIBUTING.md).
+Please see our [Contribution Guidelines](./CONTRIBUTING.md).
 
 ---
 
