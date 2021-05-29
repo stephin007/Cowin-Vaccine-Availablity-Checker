@@ -11,7 +11,7 @@ export const Map = ({ lng: _lng, lat: _lat, close }) => {
   const map = React.useRef(null);
   const [lng, setLng] = React.useState(_lng);
   const [lat, setLat] = React.useState(_lat);
-  const [zoom, setZoom] = React.useState(10);
+  const [zoom] = React.useState(10);
 
   React.useEffect(() => {
     setLng(_lng);
