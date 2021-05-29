@@ -415,7 +415,22 @@ const Home = () => {
             </div>
           ) : null}
 
-          {vaccineData.length === 0 ? null : (
+          {vaccineData.length === 0 ? (
+            <>
+              {toSearchValue === "" || pin.length !== 6 ? null : (
+                <h2
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "monospace",
+                    fontSize: "20px",
+                  }}
+                >
+                  No results found for the entered State, Pin code or Date,
+                  Please Try Again
+                </h2>
+              )}
+            </>
+          ) : (
             <>
               <VaccineDataMain vaccineData={currentVaccine} />
               {pageNumber.length === 1 ? null : (
