@@ -3,6 +3,7 @@
 ### Please check if the PR fulfills these requirements
 
 - [ ] Make sure you are requesting to **NEW-UI**. Don't request other protected Branches like **staging/master**
+- [ ] Make sure no conflicts are present in the code, if so please resolve it(_Tip: Always fetch upstream_)
 - [ ] Your Commit messages should make sense.
 - [ ] Don't push your package.lock.json as this project uses yarn.lock already.
 - [ ] Check your code additions will fail neither code linting checks nor unit test.
