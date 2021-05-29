@@ -14,9 +14,9 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import SearchIcon from "@material-ui/icons/Search";
-
 import "./Home.css";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
+import Pagination from "../Pagination/Pagination";
 
 const Home = () => {
   const [state, setState] = useState([]);
@@ -36,13 +36,46 @@ const Home = () => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [vaccinePerPage] = useState(3);
+  const indexOfLastVaccine = currentPage * vaccinePerPage;
+  const indexOfFirstVaccine = indexOfLastVaccine - vaccinePerPage;
+  const currentVaccine = vaccineData.slice(
+    indexOfFirstVaccine,
+    indexOfLastVaccine
+  );
+
+  const pageNumber = [];
+
+  for (let i = 1; i <= Math.ceil(vaccineData.length / vaccinePerPage); i++) {
+    pageNumber.push(i);
+  }
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > pageNumber.length) {
+      setCurrentPage(pageNumber.length);
+    }
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+
+    if (currentPage - 1 <= 0 && pageNumber.length) {
+      setCurrentPage(pageNumber.slice(0, 1));
+    }
+  };
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
     var day = selectedDate.getDate();
     var year = selectedDate.getFullYear();
     var finalDate = day + "-" + month + "-" + year;
-
     setFormattedDate(finalDate);
   };
 
@@ -60,6 +93,7 @@ const Home = () => {
     setSelectedDate(date);
     setVaccineData([]);
     setDistrictCode("");
+    setCurrentPage(1);
   };
 
   const onStateChange = async (e) => {
@@ -67,7 +101,9 @@ const Home = () => {
 
     setDistricts([]);
 
-    console.log(stateCode);
+    setCurrentPage(1);
+
+    setVaccineData([]);
 
     const url =
       stateCode === "States"
@@ -84,6 +120,7 @@ const Home = () => {
 
   const findByDistrict = async (e) => {
     const districtCode = e.target.value;
+    setCurrentPage(1);
 
     const url =
       districtCode === "PLEASE SELECT A STATE FIRST"
@@ -377,7 +414,22 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
-          <VaccineDataMain vaccineData={vaccineData} />
+
+          {vaccineData.length === 0 ? null : (
+            <>
+              <VaccineDataMain vaccineData={currentVaccine} />
+              {pageNumber.length === 1 ? null : (
+                <Pagination
+                  pageNumber={pageNumber}
+                  paginate={paginate}
+                  prevPage={prevPage}
+                  currentPageChange={currentPage}
+                  nextPage={nextPage}
+                  currentPage={currentPage}
+                />
+              )}
+            </>
+          )}
         </div>
       </Container>
     </>
