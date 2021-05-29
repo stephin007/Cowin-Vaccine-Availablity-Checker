@@ -16,9 +16,16 @@ const Header = () => {
       </div>
       <div className="header__rightNav">
         <div className="header__right">
-          <h3><a href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker">Contribute</a></h3>
-          <Link to="/about" style={{ textDecoration: "none", color: "black", fontSize: "19px" }}>
-              <p>About</p>
+          <h3>
+            <a href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker">
+              Contribute
+            </a>
+          </h3>
+          <Link
+            to="/about"
+            style={{ textDecoration: "none", color: "black", fontSize: "19px" }}
+          >
+            <p>About</p>
           </Link>
         </div>
       </div>

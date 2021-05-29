@@ -94,8 +94,7 @@
   <summary>Environment Variables</summary>
   <ul>
     <li>
-      <strong>REACT_APP_MAPBOX_ACCESS_TOKEN:</strong>
-      <strong>Please make a copy of the `.env.example` and rename it to .env and place the below token in this `.env` file   </strong>
+      <strong>REACT_APP_MAPBOX_ACCESS_TOKEN</strong>
       <ul>
         <li>
           Create a MapBox account by navigating to
