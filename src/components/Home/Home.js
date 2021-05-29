@@ -417,6 +417,7 @@ const Home = () => {
 
           {vaccineData.length === 0 ? null : (
             <>
+              <VaccineDataMain vaccineData={currentVaccine} />
               {pageNumber.length === 1 ? null : (
                 <Pagination
                   pageNumber={pageNumber}
@@ -427,8 +428,6 @@ const Home = () => {
                   currentPage={currentPage}
                 />
               )}
-
-              <VaccineDataMain vaccineData={currentVaccine} />
             </>
           )}
         </div>
