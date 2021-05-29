@@ -18,6 +18,16 @@
   transition: 0.3s linear;
 }
 
+.pagination__a {
+  border-bottom: 2px solid #eb4d4b;
+}
+
 .pagination > a:hover {
   color: #eb4d4b;
+}
+
+.pagination > .MuiSvgIcon-root:hover {
+  color: #eb4d4b;
+  transition: 0.3s linear;
+  cursor: pointer;
 }

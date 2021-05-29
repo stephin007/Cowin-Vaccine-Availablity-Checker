@@ -1,16 +1,15 @@
 import React from "react";
 import "./Pagination.css";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-const Pagination = ({ totalVaccine, vaccinePerPage, paginate }) => {
-  const pageNumber = [];
-
-  for (let i = 1; i <= Math.ceil(totalVaccine / vaccinePerPage); i++) {
-    pageNumber.push(i);
-  }
+const Pagination = (props) => {
+  const { pageNumber, paginate, nextPage, prevPage } = props;
 
   return (
     <div className="pagination">
       {/* eslint-disable */}
+      <ChevronLeftIcon onClick={prevPage} />
       {pageNumber.map((number) => (
         <>
           {/* eslint-disable */}
@@ -23,6 +22,7 @@ const Pagination = ({ totalVaccine, vaccinePerPage, paginate }) => {
           </a>
         </>
       ))}
+      <ChevronRightIcon onClick={nextPage} />
     </div>
   );
 };

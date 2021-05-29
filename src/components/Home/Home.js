@@ -36,10 +36,8 @@ const Home = () => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
-
   const [currentPage, setCurrentPage] = useState(1);
-  const [vaccinePerPage] = useState(5);
-
+  const [vaccinePerPage] = useState(3);
   const indexOfLastVaccine = currentPage * vaccinePerPage;
   const indexOfFirstVaccine = indexOfLastVaccine - vaccinePerPage;
   const currentVaccine = vaccineData.slice(
@@ -47,14 +45,37 @@ const Home = () => {
     indexOfLastVaccine
   );
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const pageNumber = [];
+
+  for (let i = 1; i <= Math.ceil(vaccineData.length / vaccinePerPage); i++) {
+    pageNumber.push(i);
+  }
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > pageNumber.length) {
+      setCurrentPage(pageNumber.length);
+    }
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+
+    if (currentPage - 1 <= 0 && pageNumber.length) {
+      setCurrentPage(pageNumber.slice(0, 1));
+    }
+  };
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
     var day = selectedDate.getDate();
     var year = selectedDate.getFullYear();
     var finalDate = day + "-" + month + "-" + year;
-
     setFormattedDate(finalDate);
   };
 
@@ -72,6 +93,7 @@ const Home = () => {
     setSelectedDate(date);
     setVaccineData([]);
     setDistrictCode("");
+    setCurrentPage(1);
   };
 
   const onStateChange = async (e) => {
@@ -79,8 +101,9 @@ const Home = () => {
 
     setDistricts([]);
 
+    setCurrentPage(1);
+
     setVaccineData([]);
-    console.log(stateCode);
 
     const url =
       stateCode === "States"
@@ -97,6 +120,7 @@ const Home = () => {
 
   const findByDistrict = async (e) => {
     const districtCode = e.target.value;
+    setCurrentPage(1);
 
     const url =
       districtCode === "PLEASE SELECT A STATE FIRST"
@@ -110,8 +134,6 @@ const Home = () => {
         setVaccineData(data.sessions);
       });
   };
-
-  console.log(currentVaccine);
 
   const fetchDataUsingCalendarByPin = () => {
     if (pin.length !== 6) {
@@ -396,9 +418,10 @@ const Home = () => {
           {vaccineData.length === 0 ? null : (
             <>
               <Pagination
-                vaccinePerPage={vaccinePerPage}
-                totalVaccine={vaccineData.length}
+                pageNumber={pageNumber}
                 paginate={paginate}
+                prevPage={prevPage}
+                nextPage={nextPage}
               />
               <VaccineDataMain vaccineData={currentVaccine} />
             </>
