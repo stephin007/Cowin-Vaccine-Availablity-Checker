@@ -1,8 +1,8 @@
-.test__home > img {
+.intro__home > img {
   width: 550px;
 }
 
-.test__home {
+.intro__home {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -10,7 +10,7 @@
   margin-right: 40px;
 }
 
-.test__homeText {
+.intro__homeText {
   border: 3px solid black;
   padding: 10px 55px 10px 50px;
   margin-top: -25px;
@@ -18,7 +18,7 @@
   text-align: center;
 }
 
-.test__homeText:hover {
+.intro__homeText:hover {
   border: 3px solid black;
   color: white;
   padding: 10px 55px 10px 50px;
@@ -30,10 +30,10 @@
 }
 
 @media screen and (max-width: 800px) {
-  .test__home > img {
+  .intro__home > img {
     width: 300px;
   }
-  .test__home {
+  .intro__home {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -41,7 +41,7 @@
     margin-right: -10px;
     margin-top: 40px;
   }
-  .test__home {
+  .intro__home {
     display: flex;
     align-items: center;
     flex-direction: column;
