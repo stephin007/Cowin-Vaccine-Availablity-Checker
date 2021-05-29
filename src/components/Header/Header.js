@@ -1,36 +1,181 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from './HeaderStyles'
+import React, { useState } from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "./Header.css";
+import { Link } from "react-router-dom";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    [theme.breakpoints.down("xs")]: {
+      flexGrow: 1,
+    },
+  },
+  headerOptions: {
+    display: "flex",
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+}));
 
 const Header = (props) => {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   return (
-    <div className="header">
-      <div className="header__left">
-        <Link to="/">
-          <img
-            className="header__leftImg"
-            src="https://user-images.githubusercontent.com/71087810/117496136-3d18fb00-af94-11eb-876a-d3acc96aaa75.png"
-            alt=""
-          />
-        </Link>
-      </div>
-      <div className="header__rightNav">
-        <div className="header__right">
-          <h3>
-            <a href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker">
-              Contribute
-            </a>
-          </h3>
-          <Link
-            to="/about"
-            style={{ textDecoration: "none", color: "black", fontSize: "19px" }}
+    <div className={classes.root}>
+      <AppBar position="static" elevation={0}>
+        <Toolbar className={props.theme === "light" ? "header" : "headerDark"}>
+          <Typography
+            variant="h6"
+            style={{ marginTop: 10 }}
+            className={classes.title}
           >
-            <p>About</p>
-          </Link>
-          <Button onClick={props.toggleTheme}> {props.theme === 'light' ? 'Dark Mode' : 'Light Mode'}</Button>
-        </div>
-      </div>
+            <Link to="/">
+              <img
+                src="https://user-images.githubusercontent.com/71087810/117496553-d5af7b00-af94-11eb-84bb-913a1f386811.png"
+                alt=""
+                style={{ width: 100 }}
+                className="logo__img"
+              />
+            </Link>
+          </Typography>
+
+          {isMobile ? (
+            <>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+                onClick={handleMenu}
+              >
+                <MenuIcon
+                  className={
+                    props.theme === "light" ? "header__ham" : "header__hamDark"
+                  }
+                />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={open}
+                onClose={() => setAnchorEl(null)}
+              >
+                {props.theme === "light" ? (
+                  <Link
+                    to="/about"
+                    style={{ padding: 0, textDecoration: "none" }}
+                  >
+                    <MenuItem>About</MenuItem>
+                  </Link>
+                ) : (
+                  <Link
+                    to="/about"
+                    style={{
+                      padding: 0,
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
+                    <MenuItem>About</MenuItem>
+                  </Link>
+                )}
+                <a
+                  href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ textDecorationLine: "none" }}
+                >
+                  {props.theme === "light" ? (
+                    <MenuItem style={{ color: "black" }}>Contribute</MenuItem>
+                  ) : (
+                    <MenuItem style={{ color: "white" }}>Contribute</MenuItem>
+                  )}
+                </a>{" "}
+                <MenuItem onClick={props.toggleTheme}>
+                  {props.theme === "light" ? (
+                    <Brightness7Icon
+                      style={{ marginLeft: 30, color: "black" }}
+                    />
+                  ) : (
+                    <Brightness2Icon
+                      style={{ marginLeft: 30, color: "black" }}
+                    />
+                  )}
+                </MenuItem>
+              </Menu>
+            </>
+          ) : (
+            <div className={classes.headerOptions}>
+              {props.theme === "light" ? (
+                <Link
+                  to="/about"
+                  style={{ padding: 0, textDecoration: "none", color: "black" }}
+                >
+                  <MenuItem>About</MenuItem>
+                </Link>
+              ) : (
+                <Link
+                  to="/about"
+                  style={{
+                    padding: 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                >
+                  <MenuItem>About</MenuItem>
+                </Link>
+              )}
+              <a href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/">
+                {props.theme === "light" ? (
+                  <MenuItem style={{ color: "black" }}>Contribute</MenuItem>
+                ) : (
+                  <MenuItem style={{ color: "white" }}>Contribute</MenuItem>
+                )}
+              </a>
+              <MenuItem onClick={props.toggleTheme}>
+                {" "}
+                {props.theme === "light" ? (
+                  <Brightness2Icon style={{ color: "black" }} />
+                ) : (
+                  <Brightness7Icon style={{ color: "white" }} />
+                )}
+              </MenuItem>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
     </div>
   );
 };
