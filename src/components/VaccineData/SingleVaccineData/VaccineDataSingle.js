@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Badge from "@material-ui/core/Badge";
@@ -17,11 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const VaccineDataSingle = (vaccine) => {
   const classes = useStyles();
-  const [showMap, setShowMap] = React.useState(false);
-
-  React.useEffect(() => {
-    console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN);
-  }, []);
+  const [showMap, setShowMap] = useState(false);
 
   return (
     <div className={classes.paperMainDiv}>
