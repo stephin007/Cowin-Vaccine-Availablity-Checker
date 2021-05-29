@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 body {
@@ -19,7 +19,7 @@ h4 {
     color: ${({ theme }) => theme.text};
 }
 
-.test__homeText {
+.intro__homeText {
     border: 3px solid ${({ theme }) => theme.text};
     color: ${({ theme }) => theme.text};
 }
@@ -31,4 +31,4 @@ h4 {
 .logo__img {
     filter: invert(${({ theme }) => theme.invert});
 }
-`
+`;

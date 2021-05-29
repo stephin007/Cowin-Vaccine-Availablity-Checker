@@ -207,7 +207,11 @@ const Home = () => {
               >
                 {toSearch.map((functionName, index) => {
                   return (
-                    <MenuItem key={index} value={functionName}>
+                    <MenuItem
+                      className="search__values"
+                      key={index}
+                      value={functionName}
+                    >
                       {functionName}
                     </MenuItem>
                   );

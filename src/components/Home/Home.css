@@ -68,7 +68,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    max-width: 925px;
+    max-width: 380px;
   }
   .home__intro > h2 {
     margin-top: 20px;
@@ -150,14 +150,18 @@
 
 @media screen and (max-width: 400px) {
   .home {
-    width: 380px;
+    max-width: 100%;
   }
 
   .home_selectedPin .home_selectedpincontainer .textField {
-    width: 340px;
+    width: 280px;
   }
 
   .home_selectedPin .input {
-    width: 380px;
+    width: 320px;
+  }
+
+  .MuiButtonBase-root {
+    font-size: 15px !important;
   }
 }
