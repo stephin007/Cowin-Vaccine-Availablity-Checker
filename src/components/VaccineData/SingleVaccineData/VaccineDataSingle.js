@@ -54,13 +54,13 @@ const VaccineDataSingle = (vaccine) => {
               {vaccine?.block_name}, {vaccine?.district_name},{" "}
               {vaccine?.state_name}
             </p>
-            {/* <Button
+            <Button
               onClick={() => {
                 setShowMap((old) => !old);
               }}
             >
               <MapSharp />
-            </Button> */}
+            </Button>
           </div>
           <div className="paper-left_content">
             <h3>pincode</h3>
