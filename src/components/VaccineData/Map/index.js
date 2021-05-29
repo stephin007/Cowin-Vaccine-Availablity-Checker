@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 
 import "../SingleVaccineData/VaccineDataSingle.css";
@@ -7,18 +7,18 @@ import { CloseSharp } from "@material-ui/icons";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 export const Map = ({ lng: _lng, lat: _lat, close }) => {
-  const mapContainer = React.useRef(null);
-  const map = React.useRef(null);
-  const [lng, setLng] = React.useState(_lng);
-  const [lat, setLat] = React.useState(_lat);
-  const [zoom] = React.useState(10);
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [lng, setLng] = useState(_lng);
+  const [lat, setLat] = useState(_lat);
+  const [zoom] = useState(10);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setLng(_lng);
     setLat(_lat);
   }, [_lat, _lng]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (map.current) {
       return;
     }
