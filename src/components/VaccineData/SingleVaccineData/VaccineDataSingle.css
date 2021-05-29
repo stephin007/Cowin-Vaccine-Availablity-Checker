@@ -1,20 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway&family=Roboto&family=Ubuntu&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap");
 /* font-family: 'Raleway', sans-serif;
 font-family: 'Roboto', sans-serif;
 font-family: 'Ubuntu', sans-serif; */
 
 .wrapper {
-  display: flex;
   background-color: #333333;
+}
+
+.wrapper-w-map {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "left right"
+    "map map";
+}
+
+.wrapper-wo-map {
   height: 32vh;
+  display: flex;
+}
+
+.map-container {
+  grid-area: map;
+  height: 250px;
 }
 
 .wrapper > * {
   padding: 20px;
 }
 
-.paper-left {
+.wrapper-w-map .paper-left {
+  grid-area: left;
+}
+
+.wrapper-wo-map .paper-left {
   width: 50%;
 }
 
@@ -37,7 +58,7 @@ font-family: 'Ubuntu', sans-serif; */
   text-transform: uppercase;
   font-weight: bold;
   color: #275efe;
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
   letter-spacing: 2px;
 }
 .paper-left_vaccine_head p {
@@ -59,6 +80,7 @@ font-family: 'Ubuntu', sans-serif; */
 .paper-left .paper-left_content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 10px;
 }
 
@@ -72,6 +94,7 @@ font-family: 'Ubuntu', sans-serif; */
 .paper-left .paper-left_content p {
   /* color: #F48FB1; */
   color: red;
+  text-align: right;
   /* color: black; */
   margin-top: 5px;
   text-transform: capitalize;
@@ -116,7 +139,11 @@ font-family: 'Ubuntu', sans-serif; */
   font-family: "Raleway", sans-serif;
 }
 
-.paper-right {
+.wrapper-w-map .paper-right {
+  grid-area: right;
+}
+
+.wrapper-wo-map .paper-right {
   width: 50%;
 }
 
@@ -205,30 +232,30 @@ font-family: 'Ubuntu', sans-serif; */
     height: 37vh;
   }
 }
-@media screen and (max-width: 916px){
+@media screen and (max-width: 916px) {
   .paper-left .paper-left_content p {
     font-size: 15px;
   }
-  .paper-left .paper-left_time .open-time{
+  .paper-left .paper-left_time .open-time {
     font-size: 15px;
   }
-  .paper-left .paper-left_time .close-time{
+  .paper-left .paper-left_time .close-time {
     font-size: 15px;
   }
 }
 @media screen and (max-width: 890px) {
-  .paper-left h1{
+  .paper-left h1 {
     font-size: 16px;
   }
-  .paper-left .paper-left_time .open-time{
+  .paper-left .paper-left_time .open-time {
     font-size: 13px;
   }
-  .paper-left .paper-left_time .close-time{
+  .paper-left .paper-left_time .close-time {
     font-size: 13px;
   }
   .MuiSvgIcon-root {
     font-size: 1.18rem;
-}
+  }
 }
 @media screen and (max-width: 812px) {
   .wrapper {
@@ -237,22 +264,22 @@ font-family: 'Ubuntu', sans-serif; */
   .paper-left .paper-left_content p {
     font-size: 12px;
   }
-  .paper-left .paper-left_time{
+  .paper-left .paper-left_time {
     margin-top: 20px;
   }
-  .paper-left h1{
+  .paper-left h1 {
     font-size: 14px;
   }
-  .paper-right_Badges h5{
+  .paper-right_Badges h5 {
     font-size: 16px;
   }
-  .paper-right_slots p{
+  .paper-right_slots p {
     font-size: 15px;
   }
-  .paper-left .paper-left_time .open-time{
+  .paper-left .paper-left_time .open-time {
     font-size: 11px;
   }
-  .paper-left .paper-left_time .close-time{
+  .paper-left .paper-left_time .close-time {
     font-size: 11px;
   }
 }
@@ -260,20 +287,20 @@ font-family: 'Ubuntu', sans-serif; */
   .wrapper {
     height: 42vh;
   }
- 
-  .paper-left .paper-left_time .open-time{
+
+  .paper-left .paper-left_time .open-time {
     font-size: 10px;
   }
-  .paper-left .paper-left_time .close-time{
+  .paper-left .paper-left_time .close-time {
     font-size: 10px;
   }
   .paper-left .paper-left_content p {
     font-size: 11px;
   }
-  .paper-right_Badges p{
+  .paper-right_Badges p {
     font-size: 12px;
   }
-  .paper-left .paper-left_time{
+  .paper-left .paper-left_time {
     margin-top: 30px;
   }
 }
@@ -281,7 +308,7 @@ font-family: 'Ubuntu', sans-serif; */
   .wrapper {
     height: 47vh;
   }
-  .paper-left_vaccine_head h3{
+  .paper-left_vaccine_head h3 {
     font-size: 15px;
   }
   .paper-right_Badges h5 {
@@ -290,19 +317,19 @@ font-family: 'Ubuntu', sans-serif; */
   .paper-right_Badges p {
     font-size: 10px;
   }
-  .paper-left .paper-left_content h3{
+  .paper-left .paper-left_content h3 {
     font-size: 13px;
   }
-  .paper-left .paper-left_time .open-time{
+  .paper-left .paper-left_time .open-time {
     font-size: 10px;
   }
-  .paper-left .paper-left_time .close-time{
+  .paper-left .paper-left_time .close-time {
     font-size: 10px;
   }
   .paper-left .paper-left_content p {
     font-size: 11px;
   }
-  .paper-right_Badges p{
+  .paper-right_Badges p {
     font-size: 12px;
   }
 }
@@ -324,7 +351,7 @@ font-family: 'Ubuntu', sans-serif; */
     font-size: 15px;
     margin-bottom: 10px;
   }
-  .paper-left .paper-left_content h3{
+  .paper-left .paper-left_content h3 {
     font-size: 15px;
   }
   .paper-left_vaccine_head p {
@@ -339,7 +366,7 @@ font-family: 'Ubuntu', sans-serif; */
   .paper-left p {
     width: 100%;
   }
-  .paper-left .paper-left_time{
+  .paper-left .paper-left_time {
     margin-top: 20px;
   }
   .paper-left .paper-left_content {
