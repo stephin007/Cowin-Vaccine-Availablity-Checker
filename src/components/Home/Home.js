@@ -417,12 +417,15 @@ const Home = () => {
 
           {vaccineData.length === 0 ? null : (
             <>
-              <Pagination
-                pageNumber={pageNumber}
-                paginate={paginate}
-                prevPage={prevPage}
-                nextPage={nextPage}
-              />
+              {pageNumber.length === 1 ? null : (
+                <Pagination
+                  pageNumber={pageNumber}
+                  paginate={paginate}
+                  prevPage={prevPage}
+                  nextPage={nextPage}
+                />
+              )}
+
               <VaccineDataMain vaccineData={currentVaccine} />
             </>
           )}
