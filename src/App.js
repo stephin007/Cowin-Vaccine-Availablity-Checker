@@ -5,11 +5,16 @@ import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import Intro from "./components/Intro/Intro";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({});
 
 const App = () => {
+  const classes = useStyles();
+
   return (
     <Router>
-      <div className="app">
+      <div className={classes.container}>
         <Header />
         <Switch>
           <Route exact={true} path="/">
