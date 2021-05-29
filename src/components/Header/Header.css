@@ -23,9 +23,15 @@
   cursor: pointer;
 }
 
+.header__right > button {
+  font-weight: 400;
+  margin-left: 30px;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
 .header__right > h3 a {
   text-decoration: none;
-  color: black;
 }
 
 @media screen and (max-width: 800px) {
