@@ -4,7 +4,9 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 const Pagination = (props) => {
-  const { pageNumber, paginate, nextPage, prevPage } = props;
+  const { pageNumber, paginate, nextPage, prevPage, currentPage } = props;
+
+  console.log(currentPage);
 
   return (
     <div className="pagination">
@@ -13,13 +15,24 @@ const Pagination = (props) => {
       {pageNumber.map((number) => (
         <>
           {/* eslint-disable */}
-          <a
-            key={number}
-            style={{ cursor: "pointer" }}
-            onClick={() => paginate(number)}
-          >
-            {number}
-          </a>
+          {currentPage === number ? (
+            <a
+              key={number}
+              style={{ cursor: "pointer", color: "red" }}
+              onClick={() => paginate(number)}
+            >
+              {number}
+            </a>
+          ) : (
+            <a
+              key={number}
+              style={{ cursor: "pointer" }}
+              onClick={() => paginate(number)}
+              id={number}
+            >
+              {number}
+            </a>
+          )}
         </>
       ))}
       <ChevronRightIcon onClick={nextPage} />

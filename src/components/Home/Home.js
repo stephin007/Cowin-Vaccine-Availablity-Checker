@@ -422,7 +422,9 @@ const Home = () => {
                   pageNumber={pageNumber}
                   paginate={paginate}
                   prevPage={prevPage}
+                  currentPageChange={currentPage}
                   nextPage={nextPage}
+                  currentPage={currentPage}
                 />
               )}
 
