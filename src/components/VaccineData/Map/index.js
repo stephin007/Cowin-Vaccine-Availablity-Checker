@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button } from "@material-ui/core";
-import { CloseSharp, LocationCity, LocationOn } from "@material-ui/icons";
+import { CloseSharp, LocationOn } from "@material-ui/icons";
 import ReactMapGL, { Marker } from "react-map-gl";
 
 export const Map = ({ lat, lng, close }) => {
