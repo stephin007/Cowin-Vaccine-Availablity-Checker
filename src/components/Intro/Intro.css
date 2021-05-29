@@ -10,6 +10,10 @@
   margin-right: 40px;
 }
 
+.intro__homeRes {
+  margin-top: 60px;
+}
+
 .intro__homeText {
   border: 3px solid black;
   padding: 10px 55px 10px 50px;
@@ -44,6 +48,6 @@
     display: flex;
     flex-direction: column;
     margin-left: 40px;
-    margin-top: 110px;
+    margin-top: 110;
   }
 }

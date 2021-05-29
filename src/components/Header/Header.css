@@ -1,18 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500&display=swap");
 
-.MuiAppBar-colorPrimary {
+.header {
   background-color: #caf7e3 !important;
 }
 
-.MuiIconButton-label {
-  color: black !important;
+.headerDark {
+  background-color: #363537 !important;
+  color: whitesmoke !important;
+}
+
+.header__ham {
+  color: #363537 !important;
+}
+
+.header__hamDark {
+  color: white !important;
 }
 
 .MuiButtonBase-root {
   font-family: "Fira Mono", monospace !important;
   font-weight: 600 !important;
-}
-
-.MuiButtonBase-root {
-  color: black !important;
 }

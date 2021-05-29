@@ -161,3 +161,22 @@
     width: 380px;
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .home {
+    max-width: 170%;
+  }
+
+  .makeStyles-paperMainDiv-21 {
+    max-width: 75% !important;
+  }
+
+  .home_selectedpincontainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .paper-left {
+    width: 90% !important;
+  }
+}

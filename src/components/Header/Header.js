@@ -10,6 +10,8 @@ import Menu from "@material-ui/core/Menu";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -44,18 +46,21 @@ const Header = () => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={props.theme === "light" ? "header" : "headerDark"}>
           <Typography
             variant="h6"
             style={{ marginTop: 10 }}
             className={classes.title}
           >
-            <img
-              src="https://user-images.githubusercontent.com/71087810/117496553-d5af7b00-af94-11eb-84bb-913a1f386811.png"
-              alt=""
-              style={{ width: 100 }}
-            />
+            <Link to="/">
+              <img
+                src="https://user-images.githubusercontent.com/71087810/117496553-d5af7b00-af94-11eb-84bb-913a1f386811.png"
+                alt=""
+                style={{ width: 100 }}
+              />
+            </Link>
           </Typography>
+
           {isMobile ? (
             <>
               <IconButton
@@ -65,7 +70,11 @@ const Header = () => {
                 aria-label="menu"
                 onClick={handleMenu}
               >
-                <MenuIcon />
+                <MenuIcon
+                  className={
+                    props.theme === "light" ? "header__ham" : "header__hamDark"
+                  }
+                />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -82,33 +91,85 @@ const Header = () => {
                 open={open}
                 onClose={() => setAnchorEl(null)}
               >
-                <Link
-                  to="/about"
-                  style={{ padding: 0, textDecoration: "none" }}
-                >
-                  <MenuItem>About</MenuItem>
-                </Link>
+                {props.theme === "light" ? (
+                  <Link
+                    to="/about"
+                    style={{ padding: 0, textDecoration: "none" }}
+                  >
+                    <MenuItem>About</MenuItem>
+                  </Link>
+                ) : (
+                  <Link
+                    to="/about"
+                    style={{
+                      padding: 0,
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
+                    <MenuItem>About</MenuItem>
+                  </Link>
+                )}
                 <a
                   style={{ textDecoration: "none" }}
                   href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <MenuItem>Contribute</MenuItem>
+                  {props.theme === "light" ? (
+                    <MenuItem style={{ color: "black" }}>Contribute</MenuItem>
+                  ) : (
+                    <MenuItem style={{ color: "white" }}>Contribute</MenuItem>
+                  )}
                 </a>{" "}
+                <MenuItem onClick={props.toggleTheme}>
+                  {props.theme === "light" ? (
+                    <Brightness7Icon style={{ marginLeft: 30 }} />
+                  ) : (
+                    <Brightness2Icon style={{ marginLeft: 30 }} />
+                  )}
+                </MenuItem>
               </Menu>
             </>
           ) : (
             <div className={classes.headerOptions}>
-              <Link to="/about" style={{ padding: 0, textDecoration: "none" }}>
-                <MenuItem>About</MenuItem>
-              </Link>
+              {props.theme === "light" ? (
+                <Link
+                  to="/about"
+                  style={{ padding: 0, textDecoration: "none", color: "black" }}
+                >
+                  <MenuItem>About</MenuItem>
+                </Link>
+              ) : (
+                <Link
+                  to="/about"
+                  style={{
+                    padding: 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                >
+                  <MenuItem>About</MenuItem>
+                </Link>
+              )}
               <a
                 style={{ textDecoration: "none" }}
                 href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/"
               >
-                <MenuItem>Contribute</MenuItem>
+                {props.theme === "light" ? (
+                  <MenuItem style={{ color: "black" }}>Contribute</MenuItem>
+                ) : (
+                  <MenuItem style={{ color: "white" }}>Contribute</MenuItem>
+                )}
               </a>
+              <MenuItem onClick={props.toggleTheme}>
+                {" "}
+                {props.theme === "light" ? (
+                  <Brightness2Icon />
+                ) : (
+                  <Brightness7Icon />
+                )}
+              </MenuItem>
             </div>
           )}
         </Toolbar>
