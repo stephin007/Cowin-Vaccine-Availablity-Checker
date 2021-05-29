@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -7,10 +7,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { withRouter } from "react-router-dom";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,9 +31,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = (props) => {
-  const { history } = props;
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
@@ -42,30 +40,6 @@ const Header = (props) => {
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const handleMenuClick = (pageURL) => {
-    history.push(pageURL);
-    setAnchorEl(null);
-  };
-
-  const handleButtonClick = (pageURL) => {
-    history.push(pageURL);
-  };
-
-  const menuItems = [
-    {
-      menuTitle: "Home",
-      pageURL: "/",
-    },
-    {
-      menuTitle: "Contact",
-      pageURL: "/contact",
-    },
-    {
-      menuTitle: "About",
-      pageURL: "/about",
-    },
-  ];
 
   return (
     <div className={classes.root}>
@@ -108,20 +82,33 @@ const Header = (props) => {
                 open={open}
                 onClose={() => setAnchorEl(null)}
               >
-                {menuItems.map((menuItem) => {
-                  const { menuTitle, pageURL } = menuItem;
-                  return (
-                    <MenuItem onClick={() => handleMenuClick(pageURL)}>
-                      {menuTitle}
-                    </MenuItem>
-                  );
-                })}
+                <Link
+                  to="/about"
+                  style={{ padding: 0, textDecoration: "none" }}
+                >
+                  <MenuItem>About</MenuItem>
+                </Link>
+                <a
+                  style={{ textDecoration: "none" }}
+                  href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <MenuItem>Contribute</MenuItem>
+                </a>{" "}
               </Menu>
             </>
           ) : (
             <div className={classes.headerOptions}>
-              <Button color="inherit">Login</Button>{" "}
-              <Button color="inherit">About</Button>
+              <Link to="/about" style={{ padding: 0, textDecoration: "none" }}>
+                <MenuItem>About</MenuItem>
+              </Link>
+              <a
+                style={{ textDecoration: "none" }}
+                href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/"
+              >
+                <MenuItem>Contribute</MenuItem>
+              </a>
             </div>
           )}
         </Toolbar>
@@ -130,4 +117,4 @@ const Header = (props) => {
   );
 };
 
-export default withRouter(Header);
+export default Header;

@@ -1,4 +1,4 @@
-.intro__home > img {
+.intro__homeRes > img {
   width: 550px;
 }
 
@@ -30,7 +30,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .intro__home > img {
+  .intro__homeRes > img {
     width: 300px;
   }
   .intro__home {
@@ -38,14 +38,12 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    margin-right: -10px;
-    margin-top: 40px;
   }
-  .intro__home {
+
+  .intro__homeRes {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    justify-content: center;
-    margin-top: 50px;
+    margin-left: 40px;
+    margin-top: 110px;
   }
 }
