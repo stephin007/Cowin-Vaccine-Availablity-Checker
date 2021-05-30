@@ -50,7 +50,7 @@ const VaccineDataSingle = (vaccine) => {
 
           <div className="paper-left_content">
             <h3>address</h3>
-            <p>
+            <p className="vaccine__address">
               {vaccine?.block_name}, {vaccine?.district_name},{" "}
               {vaccine?.state_name}
             </p>
@@ -64,7 +64,7 @@ const VaccineDataSingle = (vaccine) => {
           </div>
           <div className="paper-left_content">
             <h3>pincode</h3>
-            <p>{vaccine?.pincode}</p>
+            <p className="page__pincode">{vaccine?.pincode}</p>
           </div>
           <div className="paper-left_time">
             <div className="open-time time">Opening Time: {vaccine.from}</div>
