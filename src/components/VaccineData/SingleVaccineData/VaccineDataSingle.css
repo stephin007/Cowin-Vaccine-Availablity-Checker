@@ -36,10 +36,6 @@ font-family: 'Ubuntu', sans-serif; */
   grid-area: left;
 }
 
-.wrapper-wo-map .paper-left {
-  width: 50%;
-}
-
 .paper-left h1 {
   /* color: white; */
   text-align: center;
@@ -95,7 +91,7 @@ font-family: 'Ubuntu', sans-serif; */
 .paper-left .paper-left_content p {
   /* color: #F48FB1; */
   color: red;
-  text-align: right;
+  text-align: center;
   /* color: black; */
   margin-top: 5px;
   text-transform: capitalize;
@@ -142,10 +138,6 @@ font-family: 'Ubuntu', sans-serif; */
 
 .wrapper-w-map .paper-right {
   grid-area: right;
-}
-
-.wrapper-wo-map .paper-right {
-  width: 50%;
 }
 
 .paper-right_Badges {
@@ -231,6 +223,11 @@ font-family: 'Ubuntu', sans-serif; */
 @media screen and (max-width: 1024px) {
   .wrapper {
     height: 37vh;
+    width: 100%;
+  }
+
+  .map_button {
+    display: none !important;
   }
 }
 @media screen and (max-width: 916px) {
@@ -258,6 +255,7 @@ font-family: 'Ubuntu', sans-serif; */
     font-size: 1.18rem;
   }
 }
+
 @media screen and (max-width: 812px) {
   .wrapper {
     height: 40vh;
@@ -336,7 +334,7 @@ font-family: 'Ubuntu', sans-serif; */
 }
 @media screen and (max-width: 646px) {
   .wrapper {
-    height: 80vh;
+    height: 108vh;
     flex-direction: column;
   }
 
@@ -442,8 +440,8 @@ font-family: 'Ubuntu', sans-serif; */
   }
 }
 
-@media screen and (max-width: 502px) {
+@media screen and (max-width: 500px) {
   .wrapper {
-    height: 82vh;
+    height: auto;
   }
 }
