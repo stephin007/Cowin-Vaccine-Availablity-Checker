@@ -1070,6 +1070,7 @@
   dependencies:
     "regenerator-runtime" "^0.13.4"
 
+
 "@babel/runtime@7.12.1":
   "integrity" "sha512-J5AIf3vPj3UwXaAzb5j1xM4WAQDX3EMgemF8rjCP3SoW09LfRKAXQKt6CoVYl230P6iWdRcBbnLDDdnqWxZSCA=="
   "resolved" "https://registry.npmjs.org/@babel/runtime/-/runtime-7.12.1.tgz"
@@ -1385,10 +1386,12 @@
     "@types/yargs" "^15.0.0"
     "chalk" "^4.0.0"
 
+
 "@material-ui/core@^4.0.0", "@material-ui/core@^4.11.4":
   "integrity" "sha512-oqb+lJ2Dl9HXI9orc6/aN8ZIAMkeThufA5iZELf2LQeBn2NtjVilF5D2w7e9RpntAzDb4jK5DsVhkfOvFY/8fg=="
   "resolved" "https://registry.npmjs.org/@material-ui/core/-/core-4.11.4.tgz"
   "version" "4.11.4"
+
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/styles" "^4.11.4"
@@ -1467,6 +1470,14 @@
     "@babel/runtime" "^7.4.4"
     "prop-types" "^15.7.2"
     "react-is" "^16.8.0 || ^17.0.0"
+
+"@math.gl/web-mercator@^3.2.0":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@math.gl/web-mercator/-/web-mercator-3.4.2.tgz#72c7c7e698bcf8d1d1d60c0ec4c5a4698c9b960e"
+  integrity sha512-Az/WI8vxbqnrTEcYgqDQ3CgCRoFA2a4XT9mkjVrT7iIlfrUF5lrIXcmpljjKvoFNBldKrng7hFSeHHM2ghgSrg==
+  dependencies:
+    "@babel/runtime" "^7.12.0"
+    gl-matrix "^3.0.0"
 
 "@nodelib/fs.scandir@2.1.4":
   "integrity" "sha512-33g3pMJk3bg5nXbL/+CY6I2eJDzZAni49PfJnL5fghPTggPvBd/pFNSgJsdAgWptuFu7qq/ERvOYFlhvsLTCKA=="
@@ -1764,6 +1775,11 @@
   "resolved" "https://registry.npmjs.org/@types/estree/-/estree-0.0.39.tgz"
   "version" "0.0.39"
 
+"@types/geojson@*", "@types/geojson@^7946.0.7":
+  version "7946.0.7"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.7.tgz#c8fa532b60a0042219cdf173ca21a975ef0666ad"
+  integrity sha512-wE2v81i4C4Ol09RtsWFAqg3BUitWbHSpSlIo+bNdsCJijO9sjme+zm+73ZMCa/qMC8UEERxzGbvmr1cffo2SiQ==
+
 "@types/glob@^7.1.1":
   "integrity" "sha512-SEYeGAIQIQX8NN6LDKprLjbrd5dARM5EXsd8GI/A5l0apYI1fGMWgPHSe4ZKL4eozlAyI+doUE9XbYS4xCkQ1w=="
   "resolved" "https://registry.npmjs.org/@types/glob/-/glob-7.1.3.tgz"
@@ -1820,6 +1836,13 @@
   "integrity" "sha1-7ihweulOEdK4J7y+UnC86n8+ce4="
   "resolved" "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   "version" "0.0.29"
+
+"@types/mapbox-gl@^2.0.3":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@types/mapbox-gl/-/mapbox-gl-2.1.2.tgz#d5a4a8fe5e939f99ded4ac88695aa65f2ce00eb8"
+  integrity sha512-dwlJt2U2qllS3Z8+AfhZEK2Kt07Hjuf8kzxQ6Ip2L0haVNKkYP3BfdVdT2JVwSMIQGVHWq4Gru8Jro4+1WW0MQ==
+  dependencies:
+    "@types/geojson" "*"
 
 "@types/minimatch@*":
   "integrity" "sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA=="
@@ -3843,6 +3866,7 @@
   "version" "2.0.8"
   dependencies:
     "@babel/runtime" "^7.8.3"
+
     "is-in-browser" "^1.0.2"
 
 "css-what@^3.2.1":
@@ -4143,6 +4167,7 @@
   dependencies:
     "object-keys" "^1.0.12"
 
+
 "define-property@^0.2.5":
   "integrity" "sha1-w1se+RjsPJkPmlvFe+BKrOxcgRY="
   "resolved" "https://registry.npmjs.org/define-property/-/define-property-0.2.5.tgz"
@@ -4300,6 +4325,7 @@
   "version" "5.2.1"
   dependencies:
     "@babel/runtime" "^7.8.7"
+
     "csstype" "^3.0.2"
 
 "dom-serializer@0":
@@ -4596,6 +4622,7 @@
     "estraverse" "^4.2.0"
     "esutils" "^2.0.2"
     "optionator" "^0.8.1"
+
   optionalDependencies:
     "source-map" "~0.6.1"
 
@@ -5229,6 +5256,7 @@
   "version" "4.1.6"
   dependencies:
     "@babel/code-frame" "^7.5.5"
+
     "chalk" "^2.4.1"
     "micromatch" "^3.1.10"
     "minimatch" "^3.0.4"
@@ -5600,6 +5628,7 @@
   "integrity" "sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew=="
   "resolved" "https://registry.npmjs.org/history/-/history-4.10.1.tgz"
   "version" "4.10.1"
+
   dependencies:
     "@babel/runtime" "^7.1.2"
     "loose-envify" "^1.2.0"
@@ -5697,6 +5726,7 @@
     "@types/html-minifier-terser" "^5.0.0"
     "@types/tapable" "^1.0.5"
     "@types/webpack" "^4.41.8"
+
     "html-minifier-terser" "^5.0.1"
     "loader-utils" "^1.2.3"
     "lodash" "^4.17.15"
@@ -6346,6 +6376,7 @@
   "integrity" "sha512-BXgQl9kf4WTCPCCpmFGoJkz/+uhvm7h7PFKUYxh7qarQd3ER33vHG//qaE8eN25l07YqZPpHXU9I09l/RD5aGQ=="
   "resolved" "https://registry.npmjs.org/istanbul-lib-instrument/-/istanbul-lib-instrument-4.0.3.tgz"
   "version" "4.0.3"
+
   dependencies:
     "@babel/core" "^7.7.5"
     "@istanbuljs/schema" "^0.1.2"
@@ -7019,6 +7050,7 @@
   "version" "10.6.0"
   dependencies:
     "@babel/runtime" "^7.3.1"
+
     "csstype" "^3.0.2"
     "indefinite-observable" "^2.0.1"
     "is-in-browser" "^1.1.3"
@@ -7247,6 +7279,7 @@
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"
 
+
 "loglevel@^1.6.8":
   "integrity" "sha512-Hesni4s5UkWkwCGJMQGAh71PaLUmKFM60dHvq0zi/vDhhrzuk+4GgNbTXJ12YYQJn6ZKBDNIjYcuQGKudvqrIw=="
   "resolved" "https://registry.npmjs.org/loglevel/-/loglevel-1.7.1.tgz"
@@ -7271,6 +7304,7 @@
   "resolved" "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz"
   "version" "5.1.1"
   dependencies:
+
     "yallist" "^3.0.2"
 
 "lru-cache@^6.0.0":
@@ -8018,6 +8052,7 @@
   "resolved" "https://registry.npmjs.org/p-finally/-/p-finally-1.0.0.tgz"
   "version" "1.0.0"
 
+
 "p-limit@^1.1.0":
   "integrity" "sha512-vvcXsLAJ9Dr5rQOPk7toZQZJApBl2K4J6dANSsEuh6QI41JYcsS/qhTGa9ErIUUgK3WNQoJYvylxvjqmiqEA9Q=="
   "resolved" "https://registry.npmjs.org/p-limit/-/p-limit-1.3.0.tgz"
@@ -8150,6 +8185,7 @@
   "version" "5.2.0"
   dependencies:
     "@babel/code-frame" "^7.0.0"
+
     "error-ex" "^1.3.1"
     "json-parse-even-better-errors" "^2.3.0"
     "lines-and-columns" "^1.1.6"
@@ -8316,6 +8352,7 @@
   "version" "4.2.0"
   dependencies:
     "find-up" "^4.0.0"
+
 
 "pkg-dir@^4.2.0":
   "integrity" "sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ=="
@@ -8798,6 +8835,7 @@
   "version" "8.0.1"
   dependencies:
     "@csstools/normalize.css" "^10.1.0"
+
     "browserslist" "^4.6.2"
     "postcss" "^7.0.17"
     "postcss-browser-comments" "^3.0.0"
@@ -9359,6 +9397,7 @@
   "integrity" "sha512-gxAmfylo2QUjcwxI63RhQ5G85Qqt4voZpUXSEqCwykV0baaOTQDR1f0PmY8AELqIyVc0NEZUj0Gov5lNGcXgsA=="
   "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-5.2.0.tgz"
   "version" "5.2.0"
+
   dependencies:
     "@babel/runtime" "^7.1.2"
     "history" "^4.9.0"
@@ -9690,6 +9729,7 @@
   dependencies:
     "@babel/runtime" "^7.8.4"
 
+
 "regex-not@^1.0.0", "regex-not@^1.0.2":
   "integrity" "sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A=="
   "resolved" "https://registry.npmjs.org/regex-not/-/regex-not-1.0.2.tgz"
@@ -9938,6 +9978,7 @@
   "integrity" "sha512-DSOJTWHD67860I5ojetXdEQRIBvF6YcpNe53j0vn1vp9EUb9N80EiZTxgP+FkDKorWC8PZw052kTF4C1GOivCQ=="
   "resolved" "https://registry.npmjs.org/rifm/-/rifm-0.7.0.tgz"
   "version" "0.7.0"
+
   dependencies:
     "@babel/runtime" "^7.3.1"
 
@@ -10023,6 +10064,7 @@
   "version" "1.0.3"
   dependencies:
     "aproba" "^1.1.1"
+
 
 "safe-buffer@^5.0.1", "safe-buffer@^5.1.0", "safe-buffer@^5.1.1", "safe-buffer@^5.1.2", "safe-buffer@>=5.1.0", "safe-buffer@~5.1.0", "safe-buffer@~5.1.1", "safe-buffer@5.1.2":
   "integrity" "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g=="
@@ -10126,6 +10168,7 @@
   "version" "3.0.0"
   dependencies:
     "@types/json-schema" "^7.0.6"
+
     "ajv" "^6.12.5"
     "ajv-keywords" "^3.5.2"
 
@@ -11146,6 +11189,7 @@
   "integrity" "sha512-dRcuzokWhajtZWkQsDVKbWyY+jgcLC5sqJhg2PSgf4ZkH2aHPvaOY8YWGhmjb68b5qqTfasSsDO9k7RUiEmZAw=="
   "resolved" "https://registry.npmjs.org/tsconfig-paths/-/tsconfig-paths-3.9.0.tgz"
   "version" "3.9.0"
+
   dependencies:
     "@types/json5" "^0.0.29"
     "json5" "^1.0.1"
@@ -11500,6 +11544,7 @@
     "core-util-is" "1.0.2"
     "extsprintf" "^1.2.0"
 
+
 "vm-browserify@^1.0.1":
   "integrity" "sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ=="
   "resolved" "https://registry.npmjs.org/vm-browserify/-/vm-browserify-1.1.2.tgz"
@@ -11509,6 +11554,7 @@
   "integrity" "sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ=="
   "resolved" "https://registry.npmjs.org/w3c-hr-time/-/w3c-hr-time-1.0.2.tgz"
   "version" "1.0.2"
+
   dependencies:
     "browser-process-hrtime" "^1.0.0"
 
