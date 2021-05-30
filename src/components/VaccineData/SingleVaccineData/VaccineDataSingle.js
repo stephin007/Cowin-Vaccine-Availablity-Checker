@@ -55,6 +55,7 @@ const VaccineDataSingle = (vaccine) => {
               {vaccine?.state_name}
             </p>
             <Button
+              className="map_button"
               onClick={() => {
                 setShowMap((old) => !old);
               }}
