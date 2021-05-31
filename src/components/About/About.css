@@ -79,13 +79,34 @@ h4 {
 
 .contributors_block .contributor_individual .contributor_detail {
   max-width: 90%;
-  margin-left: 120px;
+  margin-left: 50px;
 }
 
 .contributors_block .contributor_individual .contributor_detail a {
   text-decoration: underline;
   font-size: 20px;
-  text-transform: capitalize;
+}
+
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contribution_count {
+  margin-top: 5px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contribution_count
+  strong {
+  background-color: teal;
+  padding: 5px;
+  border-radius: 50%;
+  color: whitesmoke;
 }
 
 @media screen and (max-width: 500px) {

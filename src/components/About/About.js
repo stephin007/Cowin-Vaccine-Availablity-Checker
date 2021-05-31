@@ -44,7 +44,7 @@ const About = () => {
             </div>
             <div className="contributors_block">
               <div className="contributor_individual">
-                <div class="contributor_image">
+                <div className="contributor_image">
                   <img
                     src="https://avatars.githubusercontent.com/u/54792119?v=4"
                     alt="contributor avatar"
@@ -52,6 +52,10 @@ const About = () => {
                 </div>
                 <div className="contributor_detail">
                   <a href="https://github.com/stephin007">Stephin007</a>
+                  <div className="contribution_count">
+                    <p>No of Contributions : </p>
+                    <strong>87</strong>
+                  </div>
                 </div>
               </div>
             </div>
