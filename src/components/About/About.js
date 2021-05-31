@@ -23,7 +23,7 @@ const About = () => {
     <>
       <div className="about-container">
         <div className="about-head">
-          <h1>About Cowin Vaccine Availability Checker</h1>
+          <h1>About CoWin Vaccine Availability Checker</h1>
         </div>
         <hr />
         <br />
