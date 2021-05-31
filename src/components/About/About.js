@@ -47,7 +47,7 @@ const About = () => {
                       <img src={avatar_url} alt="contributor avatar" />
                     </div>
                     <div className="contributor_detail">
-                      <a href="https://github.com/stephin007">{login}7</a>
+                      <a href="https://github.com/stephin007">{login}</a>
                       <div className="contribution_count">
                         <p>No of Contributions : </p>
                         <strong>{contributions}</strong>
