@@ -4,11 +4,12 @@ import Paper from "@material-ui/core/Paper";
 import Badge from "@material-ui/core/Badge";
 import HealingIcon from "@material-ui/icons/Healing";
 import VerifiedUserRoundedIcon from "@material-ui/icons/VerifiedUserRounded";
+import { Button } from "@material-ui/core";
+import { MapSharp } from "@material-ui/icons";
 
 import "./VaccineDataSingle.css";
 import { Map } from "../Map";
-import { Button } from "@material-ui/core";
-import { MapSharp } from "@material-ui/icons";
+import { Badge as CustomBadge } from "../../Badge";
 
 const useStyles = makeStyles((theme) => ({
   paperMainDiv: {
@@ -37,15 +38,13 @@ const VaccineDataSingle = (vaccine) => {
           <br />
           <div className="paper-left_vaccine_head">
             <h3>Vaccine Name</h3>
-            {vaccine.vaccine === "COVISHIELD" ? (
-              <p style={{ backgroundColor: "skyblue", color: "white" }}>
-                {vaccine?.vaccine}
-              </p>
-            ) : (
-              <p style={{ backgroundColor: "slateblue", color: "white" }}>
-                {vaccine?.vaccine}
-              </p>
-            )}
+            <CustomBadge
+              background={
+                /covi/gi.test(vaccine?.vaccine) ? "skyblue" : "slateblue"
+              }
+            >
+              {vaccine?.vaccine}
+            </CustomBadge>
           </div>
 
           <div className="paper-left_content">
@@ -68,8 +67,12 @@ const VaccineDataSingle = (vaccine) => {
             <p className="page__pincode">{vaccine?.pincode}</p>
           </div>
           <div className="paper-left_time">
-            <div className="open-time time">Opening Time: {vaccine.from}</div>
-            <div className="close-time time">Closing Time: {vaccine.to}</div>
+            <CustomBadge variant={"minimal"}>
+              Opening Time: {vaccine.from}
+            </CustomBadge>
+            <CustomBadge variant={"minimal"}>
+              Closing time: {vaccine.to}
+            </CustomBadge>
           </div>
         </div>
         <div className="paper-right">
