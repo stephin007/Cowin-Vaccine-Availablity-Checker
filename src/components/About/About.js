@@ -37,28 +37,26 @@ const About = () => {
           <div className="about_section_right">
             <div className="contributor_text">
               <h3>CONTRIBUTORS</h3>
-              {/* {contributors.map((contributor) => {
-                const { contributions } = contributor;
-                return <p>{contributions}</p>;
-              })} */}
             </div>
-            <div className="contributors_block">
-              <div className="contributor_individual">
-                <div className="contributor_image">
-                  <img
-                    src="https://avatars.githubusercontent.com/u/54792119?v=4"
-                    alt="contributor avatar"
-                  />
-                </div>
-                <div className="contributor_detail">
-                  <a href="https://github.com/stephin007">Stephin007</a>
-                  <div className="contribution_count">
-                    <p>No of Contributions : </p>
-                    <strong>87</strong>
+            {contributors.map((contributor) => {
+              const { contributions, avatar_url, login } = contributor;
+              return (
+                <div className="contributors_block">
+                  <div className="contributor_individual">
+                    <div className="contributor_image">
+                      <img src={avatar_url} alt="contributor avatar" />
+                    </div>
+                    <div className="contributor_detail">
+                      <a href="https://github.com/stephin007">{login}7</a>
+                      <div className="contribution_count">
+                        <p>No of Contributions : </p>
+                        <strong>{contributions}</strong>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
