@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 const useClasses = makeStyles({
   root: {
     textTransform: "uppercase",
+    margin: 0,
     fontWeight: "bold",
     color: "white",
     boxShadow: `inset 0 0 35px 5px rgba(0, 0, 0, 0.25),
@@ -17,6 +18,8 @@ const useClasses = makeStyles({
     textAlign: "center",
   },
   rootMinimal: {
+    height: "100%",
+    width: "100%",
     padding: "10px",
     borderRadius: "7px",
     fontWeight: "bold",
@@ -32,7 +35,7 @@ const useClasses = makeStyles({
   },
 });
 
-export const Badge = ({ children, background, variant }) => {
+export const Badge = ({ children, background, variant, ...rest }) => {
   const classes = useClasses();
 
   return (
@@ -41,6 +44,7 @@ export const Badge = ({ children, background, variant }) => {
         variant && variant === "minimal" ? classes.rootMinimal : classes.root
       }
       style={{ backgroundColor: background || "white" }}
+      {...rest}
     >
       {children}
     </span>

@@ -1,9 +1,17 @@
 import * as React from "react";
-import { Button } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import { CloseSharp, LocationOn } from "@material-ui/icons";
 import ReactMapGL, { Marker } from "react-map-gl";
 
+const useClasses = makeStyles({
+  mapContainer: {
+    height: "250px",
+    width: "100%",
+  },
+});
+
 export const Map = ({ lat, lng, close }) => {
+  const classes = useClasses();
   const [viewport, setViewport] = React.useState({
     latitude: lat,
     longitude: lng,
@@ -11,7 +19,7 @@ export const Map = ({ lat, lng, close }) => {
   });
 
   return (
-    <div className={"map-container"}>
+    <div className={classes.mapContainer}>
       <ReactMapGL
         {...viewport}
         width={"100%"}
