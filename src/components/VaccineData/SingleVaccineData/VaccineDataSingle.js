@@ -60,7 +60,7 @@ const VaccineDataSingle = (vaccine) => {
                 setShowMap((old) => !old);
               }}
             >
-              <MapSharp />
+              <MapSharp style={{ color: "black" }} />
             </Button>
           </div>
           <div className="paper-left_content">

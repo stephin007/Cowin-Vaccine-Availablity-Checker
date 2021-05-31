@@ -6,12 +6,12 @@ font-family: 'Ubuntu', sans-serif; */
 
 .wrapper {
   background-color: #333333;
-}
-
-.wrapper-w-map {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+}
+
+.wrapper-w-map {
   grid-template-areas:
     "left right"
     "map map";
@@ -19,7 +19,7 @@ font-family: 'Ubuntu', sans-serif; */
 
 .wrapper-wo-map {
   height: 32vh;
-  display: flex;
+  grid-template-areas: "left right";
 }
 
 .map-container {

@@ -20,7 +20,7 @@ export const Map = ({ lat, lng, close }) => {
         onViewportChange={(viewport) => setViewport(viewport)}
       >
         <Marker latitude={lat} longitude={lng} offsetLeft={-21} offsetTop={-32}>
-          <LocationOn fontSize={"large"} />
+          <LocationOn style={{ color: "black" }} fontSize={"large"} />
         </Marker>
         <Button
           onClick={close}
@@ -31,7 +31,7 @@ export const Map = ({ lat, lng, close }) => {
             zIndex: 120,
           }}
         >
-          <CloseSharp />
+          <CloseSharp style={{ color: "black" }} />
         </Button>
       </ReactMapGL>
     </div>
