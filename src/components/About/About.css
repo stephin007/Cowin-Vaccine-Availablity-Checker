@@ -1,6 +1,11 @@
+body {
+  background-color: #f9fafb;
+}
+
 .about-container {
   max-width: 1100px;
   margin: auto;
+  margin-top: 10px;
   overflow: hidden;
   padding: 0 2rem;
   font-family: "Fira Code Medium", "monospace";
@@ -21,6 +26,87 @@
 h4 {
   color: #333333;
   text-transform: capitalize;
+}
+
+.about_section {
+  max-width: 100%;
+  display: flex;
+}
+
+.about_section_left {
+  max-width: 60%;
+}
+
+.about_section_right {
+  max-width: 30%;
+  max-height: 100vh;
+}
+
+.about_section_right .contributor_text {
+  background-color: teal;
+  border-radius: 10px;
+  padding: 10px;
+  width: 410px;
+}
+
+.about_section_right .contributor_text h3 {
+  color: whitesmoke;
+  margin: 10px 130px;
+}
+
+.contributors_block {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  width: 410px;
+  padding: 10px;
+}
+
+.contributors_block .contributor_individual {
+  display: flex;
+}
+
+.contributors_block .contributor_individual .contributor_image {
+  max-width: 10%;
+}
+
+.contributors_block .contributor_individual .contributor_image img {
+  width: 70px;
+  border-radius: 50%;
+}
+
+.contributors_block .contributor_individual .contributor_detail {
+  max-width: 90%;
+  margin-left: 50px;
+}
+
+.contributors_block .contributor_individual .contributor_detail a {
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contribution_count {
+  margin-top: 5px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contribution_count
+  strong {
+  background-color: teal;
+  padding: 5px;
+  border-radius: 50%;
+  color: whitesmoke;
 }
 
 @media screen and (max-width: 500px) {
