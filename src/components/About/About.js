@@ -39,7 +39,7 @@ const About = () => {
               <h3>CONTRIBUTORS</h3>
             </div>
             {contributors.map((contributor) => {
-              const { contributions, avatar_url, login } = contributor;
+              const { contributions, avatar_url, login, type } = contributor;
               return (
                 <div className="contributors_block">
                   <div className="contributor_individual">
@@ -51,6 +51,13 @@ const About = () => {
                       <div className="contribution_count">
                         <p>No of Contributions : </p>
                         <strong>{contributions}</strong>
+                      </div>
+                      <div className="contributor_type">
+                        {login === "stephin007" || login === "Justinnn07" ? (
+                          <p>Maintainer</p>
+                        ) : (
+                          <p>{type}</p>
+                        )}
                       </div>
                     </div>
                   </div>

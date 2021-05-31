@@ -114,6 +114,17 @@ h4 {
   color: whitesmoke;
 }
 
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contributor_type
+  p {
+  text-transform: capitalize;
+  font-size: 15px;
+  font-weight: 500;
+  color: blueviolet;
+}
+
 @media screen and (max-width: 500px) {
   .about-container {
     width: 350px;
