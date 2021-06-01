@@ -1,4 +1,5 @@
 import React from 'react';
+import Error from './Error';
 
 const NullState = ({
   toSearchValue,
@@ -24,8 +25,7 @@ const NullState = ({
     } else if (pinCodeSearch) {
       return (
         <div>
-          No results found for the entered State, Pin code or Date, Please Try
-          Again
+          <Error />
         </div>
       );
     } else {
@@ -46,8 +46,7 @@ const NullState = ({
     } else {
       return (
         <div>
-          No results found for the entered State, Pin code or Date, Please Try
-          Again
+          <Error />
         </div>
       );
     }
