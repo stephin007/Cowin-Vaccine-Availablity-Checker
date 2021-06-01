@@ -17,18 +17,19 @@ import SearchIcon from "@material-ui/icons/Search";
 import "./Home.css";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 import Pagination from "../Pagination/Pagination";
+import { useDataLayerValue } from "../../Context/DataLayer";
 
 const Home = () => {
-  const [state, setState] = useState([]);
+  const [{ states, districts, vaccineData }, dispatch] = useDataLayerValue();
+
   const [stateCode, setStateCode] = useState("States");
-  const [districts, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState(
     "PLEASE SELECT A STATE FIRST"
   );
+
   const [pin, setPin] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [vaccineData, setVaccineData] = useState([]);
   const [toSearchValue, setToSearchValue] = useState("");
   const [toSearch] = useState([
     "Find By District",
@@ -83,7 +84,10 @@ const Home = () => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
       .then((res) => res.json())
       .then((data) => {
-        setState(data.states);
+        dispatch({
+          type: "SET_STATES",
+          states: data.states,
+        });
       });
     GetFormattedDate();
     // eslint-disable-next-line
@@ -91,19 +95,22 @@ const Home = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setVaccineData([]);
     setDistrictCode("");
     setCurrentPage(1);
   };
 
   const onStateChange = async (e) => {
     const stateCode = e.target.value;
-
-    setDistricts([]);
-
+    dispatch({
+      type: "SET_DISTRICTS",
+      districts: [],
+    });
     setCurrentPage(1);
 
-    setVaccineData([]);
+    dispatch({
+      type: "SET_VACCINEDATA",
+      vaccineData: [],
+    });
 
     const url =
       stateCode === "States"
@@ -114,7 +121,10 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         setStateCode(stateCode);
-        setDistricts(data.districts);
+        dispatch({
+          type: "SET_DISTRICTS",
+          districts: data.districts,
+        });
       });
   };
 
@@ -131,7 +141,10 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         setDistrictCode(districtCode);
-        setVaccineData(data.sessions);
+        dispatch({
+          type: "SET_VACCINEDATA",
+          vaccineData: data.sessions,
+        });
       });
   };
 
@@ -163,7 +176,10 @@ const Home = () => {
             fee_type: res?.fee_type,
             slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
           }));
-          setVaccineData(pincodeData);
+          dispatch({
+            type: "SET_VACCINEDATA",
+            vaccineData: pincodeData,
+          });
         });
     }
   };
@@ -177,8 +193,10 @@ const Home = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          setVaccineData(data.sessions);
+          dispatch({
+            type: "SET_VACCINEDATA",
+            vaccineData: data.sessions,
+          });
         });
     }
   };
@@ -202,7 +220,10 @@ const Home = () => {
                 value={toSearchValue}
                 onChange={(e) => {
                   setToSearchValue(e.target.value);
-                  setVaccineData([]);
+                  dispatch({
+                    type: "SET_VACCINEDATA",
+                    vaccineData: [],
+                  });
                 }}
               >
                 {toSearch.map((functionName, index) => {
@@ -233,7 +254,7 @@ const Home = () => {
                   onChange={onStateChange}
                 >
                   <MenuItem value="States">Select a State</MenuItem>
-                  {state?.map((stateData) => (
+                  {states?.map((stateData) => (
                     <MenuItem value={stateData?.state_id}>
                       {stateData?.state_name}
                     </MenuItem>
@@ -290,7 +311,7 @@ const Home = () => {
                   onChange={onStateChange}
                 >
                   <MenuItem value="States">Select a State</MenuItem>
-                  {state?.map((stateData) => (
+                  {states?.map((stateData) => (
                     <MenuItem value={stateData?.state_id}>
                       {stateData?.state_name}
                     </MenuItem>
