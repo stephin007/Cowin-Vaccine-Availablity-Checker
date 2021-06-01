@@ -1,9 +1,8 @@
 import React from "react";
 import "./Pagination.css";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 const Pagination = (props) => {
+  // eslint-disable-next-line
   const { pageNumber, paginate, nextPage, prevPage, currentPage } = props;
 
   console.log(currentPage);

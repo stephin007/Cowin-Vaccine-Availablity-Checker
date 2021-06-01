@@ -3,9 +3,9 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
-import { useDarkMode } from "./components/useDarkMode";
-import { lightTheme, darkTheme } from "./components/themes";
-import { GlobalStyles } from "./components/globalStyles";
+import { useDarkMode } from "./Themes/useDarkMode";
+import { lightTheme, darkTheme } from "./Themes/themes";
+import { GlobalStyles } from "./Themes/globalStyles";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 

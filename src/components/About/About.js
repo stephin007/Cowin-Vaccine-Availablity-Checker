@@ -5,7 +5,7 @@ import "./About.css";
 const About = () => {
   const [{ contributors }, dispatch] = useDataLayerValue();
 
-  const getContributors = async () => {
+  useEffect(() => {
     fetch(
       "https://api.github.com/repos/stephin007/Cowin-Vaccine-Availablity-Checker/contributors"
     )
@@ -16,11 +16,7 @@ const About = () => {
           contributors: data,
         });
       });
-  };
-
-  useEffect(() => {
-    getContributors();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
