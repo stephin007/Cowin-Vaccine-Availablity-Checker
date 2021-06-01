@@ -3,6 +3,16 @@ const initialState = {
   districts: [],
   vaccineData: [],
   contributors: [],
+  toSearch: [
+    "Find By District",
+    "Find By PinCode & Date",
+    "Find By Pincode & Date(Slots for next 7 days)",
+    "Find By District & Date(Slots for next 7 days)",
+  ],
+
+  toSearchValue: "",
+  stateCode: "States",
+  districtCode: "PLEASE SELECT A STATE FIRST",
 };
 
 const reducer = (state, action) => {
@@ -30,6 +40,22 @@ const reducer = (state, action) => {
         contributors: action.contributors,
       };
 
+    case "SET_TOSEARCHVALUE":
+      return {
+        ...state,
+        toSearchValue: action.toSearchValue,
+      };
+
+    case "SET_STATECODE":
+      return {
+        ...state,
+        stateCode: action.stateCode,
+      };
+    case "SET_DISTRICTCODE":
+      return {
+        ...state,
+        districtCode: action.districtCode,
+      };
     default:
       return state;
   }

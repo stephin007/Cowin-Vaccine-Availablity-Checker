@@ -20,23 +20,22 @@ import Pagination from "../Pagination/Pagination";
 import { useDataLayerValue } from "../../Context/DataLayer";
 
 const Home = () => {
-  const [{ states, districts, vaccineData }, dispatch] = useDataLayerValue();
-
-  const [stateCode, setStateCode] = useState("States");
-  const [districtCode, setDistrictCode] = useState(
-    "PLEASE SELECT A STATE FIRST"
-  );
+  const [
+    {
+      states,
+      districts,
+      vaccineData,
+      toSearch,
+      toSearchValue,
+      stateCode,
+      districtCode,
+    },
+    dispatch,
+  ] = useDataLayerValue();
 
   const [pin, setPin] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [toSearchValue, setToSearchValue] = useState("");
-  const [toSearch] = useState([
-    "Find By District",
-    "Find By PinCode & Date",
-    "Find By Pincode & Date(Slots for next 7 days)",
-    "Find By District & Date(Slots for next 7 days)",
-  ]);
   const [currentPage, setCurrentPage] = useState(1);
   const [vaccinePerPage] = useState(3);
   const indexOfLastVaccine = currentPage * vaccinePerPage;
@@ -95,7 +94,10 @@ const Home = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setDistrictCode("");
+    dispatch({
+      type: "SET_DISTRICTCODE",
+      districtCode: "",
+    });
     setCurrentPage(1);
   };
 
@@ -106,7 +108,6 @@ const Home = () => {
       districts: [],
     });
     setCurrentPage(1);
-
     dispatch({
       type: "SET_VACCINEDATA",
       vaccineData: [],
@@ -120,7 +121,10 @@ const Home = () => {
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setStateCode(stateCode);
+        dispatch({
+          type: "SET_STATECODE",
+          stateCode: stateCode,
+        });
         dispatch({
           type: "SET_DISTRICTS",
           districts: data.districts,
@@ -140,7 +144,11 @@ const Home = () => {
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setDistrictCode(districtCode);
+        dispatch({
+          type: "SET_DISTRICTCODE",
+          districtCode: districtCode,
+        });
+
         dispatch({
           type: "SET_VACCINEDATA",
           vaccineData: data.sessions,
@@ -219,7 +227,10 @@ const Home = () => {
                 variant="filled"
                 value={toSearchValue}
                 onChange={(e) => {
-                  setToSearchValue(e.target.value);
+                  dispatch({
+                    type: "SET_TOSEARCHVALUE",
+                    toSearchValue: e.target.value,
+                  });
                   dispatch({
                     type: "SET_VACCINEDATA",
                     vaccineData: [],
