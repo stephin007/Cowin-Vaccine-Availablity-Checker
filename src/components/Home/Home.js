@@ -10,15 +10,14 @@ import {
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
-
 } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import SearchIcon from '@material-ui/icons/Search';
-
 import './Home.css';
-import VaccineDataMain from '../VaccineData/VaccineDataMain';
 import NullState from '../NullState';
+import VaccineDataMain from '../VaccineData/VaccineDataMain';
+import Pagination from '../Pagination/Pagination';
 
 const Home = () => {
   const [state, setState] = useState([]);
@@ -79,9 +78,7 @@ const Home = () => {
     var day = selectedDate.getDate();
     var year = selectedDate.getFullYear();
 
-
-
-    var finalDate = day + "-" + month + "-" + year;
+    var finalDate = day + '-' + month + '-' + year;
 
     setFormattedDate(finalDate);
   };
@@ -100,7 +97,6 @@ const Home = () => {
     setSelectedDate(date);
     setVaccineData([]);
     setDistrictCode('');
-
   };
 
   const onStateChange = async (e) => {
@@ -111,6 +107,8 @@ const Home = () => {
     setCurrentPage(1);
 
     setVaccineData([]);
+
+    setPinCodeSearch(false);
 
     const url =
       stateCode === 'States'
@@ -139,6 +137,7 @@ const Home = () => {
       .then((data) => {
         setDistrictCode(districtCode);
         setVaccineData(data.sessions);
+        setPinCodeSearch(true);
       });
   };
 
@@ -218,7 +217,7 @@ const Home = () => {
                 {toSearch.map((functionName, index) => {
                   return (
                     <MenuItem
-                      className="search__values"
+                      className='search__values'
                       key={index}
                       value={functionName}
                     >
@@ -435,16 +434,28 @@ const Home = () => {
             </div>
           ) : null}
 
-
           <NullState
             toSearchValue={toSearchValue}
-            vaccineData={vaccineData}
+            vaccineData={currentVaccine}
             districtCode={districtCode}
             VaccineDataMain={VaccineDataMain}
             pin={pin}
             pinCodeSearch={pinCodeSearch}
           />
-
+          {vaccineData.length === 0 ? null : (
+            <>
+              {pageNumber.length === 1 ? null : (
+                <Pagination
+                  pageNumber={pageNumber}
+                  paginate={paginate}
+                  prevPage={prevPage}
+                  currentPageChange={currentPage}
+                  nextPage={nextPage}
+                  currentPage={currentPage}
+                />
+              )}
+            </>
+          )}
         </div>
       </Container>
     </>

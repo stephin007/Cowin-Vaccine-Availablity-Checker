@@ -8,6 +8,7 @@ const NullState = ({
   pin,
   pinCodeSearch,
 }) => {
+  console.log(pinCodeSearch);
   if (
     toSearchValue === 'Find By District' ||
     toSearchValue === 'Find By District & Date(Slots for next 7 days)'
@@ -20,13 +21,15 @@ const NullState = ({
           <VaccineDataMain vaccineData={vaccineData} />
         </div>
       );
-    } else {
+    } else if (pinCodeSearch) {
       return (
         <div>
           No results found for the entered State, Pin code or Date, Please Try
           Again
         </div>
       );
+    } else {
+      return <div></div>;
     }
   } else if (
     toSearchValue === 'Find By PinCode & Date' ||
