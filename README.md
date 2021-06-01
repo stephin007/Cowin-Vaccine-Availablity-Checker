@@ -1,4 +1,6 @@
 # CoWIN Vaccination Slots Checking App.
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker?ref=badge_shield)
+
 
 CoWIN Vaccination Slots Checking App is a user-friendly website
 that allow users to find vaccine in nearby available Center.
@@ -32,3 +34,7 @@ Please see our [Contribution Guidelines](./CONTRIBUTING.md).
 > _DON'T JUST CLONE, PLEASE LEAVE A STAR 🌟, MOTIVATES US TO ADD MORE FEATURES TO THE PROJECT_
 
 ---
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker?ref=badge_large)
