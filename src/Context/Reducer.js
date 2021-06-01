@@ -13,6 +13,8 @@ const initialState = {
   toSearchValue: "",
   stateCode: "States",
   districtCode: "PLEASE SELECT A STATE FIRST",
+  vaccinePerPage: 3,
+  currentPage: 1,
 };
 
 const reducer = (state, action) => {
@@ -55,6 +57,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         districtCode: action.districtCode,
+      };
+
+    case "SET_CURRENTPAGE":
+      return {
+        ...state,
+        currentPage: action.currentPage,
       };
     default:
       return state;

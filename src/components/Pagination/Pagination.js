@@ -11,7 +11,6 @@ const Pagination = (props) => {
   return (
     <div className="pagination">
       {/* eslint-disable */}
-      <ChevronLeftIcon onClick={prevPage} />
       {pageNumber.map((number) => (
         <>
           {/* eslint-disable */}
@@ -35,7 +34,6 @@ const Pagination = (props) => {
           )}
         </>
       ))}
-      <ChevronRightIcon onClick={nextPage} />
     </div>
   );
 };

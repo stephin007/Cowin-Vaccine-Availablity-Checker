@@ -29,6 +29,8 @@ const Home = () => {
       toSearchValue,
       stateCode,
       districtCode,
+      vaccinePerPage,
+      currentPage,
     },
     dispatch,
   ] = useDataLayerValue();
@@ -36,8 +38,6 @@ const Home = () => {
   const [pin, setPin] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [currentPage, setCurrentPage] = useState(1);
-  const [vaccinePerPage] = useState(3);
   const indexOfLastVaccine = currentPage * vaccinePerPage;
   const indexOfFirstVaccine = indexOfLastVaccine - vaccinePerPage;
   const currentVaccine = vaccineData.slice(
@@ -52,22 +52,35 @@ const Home = () => {
   }
 
   const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    dispatch({
+      type: "SET_CURRENTPAGE",
+      currentPage: pageNumber,
+    });
   };
 
   const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-
+    dispatch({
+      type: "SET_CURRENTPAGE",
+      currentPage: currentPage + 1,
+    });
     if (currentPage + 1 > pageNumber.length) {
-      setCurrentPage(pageNumber.length);
+      dispatch({
+        type: "SET_CURRENTPAGE",
+        currentPage: pageNumber.length,
+      });
     }
   };
 
   const prevPage = () => {
-    setCurrentPage(currentPage - 1);
-
+    dispatch({
+      type: "SET_CURRENTPAGE",
+      currentPage: currentPage - 1,
+    });
     if (currentPage - 1 <= 0 && pageNumber.length) {
-      setCurrentPage(pageNumber.slice(0, 1));
+      dispatch({
+        type: "SET_CURRENTPAGE",
+        currentPage: pageNumber.slice(0, 1),
+      });
     }
   };
 
@@ -98,7 +111,10 @@ const Home = () => {
       type: "SET_DISTRICTCODE",
       districtCode: "",
     });
-    setCurrentPage(1);
+    dispatch({
+      type: "SET_CURRENTPAGE",
+      currentPage: 1,
+    });
   };
 
   const onStateChange = async (e) => {
@@ -107,7 +123,10 @@ const Home = () => {
       type: "SET_DISTRICTS",
       districts: [],
     });
-    setCurrentPage(1);
+    dispatch({
+      type: "SET_CURRENTPAGE",
+      currentPage: 1,
+    });
     dispatch({
       type: "SET_VACCINEDATA",
       vaccineData: [],
@@ -134,8 +153,10 @@ const Home = () => {
 
   const findByDistrict = async (e) => {
     const districtCode = e.target.value;
-    setCurrentPage(1);
-
+    dispatch({
+      type: "SET_CURRENTPAGE",
+      currentPage: 1,
+    });
     const url =
       districtCode === "PLEASE SELECT A STATE FIRST"
         ? null
@@ -187,6 +208,11 @@ const Home = () => {
           dispatch({
             type: "SET_VACCINEDATA",
             vaccineData: pincodeData,
+          });
+
+          dispatch({
+            type: "SET_CURRENTPAGE",
+            currentPage: 1,
           });
         });
     }

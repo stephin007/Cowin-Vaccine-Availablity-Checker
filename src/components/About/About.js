@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDataLayerValue } from "../../Context/DataLayer";
 import "./About.css";
 
 const About = () => {
-  const [contributors, setContributors] = useState([]);
+  const [{ contributors }, dispatch] = useDataLayerValue();
 
   const getContributors = async () => {
     fetch(
@@ -10,8 +11,10 @@ const About = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        setContributors(data);
-        console.log(data);
+        dispatch({
+          type: "SET_CONTRIBUTORS",
+          contributors: data,
+        });
       });
   };
 
@@ -38,7 +41,7 @@ const About = () => {
             <div className="contributor_text">
               <h3>CONTRIBUTORS</h3>
             </div>
-            {contributors.map((contributor) => {
+            {contributors?.map((contributor) => {
               const { contributions, avatar_url, login, type } = contributor;
               return (
                 <div className="contributors_block">
