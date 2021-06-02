@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   gutterBottom: {
     marginBottom: ".5rem",
   },
+  gutterRight: {
+    marginRight: ".25rem",
+  },
   textBlack: {
     color: "#000",
   },
@@ -36,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
   textUppercase: {
     textTransform: "uppercase",
+  },
+  textCenter: {
+    textAlign: "center",
   },
   normalize: {
     padding: 0,
@@ -130,7 +136,7 @@ const VaccineDataSingle = (vaccine) => {
                   className={[classes.heightFull, classes.widthFull]}
                 >
                   <Typography
-                    variant={"h6"}
+                    variant={"subtitle1"}
                     component={"h3"}
                     className={[classes.textBlack, classes.textBold]}
                   >
@@ -190,7 +196,7 @@ const VaccineDataSingle = (vaccine) => {
                 flexDirection={"row"}
               >
                 <Typography
-                  variant={"h6"}
+                  variant={"subtitle1"}
                   component={"h3"}
                   className={[classes.textBlack, classes.textBold]}
                 >
@@ -245,69 +251,126 @@ const VaccineDataSingle = (vaccine) => {
             </Hidden>
           </Grid>
         </Box>
-        <Grid item xs={12} sm={12} md={6}>
-          <div className="paper-right">
-            <div className="paper-right_Badges">
-              <div className="paper-right_capacity">
-                <Badge
-                  color="secondary"
-                  badgeContent={vaccine?.available_capacity}
-                >
-                  <h5>Available Capacity</h5>{" "}
-                  <HealingIcon className="healing_icon" />
-                </Badge>
-              </div>
-              <div>
-                <p>
-                  <span>Date:</span>
-                  {vaccine?.date}
-                </p>
-              </div>
-            </div>
-            <div className="paper-right_age">
-              <div className="age_text">
-                <Typography
-                  variant={"h6"}
-                  component={"h3"}
-                  className={[classes.textBlack]}
-                >
-                  Minimum Age
-                </Typography>
-              </div>
-              <div className="age_content">
-                <p>{vaccine?.min_age_limit} years</p>
-              </div>
-            </div>
-            <div className="paper-right_age">
-              <div className="age_text">
-                <Typography
-                  variant={"h6"}
-                  component={"h3"}
-                  className={[classes.textBlack]}
-                >
-                  Minimum Fare(₹)
-                </Typography>
-              </div>
-              <div className="age_content">
-                {vaccine.fee_type === "Free" ? (
-                  <p style={{ color: "green" }}>{vaccine?.fee_type} </p>
-                ) : (
-                  <p style={{ color: "red" }}>{vaccine?.fee_type} </p>
-                )}
-              </div>
-            </div>
-            <div className="paper-right_slots">
+        <Box
+          component={Grid}
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          paddingX={2}
+          paddingY={3}
+        >
+          <Box
+            component={Grid}
+            item
+            className={[classes.gutterBottom]}
+            xs={12}
+            display={"flex"}
+            flexDirection={"row"}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <Box
+              display={"flex"}
+              flexDirection={"row"}
+              alignItems={"center"}
+              justifyContent={"flex-start"}
+            >
               <Typography
-                variant={"h6"}
-                component={"h3"}
-                className={[classes.textBlack]}
+                component={"p"}
+                variant="h6"
+                color={"primary"}
+                className={[classes.textBold, classes.gutterRight]}
               >
-                Slots Available
+                Available Capacity
               </Typography>
-              <p>{vaccine?.slots?.join(",")}</p>
-            </div>
-          </div>
-        </Grid>
+              <HealingIcon className="healing_icon" />
+            </Box>
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"flex-start"}
+            >
+              <Typography
+                component={"p"}
+                variant="h6"
+                color={"primary"}
+                className={[classes.textBlack, classes.gutterRight]}
+              >
+                <span>Date:</span>
+              </Typography>
+              <Typography component={"p"} variant="subtitle1" color={"primary"}>
+                {vaccine?.date}
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            component={Grid}
+            item
+            xs={12}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <Typography
+              variant={"subtitle1"}
+              component={"h3"}
+              className={[classes.textBlack, classes.textBold]}
+            >
+              Minimum Age
+            </Typography>
+
+            <Typography color={"error"} className={[classes.textBold]}>
+              {vaccine?.min_age_limit} years
+            </Typography>
+          </Box>
+          <Box
+            component={Grid}
+            item
+            xs={12}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <Typography
+              variant={"subtitle1"}
+              component={"h3"}
+              className={[classes.textBlack, classes.textBold]}
+            >
+              Minimum Fare(₹)
+            </Typography>
+            <Typography color={"error"} className={[classes.textBold]}>
+              {vaccine.fee_type === "Free"
+                ? vaccine?.fee_type
+                : vaccine?.fee_type}
+            </Typography>
+          </Box>
+          <Box
+            component={Grid}
+            item
+            xs={12}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Typography
+              variant={"h6"}
+              component={"h3"}
+              className={[classes.textBold]}
+              color={"primary"}
+            >
+              Slots Available
+            </Typography>
+
+            <Typography
+              variant={"p"}
+              className={[classes.textBlack, classes.textCenter]}
+            >
+              {vaccine?.slots?.join(", ")}
+            </Typography>
+          </Box>
+        </Box>
         {vaccine.lat && vaccine.long && showMap && (
           <Grid item xs={12}>
             <Map
