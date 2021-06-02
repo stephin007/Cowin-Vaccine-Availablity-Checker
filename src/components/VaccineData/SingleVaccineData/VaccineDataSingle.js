@@ -1,9 +1,14 @@
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Badge from "@material-ui/core/Badge";
 import HealingIcon from "@material-ui/icons/Healing";
 import VerifiedUserRoundedIcon from "@material-ui/icons/VerifiedUserRounded";
+
 import "./VaccineDataSingle.css";
+import { Map } from "../Map";
+import { Button } from "@material-ui/core";
+import { MapSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   paperMainDiv: {
@@ -12,11 +17,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 const VaccineDataSingle = (vaccine) => {
   const classes = useStyles();
+  const [showMap, setShowMap] = useState(false);
+
   return (
     <div className={classes.paperMainDiv}>
       <Paper
         variant="outlined"
-        className="wrapper"
+        className={`wrapper ${showMap ? "wrapper-w-map" : "wrapper-wo-map"}`}
         style={{ backgroundColor: "#E5E7EB", margin: "10px 0px" }}
       >
         <div className="paper-left">
@@ -43,14 +50,22 @@ const VaccineDataSingle = (vaccine) => {
 
           <div className="paper-left_content">
             <h3>address</h3>
-            <p>
+            <p className="vaccine__address">
               {vaccine?.block_name}, {vaccine?.district_name},{" "}
               {vaccine?.state_name}
             </p>
+            <Button
+              className="map_button"
+              onClick={() => {
+                setShowMap((old) => !old);
+              }}
+            >
+              <MapSharp />
+            </Button>
           </div>
           <div className="paper-left_content">
             <h3>pincode</h3>
-            <p>{vaccine?.pincode}</p>
+            <p className="page__pincode">{vaccine?.pincode}</p>
           </div>
           <div className="paper-left_time">
             <div className="open-time time">Opening Time: {vaccine.from}</div>
@@ -100,6 +115,15 @@ const VaccineDataSingle = (vaccine) => {
             <p>{vaccine?.slots?.join(",")}</p>
           </div>
         </div>
+        {vaccine.lat && vaccine.long && showMap && (
+          <Map
+            lat={vaccine.lat}
+            lng={vaccine.long}
+            close={() => {
+              setShowMap(false);
+            }}
+          />
+        )}
       </Paper>
     </div>
   );
