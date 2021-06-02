@@ -296,7 +296,7 @@ const Home = () => {
             </div>
           ) : null}
 
-          {toSearchValue =='Find By District & Date(Slots for next 7 days)' ? (
+          {toSearchValue === 'Find By District & Date(Slots for next 7 days)' ? (
             <div className='home_selectedHeaders'>
               <FormControl className='form-control'>
                 <Select
