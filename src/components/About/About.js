@@ -79,7 +79,8 @@ const About = () => {
               <h3>CONTRIBUTORS</h3>
             </div>
             {contributors.map((contributor) => {
-              const { contributions, avatar_url, login, type } = contributor;
+              const { contributions, avatar_url, login, type, html_url } =
+                contributor;
               return (
                 <div className="contributors_block">
                   <div className="contributor_individual">
@@ -87,13 +88,15 @@ const About = () => {
                       <img src={avatar_url} alt="contributor avatar" />
                     </div>
                     <div className="contributor_detail">
-                      <a href="https://github.com/stephin007">{login}</a>
+                      <a href={html_url}>{login}</a>
                       <div className="contribution_count">
                         <p>No of Contributions : </p>
                         <strong>{contributions}</strong>
                       </div>
                       <div className="contributor_type">
-                        {login === "stephin007" || login === "Justinnn07" ? (
+                        {login === "stephin007" ||
+                        login === "Justinnn07" ||
+                        login === "wise-introvert" ? (
                           <p>Maintainer</p>
                         ) : (
                           <p>{type}</p>
