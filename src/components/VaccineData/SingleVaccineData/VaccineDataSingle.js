@@ -310,6 +310,7 @@ const VaccineDataSingle = (vaccine) => {
             xs={12}
             display={"flex"}
             alignItems={"center"}
+            className={[classes.gutterBottom]}
             justifyContent={"space-between"}
           >
             <Typography
@@ -330,6 +331,7 @@ const VaccineDataSingle = (vaccine) => {
             xs={12}
             display={"flex"}
             alignItems={"center"}
+            className={[classes.gutterBottom]}
             justifyContent={"space-between"}
           >
             <Typography
@@ -352,6 +354,7 @@ const VaccineDataSingle = (vaccine) => {
             display={"flex"}
             flexDirection={"column"}
             alignItems={"center"}
+            className={[classes.gutterBottom]}
             justifyContent={"center"}
           >
             <Typography
