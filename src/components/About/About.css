@@ -23,11 +23,6 @@ body {
   font-size: large;
 }
 
-h4 {
-  color: #333333;
-  text-transform: capitalize;
-}
-
 .about_section {
   max-width: 100%;
   display: flex;
@@ -35,6 +30,28 @@ h4 {
 
 .about_section_left {
   max-width: 60%;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.about_section_main_heading h4 {
+  color: #333333;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+
+.about_section_subheadings h3 {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.about_section_subheadings p {
+  text-transform: capitalize;
+  font-weight: 300;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .about_section_right {
@@ -140,7 +157,17 @@ h4 {
 
   .about_section_left {
     max-width: 100%;
-    max-height: 50vh;
+    max-height: 100vh;
+    margin-bottom: 30px;
+  }
+
+  .about_section_main_heading h4 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings li {
+    font-size: 15px;
+    margin-left: -25px;
   }
 
   .about_section_right {
@@ -210,6 +237,31 @@ h4 {
 }
 
 @media screen and (max-width: 700px) {
+  .about_section_left {
+    margin-bottom: 70px;
+  }
+
+  .about_section_main_heading h4 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings h3 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings p {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings li {
+    font-size: 15px;
+    margin-left: -25px;
+  }
+
+  .about_section_right {
+    margin-left: -10px;
+  }
+
   .about_section_right .contributor_text h3 {
     margin: 10px 100px;
   }
@@ -244,6 +296,31 @@ h4 {
 }
 
 @media screen and (max-width: 500px) {
+  .about_section_left {
+    margin-bottom: -10px;
+  }
+
+  .about_section_main_heading h4 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings h3 {
+    font-size: 12px;
+  }
+
+  .about_section_subheadings p {
+    font-size: 10px;
+  }
+
+  .about_section_subheadings li {
+    font-size: 10px;
+    margin-left: -25px;
+  }
+
+  .about_section_right {
+    margin-left: -10px;
+  }
+
   .about_section_right .contributor_text h3 {
     margin: 10px 60px;
   }
@@ -329,5 +406,36 @@ h4 {
 
   h4 {
     font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .about_section_left {
+    margin-bottom: 150px;
+  }
+
+  .about_section_left {
+    margin-bottom: -10px;
+  }
+
+  .about_section_main_heading h4 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings h3 {
+    font-size: 12px;
+  }
+
+  .about_section_subheadings p {
+    font-size: 10px;
+  }
+
+  .about_section_subheadings li {
+    font-size: 10px;
+    margin-left: -25px;
+  }
+
+  .about_section_right {
+    margin-left: -10px;
   }
 }

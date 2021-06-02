@@ -19,6 +19,14 @@ h4 {
     color: ${({ theme }) => theme.text};
 }
 
+h1 {
+    color: ${({ theme }) => theme.text};
+}
+
+.about_section_main_heading h4{
+    color: ${({ theme }) => theme.text};
+}
+
 .intro__homeText {
     border: 3px solid ${({ theme }) => theme.text};
     color: ${({ theme }) => theme.text};
