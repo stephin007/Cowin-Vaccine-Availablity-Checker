@@ -1,5 +1,5 @@
 # CoWIN Vaccination Slots Checking App.
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker?ref=badge_shield)  [![CodeQL](https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/actions/workflows/codeql-analysis.yml/badge.svg?branch=NEW-UI)](https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/actions/workflows/codeql-analysis.yml)
 
 
 CoWIN Vaccination Slots Checking App is a user-friendly website
