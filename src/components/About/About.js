@@ -3,6 +3,7 @@ import "./About.css";
 
 const About = () => {
   const [contributors, setContributors] = useState([]);
+  const [contributorCount, setContributorCount] = useState(0);
 
   const getContributors = async () => {
     fetch(
@@ -12,6 +13,8 @@ const About = () => {
       .then((data) => {
         setContributors(data);
         console.log(data);
+        setContributorCount(data.length);
+        console.log(data.length);
       });
   };
 
@@ -76,7 +79,7 @@ const About = () => {
           </div>
           <div className="about_section_right">
             <div className="contributor_text">
-              <h3>CONTRIBUTORS</h3>
+              <h3>CONTRIBUTORS{contributorCount}</h3>
             </div>
             {contributors.map((contributor) => {
               const { contributions, avatar_url, login, type, html_url } =
