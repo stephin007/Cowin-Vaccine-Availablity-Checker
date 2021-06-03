@@ -1,5 +1,5 @@
-import React from 'react';
-import Error from './Error';
+import React from "react";
+import Error from "./Error";
 
 const NullState = ({
   toSearchValue,
@@ -11,15 +11,15 @@ const NullState = ({
 }) => {
   console.log(pinCodeSearch);
   if (
-    toSearchValue === 'Find By District' ||
-    toSearchValue === 'Find By District & Date(Slots for next 7 days)'
+    toSearchValue === "Find By District" ||
+    toSearchValue === "Find By District & Date(Slots for next 7 days)"
   ) {
-    if (districtCode === 'PLEASE SELECT A STATE FIRST') {
+    if (districtCode === "PLEASE SELECT A STATE FIRST") {
       return <div></div>;
     } else if (vaccineData.length > 0) {
       return (
         <div>
-          <VaccineDataMain vaccineData={vaccineData} />
+          <VaccineDataMain />
         </div>
       );
     } else if (pinCodeSearch) {
@@ -32,13 +32,13 @@ const NullState = ({
       return <div></div>;
     }
   } else if (
-    toSearchValue === 'Find By PinCode & Date' ||
-    toSearchValue === 'Find By Pincode & Date(Slots for next 7 days)'
+    toSearchValue === "Find By PinCode & Date" ||
+    toSearchValue === "Find By Pincode & Date(Slots for next 7 days)"
   ) {
     if (vaccineData.length > 0) {
       return (
         <div>
-          <VaccineDataMain vaccineData={vaccineData} />
+          <VaccineDataMain />
         </div>
       );
     } else if (pin.length <= 6 && !pinCodeSearch && vaccineData.length === 0) {
