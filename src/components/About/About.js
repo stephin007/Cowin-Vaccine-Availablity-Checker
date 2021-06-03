@@ -79,7 +79,9 @@ const About = () => {
           </div>
           <div className="about_section_right">
             <div className="contributor_text">
-              <h3>CONTRIBUTORS{contributorCount}</h3>
+              <h3>
+                CONTRIBUTORS <span>{contributorCount}</span>
+              </h3>
             </div>
             {contributors.map((contributor) => {
               const { contributions, avatar_url, login, type, html_url } =
