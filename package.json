@@ -12,8 +12,8 @@
     "@testing-library/user-event": "^12.1.10",
     "date-fns": "^2.21.1",
     "mapbox-gl": "^2.3.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-map-gl": "^6.1.15",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -44,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6"
   }
 }
