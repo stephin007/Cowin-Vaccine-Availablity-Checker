@@ -103,27 +103,44 @@ const VaccineDataSingle = (vaccine) => {
                   </Typography>
                 </Box>
               </Hidden>
-              <Box
-                component={Grid}
-                xs={10}
-                sm={10}
-                md={7}
-                item
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={{
-                  xs: "start",
-                  sm: "start",
-                  md: "center",
-                }}
-                textAlign={"center"}
-                className={[classes.heightFull, classes.widthFull]}
-              >
-                <Typography color={"error"} className={[classes.textBold]}>
-                  {vaccine?.block_name}, {vaccine?.district_name},{" "}
-                  {vaccine?.state_name}
-                </Typography>
-              </Box>
+              <Hidden mdDown>
+                <Box
+                  component={Grid}
+                  xs={10}
+                  sm={10}
+                  md={7}
+                  item
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  textAlign={"center"}
+                  className={[classes.heightFull, classes.widthFull]}
+                >
+                  <Typography color={"error"} className={[classes.textBold]}>
+                    {vaccine?.block_name}, {vaccine?.district_name},{" "}
+                    {vaccine?.state_name}
+                  </Typography>
+                </Box>
+              </Hidden>
+              <Hidden mdUp>
+                <Box
+                  component={Grid}
+                  xs={10}
+                  sm={10}
+                  md={7}
+                  item
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"start"}
+                  textAlign={"left"}
+                  className={[classes.heightFull, classes.widthFull]}
+                >
+                  <Typography color={"error"} className={[classes.textBold]}>
+                    {vaccine?.block_name}, {vaccine?.district_name},{" "}
+                    {vaccine?.state_name}
+                  </Typography>
+                </Box>
+              </Hidden>
               <Box
                 component={Grid}
                 xs={2}
@@ -210,6 +227,19 @@ const VaccineDataSingle = (vaccine) => {
             </Hidden>
           </Grid>
         </Box>
+        <Hidden mdUp>
+          {vaccine.lat && vaccine.long && showMap && (
+            <Grid item xs={12}>
+              <Map
+                lat={vaccine.lat}
+                lng={vaccine.long}
+                close={() => {
+                  setShowMap(false);
+                }}
+              />
+            </Grid>
+          )}
+        </Hidden>
         <Box
           component={Grid}
           item
@@ -222,6 +252,7 @@ const VaccineDataSingle = (vaccine) => {
           <Box
             component={Grid}
             item
+            container
             className={[classes.gutterBottom]}
             xs={12}
             display={"flex"}
@@ -230,6 +261,11 @@ const VaccineDataSingle = (vaccine) => {
             justifyContent={"space-between"}
           >
             <Box
+              component={Grid}
+              item
+              xs={12}
+              sm={12}
+              md={6}
               display={"flex"}
               flexDirection={"row"}
               alignItems={"center"}
@@ -245,23 +281,58 @@ const VaccineDataSingle = (vaccine) => {
               </Typography>
               <HealingIcon className="healing_icon" />
             </Box>
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              justifyContent={"flex-start"}
-            >
-              <Typography
-                component={"p"}
-                variant="h6"
-                color={"primary"}
-                className={[classes.textBlack, classes.gutterRight]}
+            <Hidden mdUp>
+              <Box
+                component={Grid}
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent="space-between"
               >
-                <span>Date:</span>
-              </Typography>
-              <Typography component={"p"} variant="subtitle1" color={"primary"}>
-                {vaccine?.date}
-              </Typography>
-            </Box>
+                <Typography
+                  variant={"subtitle1"}
+                  component={"h3"}
+                  className={[classes.textBlack, classes.textBold]}
+                >
+                  Date:
+                </Typography>
+
+                <Typography color={"primary"} className={[classes.textBold]}>
+                  {vaccine?.date}
+                </Typography>
+              </Box>
+            </Hidden>
+            <Hidden mdDown>
+              <Box
+                component={Grid}
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent="flex-start"
+              >
+                <Typography
+                  component={"p"}
+                  variant="h6"
+                  color={"primary"}
+                  className={[classes.textBlack, classes.gutterRight]}
+                >
+                  <span>Date:</span>
+                </Typography>
+                <Typography
+                  component={"p"}
+                  variant="subtitle1"
+                  color={"primary"}
+                >
+                  {vaccine?.date}
+                </Typography>
+              </Box>
+            </Hidden>
           </Box>
           <Box
             component={Grid}
@@ -333,17 +404,19 @@ const VaccineDataSingle = (vaccine) => {
             </Typography>
           </Box>
         </Box>
-        {vaccine.lat && vaccine.long && showMap && (
-          <Grid item xs={12}>
-            <Map
-              lat={vaccine.lat}
-              lng={vaccine.long}
-              close={() => {
-                setShowMap(false);
-              }}
-            />
-          </Grid>
-        )}
+        <Hidden mdDown>
+          {vaccine.lat && vaccine.long && showMap && (
+            <Grid item xs={12}>
+              <Map
+                lat={vaccine.lat}
+                lng={vaccine.long}
+                close={() => {
+                  setShowMap(false);
+                }}
+              />
+            </Grid>
+          )}
+        </Hidden>
       </Grid>
     </Container>
   );

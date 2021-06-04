@@ -1,6 +1,11 @@
+body {
+  background-color: #f9fafb;
+}
+
 .about-container {
   max-width: 1100px;
   margin: auto;
+  margin-top: 10px;
   overflow: hidden;
   padding: 0 2rem;
   font-family: "Fira Code Medium", "monospace";
@@ -18,12 +23,271 @@
   font-size: large;
 }
 
-h4 {
-  color: #333333;
-  text-transform: capitalize;
+.about_section {
+  max-width: 100%;
+  display: flex;
 }
 
-@media screen and (max-width: 500px) {
+.about_section_left {
+  max-width: 60%;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.about_section_main_heading h4 {
+  color: #333333;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+
+.about_section_subheadings h3 {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.about_section_subheadings p {
+  text-transform: capitalize;
+  font-weight: 300;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.about_section_right {
+  max-width: 30%;
+}
+
+.about_section_right .contributor_text {
+  background-color: teal;
+  border-radius: 10px;
+  padding: 10px;
+  width: 410px;
+}
+
+.about_section_right .contributor_text h3 {
+  color: whitesmoke;
+  margin: 10px 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about_section_right .contributor_text h3 span {
+  background-color: #004d4d;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 10px;
+  height: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.contributors_block {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  width: 410px;
+  padding: 10px;
+}
+
+.contributors_block .contributor_individual {
+  display: flex;
+}
+
+.contributors_block .contributor_individual .contributor_image {
+  max-width: 10%;
+}
+
+.contributors_block .contributor_individual .contributor_image img {
+  width: 70px;
+  border-radius: 50%;
+}
+
+.contributors_block .contributor_individual .contributor_detail {
+  max-width: 90%;
+  margin-left: 50px;
+}
+
+.contributors_block .contributor_individual .contributor_detail a {
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contribution_count {
+  margin-top: 5px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contribution_count
+  p {
+  color: #333333;
+}
+
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contribution_count
+  strong {
+  background-color: teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: whitesmoke;
+}
+
+.contributors_block
+  .contributor_individual
+  .contributor_detail
+  .contributor_type
+  p {
+  text-transform: capitalize;
+  font-size: 15px;
+  font-weight: 500;
+  color: blueviolet;
+}
+
+@media screen and (max-width: 1200px) {
+  .about_section {
+    flex-direction: column;
+  }
+
+  .about_section_left {
+    max-width: 100%;
+    max-height: 100vh;
+    margin-bottom: 30px;
+  }
+
+  .about_section_main_heading h4 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings li {
+    font-size: 15px;
+    margin-left: -25px;
+  }
+
+  .about_section_right {
+    max-width: 100%;
+  }
+
+  .about_section_right .contributor_text {
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  .about_section_right .contributor_text h3 {
+    margin: 10px 200px;
+  }
+
+  .contributors_block {
+    width: 100%;
+  }
+
+  .contributors_block .contributor_individual {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .contributors_block .contributor_individual .contributor_image {
+    max-width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contributors_block .contributor_individual .contributor_image img {
+    width: 75px;
+    border-radius: 10px;
+    margin-left: 25px;
+  }
+
+  .contributors_block .contributor_individual .contributor_detail a {
+    font-size: 20px;
+  }
+
+  .contributors_block
+    .contributor_individual
+    .contributor_detail
+    .contribution_count {
+    margin-top: 5px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .about-container {
+    width: 550px;
+  }
+
+  .about-head h1 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  h4 {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about_section_left {
+    margin-bottom: 70px;
+  }
+
+  .about_section_main_heading h4 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings h3 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings p {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings li {
+    font-size: 15px;
+    margin-left: -25px;
+  }
+
+  .about_section_right {
+    margin-left: -10px;
+  }
+
+  .about_section_right .contributor_text h3 {
+    margin: 10px 100px;
+  }
+
+  .contributors_block .contributor_individual .contributor_image img {
+    width: 75px;
+    border-radius: 10px;
+    margin-left: 35px;
+  }
+
+  .contributors_block .contributor_individual .contributor_detail a {
+    font-size: 18px;
+  }
+
   .about-container {
     width: 350px;
   }
@@ -35,10 +299,155 @@ h4 {
 
   .about-head h1 {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 10px;
   }
 
   h4 {
     font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about_section_left {
+    margin-bottom: -10px;
+  }
+
+  .about_section_main_heading h4 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings h3 {
+    font-size: 12px;
+  }
+
+  .about_section_subheadings p {
+    font-size: 10px;
+  }
+
+  .about_section_subheadings li {
+    font-size: 10px;
+    margin-left: -25px;
+  }
+
+  .about_section_right {
+    margin-left: -10px;
+  }
+
+  .about_section_right .contributor_text h3 {
+    margin: 10px 60px;
+  }
+
+  .contributors_block .contributor_individual .contributor_detail a {
+    font-size: 15px;
+  }
+
+  .contributors_block .contributor_individual .contributor_image {
+    max-width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contributors_block .contributor_individual .contributor_image img {
+    width: 45px;
+    margin-right: -10px;
+    border-radius: 50%;
+  }
+
+  .contributors_block .contributor_individual .contributor_detail a {
+    font-size: 15px;
+  }
+
+  .contributors_block
+    .contributor_individual
+    .contributor_detail
+    .contribution_count {
+    margin-top: 5px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .contributors_block
+    .contributor_individual
+    .contributor_detail
+    .contribution_count
+    p {
+    font-size: 10px;
+    margin-right: 20px;
+  }
+
+  .contributors_block
+    .contributor_individual
+    .contributor_detail
+    .contribution_count
+    strong {
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: whitesmoke;
+  }
+
+  .contributors_block
+    .contributor_individual
+    .contributor_detail
+    .contributor_type
+    p {
+    text-transform: capitalize;
+    font-size: 15px;
+    font-weight: 500;
+    color: blueviolet;
+  }
+
+  .about-container {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-head p {
+    font-size: 10px;
+  }
+
+  .about-head h1 {
+    font-weight: bold;
+    font-size: 10px;
+  }
+
+  h4 {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .about_section_left {
+    margin-bottom: 150px;
+  }
+
+  .about_section_left {
+    margin-bottom: -10px;
+  }
+
+  .about_section_main_heading h4 {
+    font-size: 15px;
+  }
+
+  .about_section_subheadings h3 {
+    font-size: 12px;
+  }
+
+  .about_section_subheadings p {
+    font-size: 10px;
+  }
+
+  .about_section_subheadings li {
+    font-size: 10px;
+    margin-left: -25px;
+  }
+
+  .about_section_right {
+    margin-left: -10px;
   }
 }

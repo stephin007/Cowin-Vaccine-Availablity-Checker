@@ -9,17 +9,11 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Typography,
 } from "@material-ui/core";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import "date-fns";
-import DateFnsUtils from "@date-io/date-fns";
 
 import { useClasses } from "../../lib";
 import VaccineDataMain from "../../components/VaccineData/VaccineDataMain";
+import Pagination from "../../components/Pagination/Pagination";
 
 const BASE_URL = "https://cdn-api.co-vin.in/api/v2";
 
@@ -31,17 +25,14 @@ export const HomePage = () => {
   const [loadingDistricts, setLoadingDistricts] = React.useState(false);
 
   /** CRITERIA **/
-  const [criterias, setCriterias] = React.useState(null);
   const [selectedCriteria, setSelectedCriteria] = React.useState(null);
 
   /** STATES **/
   const [states, setStates] = React.useState(null);
-  const [isStateFieldDirty, setIsStateFieldDirty] = React.useState(false);
   const [selectedState, setSelectedState] = React.useState(null);
 
   /** DISTRICTS **/
   const [districts, setDistricts] = React.useState(null);
-  const [isDistrictFieldDirty, setIsDistrictFieldDirty] = React.useState(false);
   const [selectedDistrict, setSelectedDistrict] = React.useState(null);
 
   /** PIN **/
@@ -49,20 +40,63 @@ export const HomePage = () => {
 
   /** VACCINES **/
   const [vaccines, setVaccines] = React.useState(null);
+  const [currentVaccines, setCurrentVaccines] = React.useState(null);
   const [loadingVaccines, setLoadingVaccines] = React.useState(false);
 
   /** MISC **/
   const [date, setDate] = React.useState(new Date());
 
+  /** PAGINATION **/
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [vaccinePerPage] = React.useState(3);
+  const indexOfLastVaccine = currentPage * vaccinePerPage;
+  const indexOfFirstVaccine = indexOfLastVaccine - vaccinePerPage;
+  const [pages, setPages] = React.useState([]);
+
   React.useEffect(() => {
-    if (/district/gi.test(selectedCriteria)) {
-      console.log(`getting states....`);
-      getStates();
+    if (vaccines && vaccines.length) {
+      setCurrentVaccines(
+        vaccines.slice(indexOfFirstVaccine, indexOfLastVaccine)
+      );
+      for (let i = 1; i <= Math.ceil(vaccines.length / vaccinePerPage); i++) {
+        setPages((old) => [...old, i]);
+      }
+    }
+  }, [vaccines, currentPage]);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > pages.length) {
+      setCurrentPage(pages.length);
+    }
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+
+    if (currentPage - 1 <= 0 && pages.length) {
+      setCurrentPage(pages.slice(0, 1));
+    }
+  };
+
+  React.useEffect(() => {
+    if (!states) {
+      if (/district/gi.test(selectedCriteria)) {
+        console.log(`getting states....`);
+        getStates();
+      }
     }
   }, [selectedCriteria]);
 
   React.useEffect(() => {
-    getDistricts();
+    if (!districts) {
+      getDistricts();
+    }
   }, [selectedState]);
 
   React.useEffect(() => {
@@ -75,7 +109,7 @@ export const HomePage = () => {
     ) {
       getVaccines();
     }
-  }, [selectedDistrict, selectedPin, date]);
+  }, [selectedDistrict, selectedPin, date, selectedCriteria]);
 
   const generateURL = (
     _sub = null,
@@ -88,7 +122,7 @@ export const HomePage = () => {
     }
 
     let sub;
-    const formattedDate = date;
+    const formattedDate = typeof date === "string" ? date : formatDate(date);
 
     if (_pin && _calendar) {
       sub = `/appointment/sessions/public/calendarByPin?pincode=${_pin}&date=${formattedDate}`;
@@ -154,7 +188,9 @@ export const HomePage = () => {
       ..._vaccine,
       ..._vaccine.sessions[0],
     };
-    refactored["fee"] = refactored.vaccine_fees[0].fee;
+    refactored["fee"] = refactored.vaccine_fees
+      ? refactored.vaccine_fees[0].fee
+      : "N/A";
     delete refactored.vaccine_fees;
     delete refactored.sessions;
     return refactored;
@@ -365,7 +401,22 @@ export const HomePage = () => {
           </Box>
         ) : (
           vaccines &&
-          vaccines.length > 0 && <VaccineDataMain vaccineData={vaccines} />
+          vaccines.length > 0 && (
+            <>
+              <VaccineDataMain vaccineData={currentVaccines} />
+
+              {pages.length === 1 ? null : (
+                <Pagination
+                  pageNumber={pages}
+                  paginate={paginate}
+                  prevPage={prevPage}
+                  currentPageChange={currentPage}
+                  nextPage={nextPage}
+                  currentPage={currentPage}
+                />
+              )}
+            </>
+          )
         )}
       </Grid>
     </Box>

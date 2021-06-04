@@ -10,6 +10,7 @@ import {
   Box,
   Grid,
   FormHelperText,
+  CircularProgress,
 } from "@material-ui/core";
 import {
   KeyboardDatePicker,
@@ -19,6 +20,7 @@ import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import SearchIcon from "@material-ui/icons/Search";
 import "./Home.css";
+import NullState from "../NullState";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 import Pagination from "../Pagination/Pagination";
 import { useClasses } from "../../lib";
@@ -27,6 +29,7 @@ const Home = () => {
   const [dirty, setDirty] = React.useState(false);
   const classes = useClasses();
   const [state, setState] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState(
@@ -36,6 +39,7 @@ const Home = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [vaccineData, setVaccineData] = useState([]);
+  const [pinCodeSearch, setPinCodeSearch] = useState(false);
   const [toSearchValue, setToSearchValue] = useState("");
   const [toSearch] = useState([
     "Find By District",
@@ -82,9 +86,13 @@ const Home = () => {
     var month = selectedDate.getMonth() + 1;
     var day = selectedDate.getDate();
     var year = selectedDate.getFullYear();
+
     var finalDate = day + "-" + month + "-" + year;
+
     setFormattedDate(finalDate);
   };
+
+  console.info(currentVaccine);
 
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
@@ -100,7 +108,6 @@ const Home = () => {
     setSelectedDate(date);
     setVaccineData([]);
     setDistrictCode("");
-    setCurrentPage(1);
   };
 
   const onStateChange = async (e) => {
@@ -110,14 +117,17 @@ const Home = () => {
     setCurrentPage(1);
     setVaccineData([]);
 
+    setPinCodeSearch(false);
+
     const url =
       stateCode === "States"
         ? null
         : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
-
+    setLoading(true);
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        setLoading(false);
         setStateCode(stateCode);
         setDistricts(data.districts);
       });
@@ -131,20 +141,23 @@ const Home = () => {
       districtCode === "PLEASE SELECT A STATE FIRST"
         ? null
         : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${formattedDate}`;
-
+    setLoading(true);
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        setLoading(false);
         setDistrictCode(districtCode);
         setVaccineData(data.sessions);
+        setPinCodeSearch(true);
       });
   };
 
-  const fetchDataUsingCalendarByPin = () => {
+  const fetchDataUsingCalendarByPin = async () => {
     if (pin.length !== 6) {
       alert("A Pincode must be of 6 digits");
     } else {
-      fetch(
+      setLoading(true);
+      await fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${formattedDate}`
       )
         .then((res) => res.json())
@@ -168,22 +181,27 @@ const Home = () => {
             fee_type: res?.fee_type,
             slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
           }));
+          setLoading(false);
           setVaccineData(pincodeData);
+          setPinCodeSearch(true);
         });
     }
   };
 
-  const fetchDataUsingByPin = () => {
+  const fetchDataUsingByPin = async () => {
     if (pin.length !== 6) {
       alert("A Pincode must be of 6 digits");
     } else {
-      fetch(
+      setLoading(true);
+      await fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=${pin}&date=${formattedDate}`
       )
         .then((res) => res.json())
         .then((data) => {
+          setLoading(false);
           console.log(data);
           setVaccineData(data.sessions);
+          setPinCodeSearch(true);
         });
     }
   };
