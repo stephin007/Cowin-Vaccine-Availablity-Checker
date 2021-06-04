@@ -1,5 +1,7 @@
 import * as React from "react";
 import {
+  InputAdornment,
+  OutlinedInput,
   Container,
   TextField,
   CircularProgress,
@@ -9,11 +11,16 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  IconButton,
+  FormHelperText,
 } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
 import { useClasses } from "../../lib";
 import VaccineDataMain from "../../components/VaccineData/VaccineDataMain";
 import Pagination from "../../components/Pagination/Pagination";
+import NullState from "../../components/NullState";
+import Error from "../../components/Error";
 
 const BASE_URL = "https://cdn-api.co-vin.in/api/v2";
 
@@ -23,6 +30,7 @@ export const HomePage = () => {
   /** ASYNC **/
   const [loadingStates, setLoadingStates] = React.useState(false);
   const [loadingDistricts, setLoadingDistricts] = React.useState(false);
+  const [error, setError] = React.useState(null);
 
   /** CRITERIA **/
   const [selectedCriteria, setSelectedCriteria] = React.useState(null);
@@ -37,6 +45,7 @@ export const HomePage = () => {
 
   /** PIN **/
   const [selectedPin, setSelectedPin] = React.useState(null);
+  const [invalidPin, setInvalidPin] = React.useState(false);
 
   /** VACCINES **/
   const [vaccines, setVaccines] = React.useState(null);
@@ -261,6 +270,83 @@ export const HomePage = () => {
             </Select>
           </FormControl>
         </Grid>
+        {/pin/gi.test(selectedCriteria) && (
+          <>
+            <Grid item xs={12} className={[classes.gutterBottom]}>
+              <FormControl fullWidth variant={"outlined"} error={invalidPin}>
+                <InputLabel htmlFor={"pincode-search"}>
+                  Enter pincode
+                </InputLabel>
+                <OutlinedInput
+                  onChange={(e) => {
+                    setInvalidPin(false);
+                    setSelectedPin(e.target.value);
+                  }}
+                  onKeyUp={(e) => {
+                    if (/enter/gi.test(e.keyCode) || /enter/gi.test(e.code)) {
+                      if (/^[1-9][0-9]{5}$/gi.test(selectedPin)) {
+                        setInvalidPin(false);
+                        getVaccines();
+                      } else {
+                        setInvalidPin(true);
+                      }
+                    }
+                  }}
+                  id="pincode-search"
+                  label={"Enter Pincode"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => {
+                          if (/^[1-9][0-9]{5}$/gi.test(selectedPin)) {
+                            setInvalidPin(false);
+                            getVaccines();
+                          } else {
+                            setInvalidPin(true);
+                          }
+                        }}
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                {invalidPin && (
+                  <FormHelperText>Please enter a valid Pincode</FormHelperText>
+                )}
+              </FormControl>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={4}
+              className={[classes.gutterBottom]}
+            >
+              <FormControl fullWidth>
+                <TextField
+                  variant={"outlined"}
+                  fullWidth
+                  id="date"
+                  label="Date"
+                  type="date"
+                  format={"dd-mm-YYYY"}
+                  defaultValue={formatDate(new Date(), "us")}
+                  onChange={(e) => {
+                    const raw = e.target.value.split("-");
+                    const day = raw[2];
+                    const month = raw[1];
+                    const year = raw[0];
+                    setDate(`${day}-${month}-${year}`);
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </FormControl>
+            </Grid>
+          </>
+        )}
         {/district/gi.test(selectedCriteria) && (
           <>
             <Grid
@@ -399,24 +485,28 @@ export const HomePage = () => {
           >
             <CircularProgress size={25} />
           </Box>
+        ) : vaccines && vaccines.length > 0 ? (
+          <>
+            <VaccineDataMain vaccineData={currentVaccines} />
+            {pages.length === 1 ? null : (
+              <Pagination
+                pageNumber={pages}
+                paginate={paginate}
+                prevPage={prevPage}
+                currentPageChange={currentPage}
+                nextPage={nextPage}
+                currentPage={currentPage}
+              />
+            )}
+          </>
         ) : (
           vaccines &&
-          vaccines.length > 0 && (
-            <>
-              <VaccineDataMain vaccineData={currentVaccines} />
-
-              {pages.length === 1 ? null : (
-                <Pagination
-                  pageNumber={pages}
-                  paginate={paginate}
-                  prevPage={prevPage}
-                  currentPageChange={currentPage}
-                  nextPage={nextPage}
-                  currentPage={currentPage}
-                />
-              )}
-            </>
+          vaccines.length === 0 && (
+            <h1>No results found</h1> // Replace this with <NullState />
           )
+        )}
+        {error && (
+          <h1>Something went wrong. Please try again.</h1> // Replace this with <Error /> component
         )}
       </Grid>
     </Box>
