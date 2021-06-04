@@ -68,7 +68,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    max-width: 380px;
   }
   .home__intro > h2 {
     margin-top: 20px;
@@ -114,7 +113,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    width: 410px;
   }
   .home__intro > h2 {
     margin-top: 20px;
