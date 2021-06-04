@@ -314,7 +314,7 @@ const VaccineDataSingle = (vaccine) => {
                 md={6}
                 display={"flex"}
                 alignItems={"center"}
-                justifyContent="flex-start"
+                justifyContent="flex-end"
               >
                 <Typography
                   component={"p"}
@@ -324,11 +324,7 @@ const VaccineDataSingle = (vaccine) => {
                 >
                   <span>Date:</span>
                 </Typography>
-                <Typography
-                  component={"p"}
-                  variant="subtitle1"
-                  color={"primary"}
-                >
+                <Typography component={"p"} variant="h6" color={"primary"}>
                   {vaccine?.date}
                 </Typography>
               </Box>

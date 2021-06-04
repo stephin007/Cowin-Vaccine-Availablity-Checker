@@ -9,7 +9,6 @@ import { GlobalStyles } from "./components/globalStyles";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import Intro from "./components/Intro/Intro";
@@ -37,9 +36,6 @@ const App = () => {
                   <Intro />
                 </Route>
                 <Route path="/vaccines" exact={true}>
-                  <Home />
-                </Route>
-                <Route path="/home" exact={true}>
                   <HomePage />
                 </Route>
                 <Route path="/about" exact={true}>

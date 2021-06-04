@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   InputAdornment,
+  Typography,
   OutlinedInput,
   Container,
   TextField,
@@ -19,8 +20,15 @@ import SearchIcon from "@material-ui/icons/Search";
 import { useClasses } from "../../lib";
 import VaccineDataMain from "../../components/VaccineData/VaccineDataMain";
 import Pagination from "../../components/Pagination/Pagination";
-import NullState from "../../components/NullState";
-import Error from "../../components/Error";
+
+/**********************************************************/
+/********************** NEEDS FIXING **********************/
+/**********************************************************/
+
+// import NullState from "../../components/NullState";
+// import Error from "../../components/Error";
+
+/**********************************************************/
 
 const BASE_URL = "https://cdn-api.co-vin.in/api/v2";
 
@@ -96,7 +104,6 @@ export const HomePage = () => {
   React.useEffect(() => {
     if (!states) {
       if (/district/gi.test(selectedCriteria)) {
-        console.log(`getting states....`);
         getStates();
       }
     }
@@ -109,6 +116,11 @@ export const HomePage = () => {
   }, [selectedState]);
 
   React.useEffect(() => {
+    console.log({ selectedState, selectedDistrict });
+    if (selectedDistrict || selectedPin) {
+      getVaccines();
+    }
+    /*
     if (
       states &&
       states.length > 0 &&
@@ -118,6 +130,7 @@ export const HomePage = () => {
     ) {
       getVaccines();
     }
+    */
   }, [selectedDistrict, selectedPin, date, selectedCriteria]);
 
   const generateURL = (
@@ -144,34 +157,44 @@ export const HomePage = () => {
     }
 
     const url = `${BASE_URL}${sub}`;
-    console.log({ url });
     return url;
   };
 
   const getStates = async () => {
-    setLoadingStates(true);
-    setVaccines(null);
-    setSelectedState(null);
-    setSelectedDistrict(null);
-    const response = await fetch(generateURL("/admin/location/states"));
-    const data = await response.json();
-    console.log({ data });
-    setLoadingStates(false);
-    setStates(data.states);
+    try {
+      setLoadingStates(true);
+      setError(false);
+      setVaccines(null);
+      setSelectedState(null);
+      setSelectedDistrict(null);
+      const response = await fetch(generateURL("/admin/location/states"));
+      const data = await response.json();
+      setLoadingStates(false);
+      setStates(data.states);
+    } catch (err) {
+      setLoadingStates(false);
+      setError(true);
+    }
   };
 
   const getDistricts = async () => {
-    setVaccines(null);
-    setSelectedDistrict(null);
-    if (selectedState && selectedState.state_id) {
+    try {
+      setVaccines(null);
       setSelectedDistrict(null);
-      setLoadingDistricts(true);
-      const response = await fetch(
-        generateURL(`/admin/location/districts/${selectedState.state_id}`)
-      );
-      const data = await response.json();
+      setError(false);
+      if (selectedState && selectedState.state_id) {
+        setSelectedDistrict(null);
+        setLoadingDistricts(true);
+        const response = await fetch(
+          generateURL(`/admin/location/districts/${selectedState.state_id}`)
+        );
+        const data = await response.json();
+        setLoadingDistricts(false);
+        setDistricts(data.districts);
+      }
+    } catch (error) {
       setLoadingDistricts(false);
-      setDistricts(data.districts);
+      setError(true);
     }
   };
 
@@ -179,12 +202,10 @@ export const HomePage = () => {
     const month = _date.getMonth() + 1;
     const day = _date.getDate();
     const year = _date.getFullYear();
-    console.log({ month, day, year });
     if (format === "us") {
       const formatted = `${year}-${month < 10 ? "0" + month : month}-${
         day < 10 ? "0" + day : day
       }`;
-      console.log({ formatted });
       return formatted;
     }
     return `${day < 10 ? "0" + day : day}-${
@@ -206,32 +227,30 @@ export const HomePage = () => {
   };
 
   const getVaccines = async () => {
-    setLoadingVaccines(true);
-    console.log({
-      selectedPin,
-      selectedDistrict,
-      calendar: /7/gi.test(selectedCriteria),
-    });
-    const url = generateURL(
-      null,
-      selectedPin,
-      selectedDistrict,
-      /7/gi.test(selectedCriteria)
-    );
-    console.log({ vaccinesURL: url });
-    const response = await fetch(url);
-    const data = await response.json();
-    let _vaccines;
-    console.log({ before: _vaccines });
-    if (data.hasOwnProperty("centers")) {
-      // response has calendar data
-      _vaccines = data.centers.map(refactor);
-    } else {
-      _vaccines = data.sessions;
+    try {
+      setLoadingVaccines(true);
+      setError(false);
+      const url = generateURL(
+        null,
+        selectedPin,
+        selectedDistrict,
+        /7/gi.test(selectedCriteria)
+      );
+      const response = await fetch(url);
+      const data = await response.json();
+      let _vaccines;
+      if (data.hasOwnProperty("centers")) {
+        // response has calendar data
+        _vaccines = data.centers.map(refactor);
+      } else {
+        _vaccines = data.sessions;
+      }
+      setVaccines(_vaccines);
+      setLoadingVaccines(false);
+    } catch (err) {
+      setLoadingVaccines(false);
+      setError(true);
     }
-    console.log({ after: _vaccines });
-    setVaccines(_vaccines);
-    setLoadingVaccines(false);
   };
 
   return (
@@ -243,6 +262,21 @@ export const HomePage = () => {
       style={{ paddingTop: ".5rem" }}
     >
       <Grid container spacing={1}>
+        <Box
+          item
+          xs={12}
+          component={Grid}
+          className={[
+            classes.gutterBottom,
+            classes.textUppercase,
+            classes.textBold,
+            classes.textBlack,
+          ]}
+        >
+          <Typography variant={"h4"} fullWidth align={"center"}>
+            Vaccine Availability
+          </Typography>
+        </Box>
         <Grid item xs={12} className={[classes.gutterBottom]}>
           <FormControl variant={"outlined"} fullWidth>
             <InputLabel id={"criteria-select-label"}>
@@ -254,6 +288,10 @@ export const HomePage = () => {
               id={"criteria-select"}
               value={selectedCriteria}
               onChange={(e) => {
+                setSelectedState(null);
+                setSelectedDistrict(null);
+                setSelectedPin(null);
+                setVaccines(null);
                 setSelectedCriteria(e.target.value);
               }}
             >
@@ -272,7 +310,7 @@ export const HomePage = () => {
         </Grid>
         {/pin/gi.test(selectedCriteria) && (
           <>
-            <Grid item xs={12} className={[classes.gutterBottom]}>
+            <Grid item xs={8} className={[classes.gutterBottom]}>
               <FormControl fullWidth variant={"outlined"} error={invalidPin}>
                 <InputLabel htmlFor={"pincode-search"}>
                   Enter pincode
@@ -316,13 +354,7 @@ export const HomePage = () => {
                 )}
               </FormControl>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={4}
-              className={[classes.gutterBottom]}
-            >
+            <Grid item xs={4} className={[classes.gutterBottom]}>
               <FormControl fullWidth>
                 <TextField
                   variant={"outlined"}
@@ -393,7 +425,7 @@ export const HomePage = () => {
                 </Select>
               </FormControl>
             </Grid>
-            {selectedState && (
+            {selectedState ? (
               <Grid
                 item
                 xs={12}
@@ -442,8 +474,28 @@ export const HomePage = () => {
                   </Select>
                 </FormControl>
               </Grid>
+            ) : (
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={4}
+                className={[classes.gutterBottom]}
+              >
+                <FormControl variant={"outlined"} fullWidth>
+                  <InputLabel id={"district-select-label"}>
+                    Select District
+                  </InputLabel>
+                  <Select
+                    disabled
+                    labelId={"district-select-label"}
+                    label={"Select Districts"}
+                    id={"state-select"}
+                  ></Select>
+                </FormControl>
+              </Grid>
             )}
-            {selectedState && selectedDistrict && (
+            {selectedState && selectedDistrict ? (
               <Grid
                 item
                 xs={12}
@@ -467,6 +519,29 @@ export const HomePage = () => {
                       const year = raw[0];
                       setDate(`${day}-${month}-${year}`);
                     }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+            ) : (
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={4}
+                className={[classes.gutterBottom]}
+              >
+                <FormControl fullWidth>
+                  <TextField
+                    variant={"outlined"}
+                    fullWidth
+                    id="date"
+                    label="Date"
+                    type="date"
+                    format={"dd-mm-YYYY"}
+                    defaultValue={formatDate(new Date(), "us")}
                     InputLabelProps={{
                       shrink: true,
                     }}
