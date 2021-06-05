@@ -25,7 +25,7 @@ const CovidWorld = ({ value, index }) => {
             <div class="world_head">
               <Paper className="world_head_paper">
                 <h3 className="active">Total Active Cases</h3>
-                {allWorldData.active}
+                {/* {allWorldData.active} */}
               </Paper>
               <Paper className="world_head_paper">
                 <h3 className="recovered">Total Recovered</h3>

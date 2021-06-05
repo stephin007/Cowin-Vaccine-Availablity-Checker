@@ -1,15 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
-.world_wrapper {
+/* .world_wrapper { 
   height: 100vh;
   width: 753px;
+  display: flex;
+} */
+
+.world_wrapper {
+  height: 100vh;
+  width: 100%;
   display: flex;
 }
 
 .world_head {
   display: flex;
   height: 25vh;
-  width: 753px;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
