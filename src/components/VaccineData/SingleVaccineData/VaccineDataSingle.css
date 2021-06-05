@@ -217,12 +217,12 @@ font-family: 'Ubuntu', sans-serif; */
 /*Media Queries*/
 @media screen and (max-width: 1496px) {
   .wrapper {
-    height: 37vh;
+    height: auto;
   }
 }
 @media screen and (max-width: 1024px) {
   .wrapper {
-    height: 37vh;
+    height: auto;
     width: 100%;
   }
 
@@ -258,7 +258,7 @@ font-family: 'Ubuntu', sans-serif; */
 
 @media screen and (max-width: 812px) {
   .wrapper {
-    height: 40vh;
+    height: auto;
   }
   .paper-left .paper-left_content p {
     font-size: 12px;
@@ -334,7 +334,7 @@ font-family: 'Ubuntu', sans-serif; */
 }
 @media screen and (max-width: 646px) {
   .wrapper {
-    height: 108vh;
+    height: auto;
     flex-direction: column;
   }
 
