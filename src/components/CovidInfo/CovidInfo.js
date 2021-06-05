@@ -1,17 +1,38 @@
-import React from "react";
-import { CssBaseline } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import { Container } from "@material-ui/core";
+import { useState } from "react";
+import { CssBaseline, Container, Tabs, Tab, AppBar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  appbar: {
+    background: "#333",
+  },
+  section_title: {
+    textAlign: "center",
+    textTransform: "uppercase",
+    fontFamily: "Nunito",
+    marginTop: "10px",
+  },
+}));
 
 const CovidInfo = () => {
+  const classes = useStyles();
+  const [tabValue, setTabValue] = useState(0);
+
+  const handleTabChange = (value) => {
+    setTabValue(value);
+  };
+
   return (
     <>
       <CssBaseline />
-      <Container maxwidth="md">
-        <Typography
-          component="div"
-          style={{ backgroundColor: "#cfe8fc", height: "100vh" }}
-        />
+      <Container maxWidth="md">
+        <h1 className={classes.section_title}>Covid 19 Information</h1>
+        <AppBar position="static" className={classes.appbar}>
+          <Tabs value={tabValue} onChange={(e, val) => handleTabChange(val)}>
+            <Tab label="India" />
+            <Tab label="World" />
+          </Tabs>
+        </AppBar>
       </Container>
     </>
   );
