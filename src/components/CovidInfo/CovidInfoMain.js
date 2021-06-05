@@ -29,7 +29,7 @@ const CovidInfo = () => {
     <>
       <CssBaseline />
       <Container maxWidth="md">
-        <h1 className={classes.section_title}>Covid 19 Information</h1>
+        <h1 className={classes.section_title}>World Covid 19 Information</h1>
         <AppBar position="static" className={classes.appbar}>
           <Tabs
             value={tabValue}

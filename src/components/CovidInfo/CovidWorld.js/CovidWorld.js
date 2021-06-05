@@ -15,6 +15,89 @@ const CovidWorld = ({ value, index }) => {
       });
   };
 
+  const paperContents = [
+    {
+      paperTitle: "Total Active Cases",
+      paperAnswer: allWorldData.active,
+    },
+    {
+      paperTitle: "Active per million",
+      paperAnswer: allWorldData.activePerOneMillion,
+    },
+    {
+      paperTitle: "Affected Countries",
+      paperAnswer: allWorldData.affectedCountries,
+    },
+    {
+      paperTitle: "Total Cases",
+      paperAnswer: allWorldData.cases,
+    },
+    {
+      paperTitle: "Active Cases per million",
+      paperAnswer: allWorldData.casesPerOneMillion,
+    },
+    {
+      paperTitle: "critical",
+      paperAnswer: allWorldData.critical,
+    },
+    {
+      paperTitle: "critical per million",
+      paperAnswer: allWorldData.criticalPerOneMillion,
+    },
+    {
+      paperTitle: "deaths",
+      paperAnswer: allWorldData.deaths,
+    },
+    {
+      paperTitle: "deaths Per OneMillion",
+      paperAnswer: allWorldData.deathsPerOneMillion,
+    },
+    {
+      paperTitle: "one Case Per People",
+      paperAnswer: allWorldData.oneCasePerPeople,
+    },
+    {
+      paperTitle: "one Death Per People",
+      paperAnswer: allWorldData.oneDeathPerPeople,
+    },
+    {
+      paperTitle: "one Test Per People",
+      paperAnswer: allWorldData.oneTestPerPeople,
+    },
+    {
+      paperTitle: "population",
+      paperAnswer: allWorldData.population,
+    },
+    {
+      paperTitle: "recovered",
+      paperAnswer: allWorldData.recovered,
+    },
+    {
+      paperTitle: "recovered Per One Million",
+      paperAnswer: allWorldData.recoveredPerOneMillion,
+    },
+    {
+      paperTitle: "tests",
+      paperAnswer: allWorldData.tests,
+    },
+    {
+      paperTitle: "tests Per One Million",
+      paperAnswer: allWorldData.testsPerOneMillion,
+    },
+    {
+      paperTitle: "today's Cases",
+      paperAnswer: allWorldData.todayCases,
+    },
+    {
+      paperTitle: "today's Deaths",
+      paperAnswer: allWorldData.todayDeaths,
+    },
+    {
+      paperTitle: "today's Recoveries",
+      paperAnswer: allWorldData.todayRecovered,
+    },
+  ];
+
   useEffect(() => {
     getAllWorldCovidData();
   }, []);
@@ -24,30 +107,16 @@ const CovidWorld = ({ value, index }) => {
         <>
           <div class="world_wrapper">
             <div class="world_head">
-              <Paper className="world_head_paper">
-                <h3 className="paper_title">Total Active Cases</h3>
-                <p className="count">{allWorldData.active}</p>
-              </Paper>
-              <Paper className="world_head_paper">
-                <h3 className="paper_title">Active per million</h3>
-                <p className="count">{allWorldData.activePerOneMillion}</p>
-              </Paper>
-              <Paper className="world_head_paper">
-                <h3 className="paper_title">Affected Countries</h3>
-                <p className="count">{allWorldData.affectedCountries}</p>
-              </Paper>
-              <Paper className="world_head_paper">
-                <h3 className="paper_title">Total Cases</h3>
-                <p className="count">{allWorldData.cases}</p>
-              </Paper>
-              <Paper className="world_head_paper">
-                <h3 className="paper_title">Active Cases per million</h3>
-                <p className="count">{allWorldData.casesPerOneMillion}</p>
-              </Paper>
-              <Paper className="world_head_paper">
-                <h3 className="paper_title">critical</h3>
-                <p className="count">{allWorldData.critical}</p>
-              </Paper>
+              {paperContents.map((paperContent) => {
+                return (
+                  <>
+                    <Paper className="world_head_paper">
+                      <h3 className="paper_title">{paperContent.paperTitle}</h3>
+                      <p className="count">{paperContent.paperAnswer}</p>
+                    </Paper>
+                  </>
+                );
+              })}
             </div>
           </div>
         </>
