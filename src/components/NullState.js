@@ -10,7 +10,7 @@ const NullState = ({
   pinCodeSearch,
 }) => {
   console.log(pinCodeSearch);
-  if (/pin/gi.test(toSearchValue)) {
+  if (/district/gi.test(toSearchValue)) {
     if (districtCode === "PLEASE SELECT A STATE FIRST") {
       return <div></div>;
     } else if (vaccineData.length > 0) {
