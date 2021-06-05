@@ -25,14 +25,28 @@ const CovidWorld = ({ value, index }) => {
           <div class="world_wrapper">
             <div class="world_head">
               <Paper className="world_head_paper">
-                <h3 className="active">Total Active Cases</h3>
-                {/* {allWorldData.active} */}
+                <h3 className="paper_title">Total Active Cases</h3>
+                <p className="count">{allWorldData.active}</p>
               </Paper>
               <Paper className="world_head_paper">
-                <h3 className="recovered">Total Recovered</h3>
+                <h3 className="paper_title">Active per million</h3>
+                <p className="count">{allWorldData.activePerOneMillion}</p>
               </Paper>
               <Paper className="world_head_paper">
-                <h3 className="vaccinated">Total Vaccinated</h3>
+                <h3 className="paper_title">Affected Countries</h3>
+                <p className="count">{allWorldData.affectedCountries}</p>
+              </Paper>
+              <Paper className="world_head_paper">
+                <h3 className="paper_title">Total Cases</h3>
+                <p className="count">{allWorldData.cases}</p>
+              </Paper>
+              <Paper className="world_head_paper">
+                <h3 className="paper_title">Active Cases per million</h3>
+                <p className="count">{allWorldData.casesPerOneMillion}</p>
+              </Paper>
+              <Paper className="world_head_paper">
+                <h3 className="paper_title">critical</h3>
+                <p className="count">{allWorldData.critical}</p>
               </Paper>
             </div>
           </div>

@@ -7,7 +7,7 @@ import CovidIndia from "./CovidIndia.js/CovidIndia";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    background: "#333",
+    background: "#16222f",
   },
   section_title: {
     textAlign: "center",

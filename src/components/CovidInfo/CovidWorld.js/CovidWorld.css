@@ -11,34 +11,34 @@
   height: 25vh;
   width: 100%;
   justify-content: space-between;
-  align-items: center;
   margin-top: 10px;
   font-family: "Nunito", monospace;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .world_head_paper {
   display: flex;
   flex-direction: column;
+  text-transform: capitalize;
   width: 32%;
-  height: 100%;
+  height: 50%;
+  margin-top: 10px;
 }
 
 .world_head_paper h3 {
   text-align: center;
 }
 
-.world_head_paper .active {
-  background-color: yellow;
-  padding: 5px;
-}
-
-.world_head_paper .recovered {
-  background-color: green;
-  padding: 5px;
+.world_head_paper .paper_title {
+  background-color: #333;
   color: whitesmoke;
+  padding: 5px;
 }
 
-.world_head_paper .vaccinated {
-  background-color: greenyellow;
+.world_head_paper .count {
   padding: 5px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 400;
 }
