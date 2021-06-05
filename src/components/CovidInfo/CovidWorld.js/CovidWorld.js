@@ -13,7 +13,6 @@ import "./CovidWorld.css";
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
   const [selectOptions, setSelectOptions] = useState("");
-  const [error, setError] = useState(false);
 
   const getAllWorldCovidData = async () => {
     await fetch(`https://disease.sh/v3/covid-19/all`)
@@ -138,8 +137,12 @@ const CovidWorld = ({ value, index }) => {
                 <Select
                   labelId="world_select_options"
                   id="world_select_options"
+                  value={selectOptions}
                   fullWidth
-                  onChange={(e) => setSelectOptions(e.target.value)}
+                  onChange={(e) => {
+                    setSelectOptions(e.target.value);
+                  }}
+                  error={selectOptions === ""}
                 >
                   {worldSelectOptions.map((option, index) => {
                     return (
@@ -149,6 +152,9 @@ const CovidWorld = ({ value, index }) => {
                     );
                   })}
                 </Select>
+                <FormHelperText>
+                  {selectOptions === "" ? "Please Select a value" : " "}
+                </FormHelperText>
               </FormControl>
             </div>
             <div class="world_head">
@@ -163,7 +169,7 @@ const CovidWorld = ({ value, index }) => {
   );
 };
 
-const PaperInformation = ({ children, paperContents }) => {
+const PaperInformation = ({ paperContents }) => {
   return (
     <>
       {paperContents.map((paperContent, index) => {
