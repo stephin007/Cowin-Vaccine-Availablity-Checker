@@ -13,7 +13,8 @@ import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import Intro from "./components/Intro/Intro";
-import CovidInfo from "./components/CovidInfo/CovidInfo";
+
+import CovidInfoMain from "./components/CovidInfo/CovidInfoMain";
 
 const App = () => {
   const [theme, toggleTheme] = useDarkMode();
@@ -40,7 +41,7 @@ const App = () => {
                   <Home />
                 </Route>
                 <Route path="/covidinfo" exact={true}>
-                  <CovidInfo />
+                  <CovidInfoMain />
                 </Route>
                 <Route path="/about" exact={true}>
                   <About />
