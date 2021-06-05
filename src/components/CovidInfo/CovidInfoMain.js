@@ -36,12 +36,12 @@ const CovidInfo = () => {
             variant="fullWidth"
             onChange={(e, val) => handleTabChange(val)}
           >
-            <Tab label="India" />
             <Tab label="World" />
+            <Tab label="India" />
           </Tabs>
         </AppBar>
-        <CovidIndia value={tabValue} index={0} />
-        <CovidWorld value={tabValue} index={1} />
+        <CovidIndia value={tabValue} index={1} />
+        <CovidWorld value={tabValue} index={0} />
       </Container>
     </>
   );
