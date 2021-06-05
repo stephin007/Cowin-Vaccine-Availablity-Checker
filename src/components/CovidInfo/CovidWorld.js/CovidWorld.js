@@ -10,6 +10,7 @@ const CovidWorld = ({ value, index }) => {
     await fetch(`https://disease.sh/v3/covid-19/all`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setAllWorldData(data);
       });
   };
