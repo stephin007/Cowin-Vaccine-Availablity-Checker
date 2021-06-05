@@ -31,7 +31,11 @@ const CovidInfo = () => {
       <Container maxWidth="md">
         <h1 className={classes.section_title}>Covid 19 Information</h1>
         <AppBar position="static" className={classes.appbar}>
-          <Tabs value={tabValue} onChange={(e, val) => handleTabChange(val)}>
+          <Tabs
+            value={tabValue}
+            variant="fullWidth"
+            onChange={(e, val) => handleTabChange(val)}
+          >
             <Tab label="India" />
             <Tab label="World" />
           </Tabs>
