@@ -1,19 +1,35 @@
 import { useState, useEffect } from "react";
-import { Paper } from "@material-ui/core";
+import {
+  Paper,
+  FormControl,
+  Select,
+  InputLabel,
+  MenuItem,
+  FormHelperText,
+} from "@material-ui/core";
 
 import "./CovidWorld.css";
 
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
+  const [selectOptions, setSelectOptions] = useState("");
+  const [error, setError] = useState(false);
 
   const getAllWorldCovidData = async () => {
     await fetch(`https://disease.sh/v3/covid-19/all`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setAllWorldData(data);
       });
   };
+
+  // TODOs
+  // 1. make a select field to filter out the slection
+  //    - get whole world (done)
+  //    - get Data by continents
+  //    - get Data by specific continent
+  //    - get Data by countries
+  //    - get Data by country
 
   const paperContents = [
     {
@@ -98,6 +114,14 @@ const CovidWorld = ({ value, index }) => {
     },
   ];
 
+  const worldSelectOptions = [
+    "Get COVID19 World Information",
+    "Get COVID19 Data by continents",
+    "Get COVID19 Data by specific continent",
+    "Get COVID19 Data by countries",
+    "Get COVID19 Data by country",
+  ];
+
   useEffect(() => {
     getAllWorldCovidData();
   }, []);
@@ -106,17 +130,31 @@ const CovidWorld = ({ value, index }) => {
       {value === index && (
         <>
           <div class="world_wrapper">
+            <div class="select_options">
+              <FormControl variant="filled">
+                <InputLabel id="demo-simple-select-filled-label">
+                  Search...
+                </InputLabel>
+                <Select
+                  labelId="world_select_options"
+                  id="world_select_options"
+                  fullWidth
+                  onChange={(e) => setSelectOptions(e.target.value)}
+                >
+                  {worldSelectOptions.map((option, index) => {
+                    return (
+                      <MenuItem key={index} value={option}>
+                        {option}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
             <div class="world_head">
-              {paperContents.map((paperContent) => {
-                return (
-                  <>
-                    <Paper className="world_head_paper">
-                      <h3 className="paper_title">{paperContent.paperTitle}</h3>
-                      <p className="count">{paperContent.paperAnswer}</p>
-                    </Paper>
-                  </>
-                );
-              })}
+              {selectOptions === "Get COVID19 World Information" && (
+                <PaperInformation paperContents={paperContents} />
+              )}
             </div>
           </div>
         </>
@@ -125,4 +163,20 @@ const CovidWorld = ({ value, index }) => {
   );
 };
 
+const PaperInformation = ({ children, paperContents }) => {
+  return (
+    <>
+      {paperContents.map((paperContent, index) => {
+        return (
+          <>
+            <Paper className="world_head_paper" key={index}>
+              <h3 className="paper_title">{paperContent.paperTitle}</h3>
+              <p className="count">{paperContent.paperAnswer}</p>
+            </Paper>
+          </>
+        );
+      })}
+    </>
+  );
+};
 export default CovidWorld;
