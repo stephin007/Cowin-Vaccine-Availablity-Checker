@@ -93,23 +93,45 @@ const Header = (props) => {
                 onClose={() => setAnchorEl(null)}
               >
                 {props.theme === "light" ? (
-                  <Link
-                    to="/about"
-                    style={{ padding: 0, textDecoration: "none" }}
-                  >
-                    <MenuItem>About</MenuItem>
-                  </Link>
+                  <>
+                    <Link
+                      to="/about"
+                      style={{ padding: 0, textDecoration: "none" }}
+                    >
+                      <MenuItem style={{ color: "black" }}>About</MenuItem>
+                    </Link>
+                    <Link
+                      to="/covidinfo"
+                      style={{ padding: 0, textDecoration: "none" }}
+                    >
+                      <MenuItem style={{ color: "black" }}>
+                        COVID19 Information
+                      </MenuItem>
+                    </Link>
+                  </>
                 ) : (
-                  <Link
-                    to="/about"
-                    style={{
-                      padding: 0,
-                      textDecoration: "none",
-                      color: "white",
-                    }}
-                  >
-                    <MenuItem>About</MenuItem>
-                  </Link>
+                  <>
+                    <Link
+                      to="/about"
+                      style={{
+                        padding: 0,
+                        textDecoration: "none",
+                        color: "white",
+                      }}
+                    >
+                      <MenuItem>About</MenuItem>
+                    </Link>
+                    <Link
+                      to="/covidinfo"
+                      style={{
+                        padding: 0,
+                        textDecoration: "none",
+                        color: "white",
+                      }}
+                    >
+                      <MenuItem>COVID19 Information</MenuItem>
+                    </Link>
+                  </>
                 )}
                 <a
                   href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/"
@@ -139,23 +161,51 @@ const Header = (props) => {
           ) : (
             <div className={classes.headerOptions}>
               {props.theme === "light" ? (
-                <Link
-                  to="/about"
-                  style={{ padding: 0, textDecoration: "none", color: "black" }}
-                >
-                  <MenuItem>About</MenuItem>
-                </Link>
+                <>
+                  <Link
+                    to="/about"
+                    style={{
+                      padding: 0,
+                      textDecoration: "none",
+                      color: "black",
+                    }}
+                  >
+                    <MenuItem>About</MenuItem>
+                  </Link>
+                  <Link
+                    to="/covidinfo"
+                    style={{
+                      padding: 0,
+                      textDecoration: "none",
+                      color: "black",
+                    }}
+                  >
+                    <MenuItem>COVID19 Information</MenuItem>
+                  </Link>
+                </>
               ) : (
-                <Link
-                  to="/about"
-                  style={{
-                    padding: 0,
-                    textDecoration: "none",
-                    color: "white",
-                  }}
-                >
-                  <MenuItem>About</MenuItem>
-                </Link>
+                <>
+                  <Link
+                    to="/about"
+                    style={{
+                      padding: 0,
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
+                    <MenuItem>About</MenuItem>
+                  </Link>
+                  <Link
+                    to="/covidinfo"
+                    style={{
+                      padding: 0,
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
+                    <MenuItem>COVID19 Information</MenuItem>
+                  </Link>
+                </>
               )}
               <a href="https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/">
                 {props.theme === "light" ? (
