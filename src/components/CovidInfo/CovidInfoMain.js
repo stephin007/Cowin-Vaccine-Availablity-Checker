@@ -2,6 +2,9 @@ import { useState } from "react";
 import { CssBaseline, Container, Tabs, Tab, AppBar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import CovidWorld from "./CovidWorld.js/CovidWorld";
+import CovidIndia from "./CovidIndia.js/CovidIndia";
+
 const useStyles = makeStyles((theme) => ({
   appbar: {
     background: "#333",
@@ -33,6 +36,8 @@ const CovidInfo = () => {
             <Tab label="World" />
           </Tabs>
         </AppBar>
+        <CovidIndia value={tabValue} index={0} />
+        <CovidWorld value={tabValue} index={1} />
       </Container>
     </>
   );
