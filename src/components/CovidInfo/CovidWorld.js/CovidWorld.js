@@ -5,7 +5,6 @@ import {
   InputLabel,
   MenuItem,
   FormHelperText,
-  CircularProgress,
 } from "@material-ui/core";
 
 import "./CovidWorld.css";
@@ -143,7 +142,7 @@ const CovidWorld = ({ value, index }) => {
   }, []);
   return (
     <>
-      {value === index && !loading ? (
+      {value === index && (
         <>
           <div className="world_wrapper">
             <div className="select_options">
@@ -179,6 +178,7 @@ const CovidWorld = ({ value, index }) => {
                 <>
                   <WorldPaperInformation
                     WorldPaperContents={WorldPaperContents}
+                    loading={loading}
                   />
                 </>
               )}
@@ -187,24 +187,11 @@ const CovidWorld = ({ value, index }) => {
                 <>
                   <ContinentPaperInformation
                     dataByContinent={dataByContinent}
+                    loading={loading}
                   />
                 </>
               )}
             </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div
-            style={{
-              textAlign: "center",
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <CircularProgress />
           </div>
         </>
       )}
