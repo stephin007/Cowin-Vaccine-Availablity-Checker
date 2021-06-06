@@ -5,6 +5,7 @@ import {
   InputLabel,
   MenuItem,
   FormHelperText,
+  CircularProgress,
 } from "@material-ui/core";
 
 import "./CovidWorld.css";
@@ -17,6 +18,7 @@ const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
   const [dataByContinent, setDataByContinent] = useState([]);
   const [selectOptions, setSelectOptions] = useState("");
+  const [loading, setLoading] = useState(true);
   // TODOs
   // 1. make a select field to filter out the slection
   //    - get whole world (done)
@@ -121,6 +123,7 @@ const CovidWorld = ({ value, index }) => {
       .then((response) => response.json())
       .then((data) => {
         setAllWorldData(data);
+        setLoading(false);
       });
   };
 
@@ -129,6 +132,7 @@ const CovidWorld = ({ value, index }) => {
       .then((response) => response.json())
       .then((data) => {
         setDataByContinent(data);
+        setLoading(false);
         console.log(data);
       });
   };
@@ -139,7 +143,7 @@ const CovidWorld = ({ value, index }) => {
   }, []);
   return (
     <>
-      {value === index && (
+      {value === index && !loading ? (
         <>
           <div className="world_wrapper">
             <div className="select_options">
@@ -187,6 +191,20 @@ const CovidWorld = ({ value, index }) => {
                 </>
               )}
             </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            style={{
+              textAlign: "center",
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <CircularProgress />
           </div>
         </>
       )}
