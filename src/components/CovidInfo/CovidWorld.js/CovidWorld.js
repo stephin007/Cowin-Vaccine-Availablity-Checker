@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import {
-  Paper,
   FormControl,
   Select,
   InputLabel,
@@ -9,19 +8,15 @@ import {
 } from "@material-ui/core";
 
 import "./CovidWorld.css";
+import {
+  WorldPaperInformation,
+  ContinentPaperInformation,
+} from "./PaperContents";
 
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
+  const [dataByContinent, setDataByContinent] = useState([]);
   const [selectOptions, setSelectOptions] = useState("");
-
-  const getAllWorldCovidData = async () => {
-    await fetch(`https://disease.sh/v3/covid-19/all`)
-      .then((response) => response.json())
-      .then((data) => {
-        setAllWorldData(data);
-      });
-  };
-
   // TODOs
   // 1. make a select field to filter out the slection
   //    - get whole world (done)
@@ -30,13 +25,21 @@ const CovidWorld = ({ value, index }) => {
   //    - get Data by countries
   //    - get Data by country
 
-  const paperContents = [
+  const SelectOptions = [
+    "Get COVID19 World Information",
+    "Get COVID19 Data by continents",
+    "Get COVID19 Data by specific continent",
+    "Get COVID19 Data by countries",
+    "Get COVID19 Data by country",
+  ];
+
+  const WorldPaperContents = [
     {
       paperTitle: "Total Active Cases",
       paperAnswer: allWorldData.active,
     },
     {
-      paperTitle: "Active per million",
+      paperTitle: "Active per one million",
       paperAnswer: allWorldData.activePerOneMillion,
     },
     {
@@ -113,16 +116,109 @@ const CovidWorld = ({ value, index }) => {
     },
   ];
 
-  const worldSelectOptions = [
-    "Get COVID19 World Information",
-    "Get COVID19 Data by continents",
-    "Get COVID19 Data by specific continent",
-    "Get COVID19 Data by countries",
-    "Get COVID19 Data by country",
+  const ContinentsPaperContent = [
+    {
+      paperTitle: "Total Active Cases",
+      paperAnswer: dataByContinent.active,
+    },
+    {
+      paperTitle: "Active per one million",
+      paperAnswer: dataByContinent.activePerOneMillion,
+    },
+    {
+      paperTitle: "Affected Countries",
+      paperAnswer: dataByContinent.affectedCountries,
+    },
+    {
+      paperTitle: "Total Cases",
+      paperAnswer: dataByContinent.cases,
+    },
+    {
+      paperTitle: "Active Cases per million",
+      paperAnswer: dataByContinent.casesPerOneMillion,
+    },
+    {
+      paperTitle: "critical",
+      paperAnswer: dataByContinent.critical,
+    },
+    {
+      paperTitle: "critical per million",
+      paperAnswer: dataByContinent.criticalPerOneMillion,
+    },
+    {
+      paperTitle: "deaths",
+      paperAnswer: dataByContinent.deaths,
+    },
+    {
+      paperTitle: "deaths Per OneMillion",
+      paperAnswer: dataByContinent.deathsPerOneMillion,
+    },
+    {
+      paperTitle: "one Case Per People",
+      paperAnswer: dataByContinent.oneCasePerPeople,
+    },
+    {
+      paperTitle: "one Death Per People",
+      paperAnswer: dataByContinent.oneDeathPerPeople,
+    },
+    {
+      paperTitle: "one Test Per People",
+      paperAnswer: dataByContinent.oneTestPerPeople,
+    },
+    {
+      paperTitle: "population",
+      paperAnswer: dataByContinent.population,
+    },
+    {
+      paperTitle: "recovered",
+      paperAnswer: dataByContinent.recovered,
+    },
+    {
+      paperTitle: "recovered Per One Million",
+      paperAnswer: dataByContinent.recoveredPerOneMillion,
+    },
+    {
+      paperTitle: "tests",
+      paperAnswer: dataByContinent.tests,
+    },
+    {
+      paperTitle: "tests Per One Million",
+      paperAnswer: dataByContinent.testsPerOneMillion,
+    },
+    {
+      paperTitle: "today's Cases",
+      paperAnswer: dataByContinent.todayCases,
+    },
+    {
+      paperTitle: "today's Deaths",
+      paperAnswer: dataByContinent.todayDeaths,
+    },
+    {
+      paperTitle: "today's Recoveries",
+      paperAnswer: dataByContinent.todayRecovered,
+    },
   ];
+
+  const getAllWorldCovidData = async () => {
+    await fetch(`https://disease.sh/v3/covid-19/all`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAllWorldData(data);
+      });
+  };
+
+  const getCovidDataByContinent = async () => {
+    await fetch(`https://disease.sh/v3/covid-19/continents`)
+      .then((response) => response.json())
+      .then((data) => {
+        setDataByContinent(data);
+        console.log(data);
+      });
+  };
 
   useEffect(() => {
     getAllWorldCovidData();
+    getCovidDataByContinent();
   }, []);
   return (
     <>
@@ -144,7 +240,7 @@ const CovidWorld = ({ value, index }) => {
                   }}
                   error={selectOptions === ""}
                 >
-                  {worldSelectOptions.map((option, index) => {
+                  {SelectOptions.map((option, index) => {
                     return (
                       <MenuItem key={index} value={option}>
                         {option}
@@ -152,14 +248,26 @@ const CovidWorld = ({ value, index }) => {
                     );
                   })}
                 </Select>
-                <FormHelperText>
+                <FormHelperText style={{ color: "red" }}>
                   {selectOptions === "" ? "Please Select a value" : " "}
                 </FormHelperText>
               </FormControl>
             </div>
             <div class="world_head">
               {selectOptions === "Get COVID19 World Information" && (
-                <PaperInformation paperContents={paperContents} />
+                <>
+                  <WorldPaperInformation
+                    WorldPaperContents={WorldPaperContents}
+                  />
+                </>
+              )}
+
+              {selectOptions === "Get COVID19 Data by continents" && (
+                <>
+                  <ContinentPaperInformation
+                    ContinentsPaperContent={ContinentsPaperContent}
+                  />
+                </>
               )}
             </div>
           </div>
@@ -169,20 +277,4 @@ const CovidWorld = ({ value, index }) => {
   );
 };
 
-const PaperInformation = ({ paperContents }) => {
-  return (
-    <>
-      {paperContents.map((paperContent, index) => {
-        return (
-          <>
-            <Paper className="world_head_paper" key={index}>
-              <h3 className="paper_title">{paperContent.paperTitle}</h3>
-              <p className="count">{paperContent.paperAnswer}</p>
-            </Paper>
-          </>
-        );
-      })}
-    </>
-  );
-};
 export default CovidWorld;
