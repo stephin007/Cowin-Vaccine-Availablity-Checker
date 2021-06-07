@@ -23,6 +23,9 @@ import Pagination from "../Pagination/Pagination";
 const Home = () => {
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filtervalueVaccine, setfiltervalueVaccine] = useState("ALL");
+  const [filtervalueAge, setfiltervalueAge] = useState("ALL");
+  const [filtervalueFare, setfiltervalueFare] = useState("ALL");
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState(
@@ -200,7 +203,15 @@ const Home = () => {
         });
     }
   };
-
+  const filterValueVaccinechange = (e) => {
+    setfiltervalueVaccine(e.target.value);
+  };
+  const filterValueAgeChange = (e) => {
+    setfiltervalueAge(e.target.value);
+  };
+  const filterValueFareChange = (e) => {
+    setfiltervalueFare(e.target.value);
+  };
   return (
     <>
       <Container maxWidth="md">
@@ -444,7 +455,34 @@ const Home = () => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
-
+          {vaccineData.length > 0 ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <FormControl style={{ width: "150px" }}>
+                <InputLabel value="ALL">VACCINE-All</InputLabel>
+                <Select onChange={filterValueVaccinechange}>
+                  <MenuItem value="ALL">ALL</MenuItem>
+                  <MenuItem value="COVAXIN">COVAXIN</MenuItem>
+                  <MenuItem value="COVISHIELD">COVISHIELD</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl style={{ width: "150px", marginLeft: "20px" }}>
+                <InputLabel value="ALL">AGE</InputLabel>
+                <Select onChange={filterValueAgeChange}>
+                  <MenuItem value="ALL">ALL</MenuItem>
+                  <MenuItem value="18">18-45</MenuItem>
+                  <MenuItem value="45">ABOVE 45</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl style={{ width: "150px", marginLeft: "20px" }}>
+                <InputLabel value="ALL">MINIMUM FARE</InputLabel>
+                <Select onChange={filterValueFareChange}>
+                  <MenuItem value="ALL">ALL</MenuItem>
+                  <MenuItem value="Free">FREE</MenuItem>
+                  <MenuItem value="Paid">PAID</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+          ) : null}
           {currentVaccine.length === 0 && loading === true ? (
             <div
               style={{
@@ -456,7 +494,12 @@ const Home = () => {
               <CircularProgress />
             </div>
           ) : (
-            <VaccineDataMain vaccineData={currentVaccine} />
+            <VaccineDataMain
+              vaccineData={currentVaccine}
+              filtervalueVaccine={filtervalueVaccine}
+              filtervalueAge={filtervalueAge}
+              filtervalueFare={filtervalueFare}
+            />
           )}
           <NullState
             toSearchValue={toSearchValue}
