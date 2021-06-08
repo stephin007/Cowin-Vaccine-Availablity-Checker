@@ -40,40 +40,15 @@ const Home = () => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
   const [vaccinePerPage] = useState(3);
-  const indexOfLastVaccine = currentPage * vaccinePerPage;
-  const indexOfFirstVaccine = indexOfLastVaccine - vaccinePerPage;
+  const totalVaccine = pageNumber * vaccinePerPage;
   const currentVaccine = vaccineData.slice(
-    indexOfFirstVaccine,
-    indexOfLastVaccine
+    totalVaccine,
+    totalVaccine + vaccinePerPage
   );
 
-  const pageNumber = [];
-
-  for (let i = 1; i <= Math.ceil(vaccineData.length / vaccinePerPage); i++) {
-    pageNumber.push(i);
-  }
-
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-
-    if (currentPage + 1 > pageNumber.length) {
-      setCurrentPage(pageNumber.length);
-    }
-  };
-
-  const prevPage = () => {
-    setCurrentPage(currentPage - 1);
-
-    if (currentPage - 1 <= 0 && pageNumber.length) {
-      setCurrentPage(pageNumber.slice(0, 1));
-    }
-  };
+  const vaccinePageCount = Math.ceil(vaccineData.length / vaccinePerPage);
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
@@ -84,8 +59,6 @@ const Home = () => {
 
     setFormattedDate(finalDate);
   };
-
-  console.info(currentVaccine);
 
   useEffect(() => {
     fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
@@ -108,8 +81,6 @@ const Home = () => {
 
     setDistricts([]);
 
-    setCurrentPage(1);
-
     setVaccineData([]);
 
     setPinCodeSearch(false);
@@ -130,7 +101,6 @@ const Home = () => {
 
   const findByDistrict = async (e) => {
     const districtCode = e.target.value;
-    setCurrentPage(1);
 
     const url =
       districtCode === "PLEASE SELECT A STATE FIRST"
@@ -471,11 +441,7 @@ const Home = () => {
               {pageNumber.length === 1 ? null : (
                 <Pagination
                   pageNumber={pageNumber}
-                  paginate={paginate}
-                  prevPage={prevPage}
-                  currentPageChange={currentPage}
-                  nextPage={nextPage}
-                  currentPage={currentPage}
+                  pageCount={vaccinePageCount}
                 />
               )}
             </>
