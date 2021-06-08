@@ -42,14 +42,16 @@ const Home = () => {
   ]);
   const [pageNumber, setPageNumber] = useState(0);
   const [vaccinePerPage] = useState(3);
+
+  // Pagination Logics ..
   const totalVaccine = pageNumber * vaccinePerPage;
   const currentVaccine = vaccineData.slice(
     totalVaccine,
     totalVaccine + vaccinePerPage
   );
-
   const vaccinePageCount = Math.ceil(vaccineData.length / vaccinePerPage);
 
+  // Formated Date
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
     var day = selectedDate.getDate();
