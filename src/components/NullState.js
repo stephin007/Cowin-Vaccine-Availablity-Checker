@@ -9,7 +9,6 @@ const NullState = ({
   pin,
   pinCodeSearch,
 }) => {
-  console.log(pinCodeSearch);
   if (
     toSearchValue === "Find By District" ||
     toSearchValue === "Find By District & Date(Slots for next 7 days)"

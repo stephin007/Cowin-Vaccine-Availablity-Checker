@@ -132,7 +132,6 @@ const CovidWorld = ({ value, index }) => {
       .then((data) => {
         setDataByContinent(data);
         setLoading(false);
-        console.log(data);
       });
   };
 

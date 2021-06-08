@@ -51,6 +51,11 @@ const Home = () => {
   );
   const vaccinePageCount = Math.ceil(vaccineData.length / vaccinePerPage);
 
+  const onPageChange = ({ selected }) => {
+    setPageNumber(selected);
+    console.log(selected);
+  };
+
   // Formated Date
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
@@ -166,7 +171,6 @@ const Home = () => {
         .then((res) => res.json())
         .then((data) => {
           setLoading(false);
-          console.log(data);
           setVaccineData(data.sessions);
           setPinCodeSearch(true);
         });
@@ -440,12 +444,11 @@ const Home = () => {
           />
           {vaccineData.length === 0 ? null : (
             <>
-              {pageNumber.length === 1 ? null : (
-                <Pagination
-                  pageNumber={pageNumber}
-                  pageCount={vaccinePageCount}
-                />
-              )}
+              <Pagination
+                pageNumber={pageNumber}
+                pageCount={vaccinePageCount}
+                onPageChange={onPageChange}
+              />
             </>
           )}
         </div>
