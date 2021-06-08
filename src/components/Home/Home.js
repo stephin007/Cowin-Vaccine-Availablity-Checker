@@ -53,7 +53,6 @@ const Home = () => {
 
   const onPageChange = ({ selected }) => {
     setPageNumber(selected);
-    console.log(selected);
   };
 
   // Formated Date

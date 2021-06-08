@@ -1,28 +1,23 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import "./Pagination.css";
-import Pagination from "@material-ui/lab/Pagination";
 
-const Paginations = ({ pageCount, onPageChange, pageNumber }) => {
+const Pagination = ({ pageCount, onPageChange }) => {
   return (
-    <div className="">
-      {/* <ReactPaginate
+    <div className="paginations">
+      <ReactPaginate
         previousLabel="prev"
         nextLabel="Next"
         pageCount={pageCount}
         onPageChange={onPageChange}
-        containerClassName="MuiPagination-ul"
-        nextClassName="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary"
-        previousClassName="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary"
-      /> */}
-      <Pagination
-        count={pageCount}
-        variant="outlined"
-        shape="rounded"
-        onChange={() => 3}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+        breakClassName={"break-me"}
+        breakLabel={"..."}
       />
     </div>
   );
 };
 
-export default Paginations;
+export default Pagination;
