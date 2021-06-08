@@ -14,6 +14,8 @@ import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import Intro from "./components/Intro/Intro";
 
+import CovidInfoMain from "./components/CovidInfo/CovidInfoMain";
+
 const App = () => {
   const [theme, toggleTheme] = useDarkMode();
   const themeMode = theme === "light" ? lightTheme : darkTheme;
@@ -37,6 +39,9 @@ const App = () => {
                 </Route>
                 <Route path="/vaccines" exact={true}>
                   <Home />
+                </Route>
+                <Route path="/covidinfo" exact={true}>
+                  <CovidInfoMain />
                 </Route>
                 <Route path="/about" exact={true}>
                   <About />

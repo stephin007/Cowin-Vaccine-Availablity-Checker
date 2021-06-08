@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import { CircularProgress } from "@material-ui/core";
+
 import "./About.css";
 
 const About = () => {
   const [contributors, setContributors] = useState([]);
+  const [contributorCount, setContributorCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const getContributors = async () => {
     fetch(
@@ -12,6 +16,8 @@ const About = () => {
       .then((data) => {
         setContributors(data);
         console.log(data);
+        setContributorCount(data.length);
+        setLoading(false);
       });
   };
 
@@ -76,37 +82,57 @@ const About = () => {
           </div>
           <div className="about_section_right">
             <div className="contributor_text">
-              <h3>CONTRIBUTORS</h3>
+              <h3>
+                CONTRIBUTORS <span>{contributorCount}</span>
+              </h3>
             </div>
-            {contributors.map((contributor) => {
-              const { contributions, avatar_url, login, type, html_url } =
-                contributor;
-              return (
-                <div className="contributors_block">
-                  <div className="contributor_individual">
-                    <div className="contributor_image">
-                      <img src={avatar_url} alt="contributor avatar" />
-                    </div>
-                    <div className="contributor_detail">
-                      <a href={html_url}>{login}</a>
-                      <div className="contribution_count">
-                        <p>No of Contributions : </p>
-                        <strong>{contributions}</strong>
+            {!loading ? (
+              contributors.map((contributor) => {
+                const { contributions, avatar_url, login, type, html_url } =
+                  contributor;
+                return (
+                  <div className="contributors_block">
+                    <div className="contributor_individual">
+                      <div className="contributor_image">
+                        <img src={avatar_url} alt="contributor avatar" />
                       </div>
-                      <div className="contributor_type">
-                        {login === "stephin007" ||
-                        login === "Justinnn07" ||
-                        login === "wise-introvert" ? (
-                          <p>Maintainer</p>
-                        ) : (
-                          <p>{type}</p>
-                        )}
+                      <div className="contributor_detail">
+                        <a href={html_url}>{login}</a>
+                        <div className="contribution_count">
+                          <p>No of Contributions : </p>
+                          <strong>{contributions}</strong>
+                        </div>
+                        <div className="contributor_type">
+                          {login === "stephin007" ||
+                          login === "Justinnn07" ||
+                          login === "wise-introvert" ? (
+                            <p>Maintainer</p>
+                          ) : (
+                            <p>{type}</p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
+                );
+              })
+            ) : (
+              <>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    width: "auto",
+                    height: "100vh",
+                  }}
+                >
+                  <CircularProgress />
                 </div>
-              );
-            })}
+              </>
+            )}
           </div>
         </div>
       </div>

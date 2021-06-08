@@ -19,11 +19,11 @@ CoWIN Vaccination Slots Checking App uses a number of open source projects :
 - [MaterialUI](https://material-ui.com/)
 - [StyledComponents](https://www.styled-components.com/)
 
-## Releases
+## Releases(ChangeLog for Each Branch Coming Soon)
 
 - [Production](https://cowinvaccinetracker.forcommunity.tech/)
 - [Staging](https://cowin-vaccine-availablity-checker.vercel.app/)
-- [New UI demo](https://cowinvaccinetracker.stephinreji.me/)
+- [New Features Demo](https://cowinvaccinetracker.stephinreji.me/)
 
 ## Contribution
 

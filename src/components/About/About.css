@@ -56,7 +56,6 @@ body {
 
 .about_section_right {
   max-width: 30%;
-  max-height: 100vh;
 }
 
 .about_section_right .contributor_text {
@@ -69,6 +68,20 @@ body {
 .about_section_right .contributor_text h3 {
   color: whitesmoke;
   margin: 10px 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about_section_right .contributor_text h3 span {
+  background-color: #004d4d;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 10px;
+  height: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
 }
 
 .contributors_block {
@@ -172,7 +185,6 @@ body {
 
   .about_section_right {
     max-width: 100%;
-    max-height: 100vh;
   }
 
   .about_section_right .contributor_text {
