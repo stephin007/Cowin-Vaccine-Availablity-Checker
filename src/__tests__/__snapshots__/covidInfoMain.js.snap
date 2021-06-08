@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`check tab value change functionality check handle tab change 1`] = `ShallowWrapper {}`;
+
 exports[`render covidInfoMain render covidinfo correctly 1`] = `ShallowWrapper {}`;
