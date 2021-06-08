@@ -6,6 +6,10 @@ import { Header } from './components/Header/Header';
 describe('Rendering Header Component', () => {
 	let header = shallow(<Header />);
 
+	it('renders correctly', () => {
+		expect(header).toMatchSnapshot();
+	});
+
 	it('renders AppBar Component', () => {
 		expect(header.find('[data-testId="header-appbar"]').exists()).toEqual(true);
 	});
@@ -21,3 +25,14 @@ describe('Rendering Header Component', () => {
 	});
 });
 
+describe('toggle Theme', () => {
+	let toggleTheme = jest.fn();
+	let header = shallow(<Header toggleTheme={toggleTheme} />);
+	beforeEach(() => {
+		header.find('[data-testId="header-toggleTheme"]').simulate('click');
+	});
+
+	it('button click event', () => {
+		expect(header.find('[data-testId="header-toggleTheme"]').props().onClick).toHaveBeenCalled();
+	});
+});
