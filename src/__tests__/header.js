@@ -1,7 +1,6 @@
 import React from 'react';
-import App from './App';
 import { shallow } from 'enzyme';
-import { Header } from './components/Header/Header';
+import { Header } from '../components/Header/Header';
 
 describe('Rendering Header Component', () => {
 	let header = shallow(<Header />);
