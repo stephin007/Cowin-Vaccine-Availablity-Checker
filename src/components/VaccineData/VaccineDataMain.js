@@ -29,12 +29,12 @@ const VaccineDataMain = ({
             filtervalueFare === "ALL" ? (
             (console.log("cond2"),
             (<VaccineDataSingle key={vaccine.center_id} {...vaccine} />))
-          ) : parseInt(filtervalueFare) === vaccine.fee_type &&
+          ) : filtervalueFare === vaccine.fee_type &&
             filtervalueVaccine === "ALL" &&
             filtervalueAge === "ALL" ? (
             (console.log("cond3"),
             (<VaccineDataSingle key={vaccine.center_id} {...vaccine} />))
-          ) : parseInt(filtervalueFare) === vaccine.fee_type &&
+          ) : filtervalueFare === vaccine.fee_type &&
             filtervalueVaccine === vaccine.vaccine &&
             filtervalueAge === "ALL" ? (
             <VaccineDataSingle key={vaccine.center_id} {...vaccine} />
