@@ -39,6 +39,21 @@ const Home = () => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
+  const [vaccinePerPage, setVaccinePerPage] = useState(3);
+
+  const infiniteScroll = () => {
+    setVaccinePerPage(vaccinePerPage + 3);
+  };
+
+  window.onscroll = () => {
+    setLoading(true);
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      infiniteScroll();
+    }
+  };
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
