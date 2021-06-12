@@ -16,14 +16,15 @@ import {
 
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
-  const [dataByContinent, setDataByContinent] = useState([]);
+  const [continentsData, setContinentsData] = useState({});
+  const [dataByAllContinents, setDataByAllContinents] = useState([]);
   const [selectOptions, setSelectOptions] = useState("");
   const [loading, setLoading] = useState(true);
   // TODOs
   // 1. make a select field to filter out the slection
   //    - get whole world (done)
   //    - get Data by continents (done)
-  //    - get Data by specific continent
+  //    - get Data by specific continent (done)
   //    - get Data by countries
   //    - get Data by country
 
@@ -131,7 +132,7 @@ const CovidWorld = ({ value, index }) => {
     await fetch(`https://disease.sh/v3/covid-19/continents`)
       .then((response) => response.json())
       .then((data) => {
-        setDataByContinent(data);
+        setDataByAllContinents(data);
         setLoading(false);
         console.log(data);
       });
@@ -143,9 +144,9 @@ const CovidWorld = ({ value, index }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        setDataByContinent(data);
         setLoading(false);
-        console.log(data);
+        setContinentsData(data);
+        console.log(continentsData);
       });
   };
 
@@ -199,7 +200,7 @@ const CovidWorld = ({ value, index }) => {
               {selectOptions === "Get COVID19 Data by continents" && (
                 <>
                   <ContinentPaperInformation
-                    dataByContinent={dataByContinent}
+                    dataByAllContinents={dataByAllContinents}
                     loading={loading}
                   />
                 </>
@@ -212,6 +213,7 @@ const CovidWorld = ({ value, index }) => {
                     getCovidDataOfSingleContinent={
                       getCovidDataOfSingleContinent
                     }
+                    continentsData={continentsData}
                   />
                 </>
               )}

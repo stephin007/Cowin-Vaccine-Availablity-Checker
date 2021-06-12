@@ -9,6 +9,8 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 
+import "./CovidWorld.css";
+
 export const WorldPaperInformation = ({ WorldPaperContents, loading }) => {
   return (
     <>
@@ -45,13 +47,13 @@ export const WorldPaperInformation = ({ WorldPaperContents, loading }) => {
   );
 };
 
-export const ContinentPaperInformation = ({ dataByContinent, loading }) => {
+export const ContinentPaperInformation = ({ dataByAllContinents, loading }) => {
   return (
     <>
       {!loading ? (
         <>
           <div className="continents_head">
-            {dataByContinent.map((data, index) => {
+            {dataByAllContinents.map((data, index) => {
               const { continent, active, critical, cases, deaths, recovered } =
                 data;
               return (
@@ -106,6 +108,7 @@ export const ContinentPaperInformation = ({ dataByContinent, loading }) => {
 export const SingleContinentPaperInformation = ({
   loading,
   getCovidDataOfSingleContinent,
+  continentsData,
 }) => {
   const [continentNames] = useState([
     "North America",
@@ -120,33 +123,37 @@ export const SingleContinentPaperInformation = ({
     <>
       {!loading ? (
         <>
-          <FormControl variant="filled">
-            <InputLabel id="demo-simple-select-filled-label">
-              Search...
-            </InputLabel>
-            <Select
-              labelId="world_select_options"
-              id="world_select_options"
-              value={continentValue}
-              fullWidth
-              onChange={(e) => {
-                setContinentValue(e.target.value);
-                getCovidDataOfSingleContinent(e.target.value);
-              }}
-              error={continentValue === ""}
-            >
-              {continentNames.map((option, index) => {
-                return (
-                  <MenuItem key={index} value={option}>
-                    {option}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-            <FormHelperText style={{ color: "red" }}>
-              {continentValue === "" ? "Please Select a value" : " "}
-            </FormHelperText>
-          </FormControl>
+          <div className="single_continent_head">
+            <div className="continent_select_options">
+              <FormControl variant="filled">
+                <InputLabel id="demo-simple-select-filled-label">
+                  Select a Continent
+                </InputLabel>
+                <Select
+                  labelId="world_select_options"
+                  id="world_select_options"
+                  value={continentValue}
+                  fullWidth
+                  onChange={(e) => {
+                    setContinentValue(e.target.value);
+                    getCovidDataOfSingleContinent(e.target.value);
+                  }}
+                  error={continentValue === ""}
+                >
+                  {continentNames.map((option, index) => {
+                    return (
+                      <MenuItem key={index} value={option}>
+                        {option}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText style={{ color: "red" }}>
+                  {continentValue === "" ? "Please Select a value" : " "}
+                </FormHelperText>
+              </FormControl>
+            </div>
+          </div>
         </>
       ) : (
         <>
