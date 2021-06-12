@@ -154,7 +154,6 @@ const Chart = ({ allWorldData, loading }) => {
 		<Container maxWidth="lg">
 			{!loading ? (
 				<>
-					<h1 className="title">Get World COVID 19 Information</h1>
 					<Line data={initialData} options={lineOptions} />
 					<Line data={additionalData1} options={lineOptions} />
 					<Line data={additionalData2} options={lineOptions} />

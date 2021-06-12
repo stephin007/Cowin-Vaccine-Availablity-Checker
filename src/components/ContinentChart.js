@@ -50,7 +50,6 @@ const ContinentChart = ({ dataByContinent, loading }) => {
 		<Container maxWidth="lg">
 			{!loading ? (
 				<>
-					<h1 className="title">Get World COVID 19 Information By Continent</h1>
 					{dataByContinent.map((data) => {
 						index = Math.floor(Math.random() * 6);
 						return (
