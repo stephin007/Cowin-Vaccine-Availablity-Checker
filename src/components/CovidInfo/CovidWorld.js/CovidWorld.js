@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { FormControl, Select, InputLabel, MenuItem, FormHelperText } from '@material-ui/core';
 
 import './CovidWorld.css';
-import { WorldPaperInformation, ContinentPaperInformation } from './CovidWorldContents';
+// import { WorldPaperInformation, ContinentPaperInformation } from './CovidWorldContents';
 import Chart from '../../Chart';
+import ContinentChart from '../../ContinentChart';
 
 const CovidWorld = ({ value, index }) => {
 	const [allWorldData, setAllWorldData] = useState([]);
@@ -177,7 +178,8 @@ const CovidWorld = ({ value, index }) => {
 
 							{selectOptions === 'Get COVID19 Data by continents' && (
 								<>
-									<ContinentPaperInformation dataByContinent={dataByContinent} loading={loading} />
+									{/* <ContinentPaperInformation dataByContinent={dataByContinent} loading={loading} /> */}
+									<ContinentChart dataByContinent={dataByContinent} loading={loading} />
 								</>
 							)}
 						</div>

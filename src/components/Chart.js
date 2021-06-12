@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const HorizontalBarChart = ({ allWorldData, loading }) => {
+const Chart = ({ allWorldData, loading }) => {
 	const classes = useStyles();
 
 	const initialData = {
@@ -168,4 +168,4 @@ const HorizontalBarChart = ({ allWorldData, loading }) => {
 	);
 };
 
-export default HorizontalBarChart;
+export default Chart;
