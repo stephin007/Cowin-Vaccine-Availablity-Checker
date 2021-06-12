@@ -1,81 +1,171 @@
-import React, { useState, useEffect } from 'react';
-import { Line, Bar } from 'react-chartjs-2';
+import { Container, makeStyles, CircularProgress } from '@material-ui/core';
+import React from 'react';
+import { Line } from 'react-chartjs-2';
 
-import { fetchDailyData } from '../../api';
-
-import styles from './Chart.module.css';
-
-let styles = {
-	container: {
-		display: flex,
-		justifyContent: center,
-		width: '65%',
+const lineOptions = {
+	scales: {
+		yAxes: [
+			{
+				ticks: {
+					beginAtZero: true,
+				},
+			},
+		],
 	},
 };
 
-const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
-	const [dailyData, setDailyData] = useState({});
+const useStyles = makeStyles({
+	progress: {
+		textAlign: 'center',
+		position: 'absolute',
+		left: '50%',
+		top: '50%',
+		transform: 'translate(-50%, -50%)',
+	},
+});
 
-	useEffect(() => {
-		const fetchMyAPI = async () => {
-			const initialDailyData = await fetchDailyData();
+const HorizontalBarChart = ({ allWorldData, loading }) => {
+	const classes = useStyles();
 
-			setDailyData(initialDailyData);
-		};
-
-		fetchMyAPI();
-	}, []);
-
-	const barChart = confirmed ? (
-		<Bar
-			data={{
-				labels: ['Infected', 'Recovered', 'Deaths'],
-				datasets: [
-					{
-						label: 'People',
-						backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
-						data: [confirmed.value, recovered.value, deaths.value],
-					},
+	const initialData = {
+		labels: [
+			'Active per one million',
+			'Affected Countries',
+			'critical per million',
+			'deaths Per OneMillion',
+			'one Case Per People',
+			'one Death Per People',
+			'one Test Per People',
+			"today's Deaths",
+		],
+		datasets: [
+			{
+				label: 'DataSet #1',
+				fill: true,
+				data: [
+					allWorldData.activePerOneMillion,
+					allWorldData.affectedCountries,
+					allWorldData.criticalPerOneMillion,
+					allWorldData.deathsPerOneMillion,
+					allWorldData.oneCasePerPeople,
+					allWorldData.oneDeathPerPeople,
+					allWorldData.oneTestPerPeople,
+					allWorldData.todayDeaths,
 				],
-			}}
-			options={{
-				legend: { display: false },
-				title: { display: true, text: `Current state in ${country}` },
-			}}
-		/>
-	) : null;
-
-	const lineChart = dailyData[0] ? (
-		<Line
-			data={{
-				labels: dailyData.map(({ date }) => new Date(date).toLocaleDateString()),
-				datasets: [
-					{
-						data: dailyData.map((data) => data.confirmed),
-						label: 'Infected',
-						borderColor: '#3333ff',
-						fill: true,
-					},
-					{
-						data: dailyData.map((data) => data.deaths),
-						label: 'Deaths',
-						borderColor: 'red',
-						backgroundColor: 'rgba(255, 0, 0, 0.5)',
-						fill: true,
-					},
-					{
-						data: dailyData.map((data) => data.recovered),
-						label: 'Recovered',
-						borderColor: 'green',
-						backgroundColor: 'rgba(0, 255, 0, 0.5)',
-						fill: true,
-					},
+				backgroundColor: [
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(255, 159, 64, 0.2)',
 				],
-			}}
-		/>
-	) : null;
+				borderColor: [
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(255, 159, 64, 1)',
+				],
+				borderWidth: 1,
+			},
+		],
+	};
 
-	return <div className={styles.container}>{country ? barChart : lineChart}</div>;
+	const additionalData1 = {
+		labels: [
+			'Active Cases per million',
+			'critical',
+			'recovered Per One Million',
+			'tests Per One Million',
+			"today's Cases",
+			"today's Recoveries",
+		],
+		datasets: [
+			{
+				label: 'DataSet #2',
+				fill: true,
+				data: [
+					allWorldData.casesPerOneMillion,
+					allWorldData.critical,
+					allWorldData.recoveredPerOneMillion,
+					allWorldData.testsPerOneMillion,
+					allWorldData.todayCases,
+					allWorldData.todayRecovered,
+				],
+				backgroundColor: [
+					'rgba(255, 159, 64, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+				],
+				borderColor: [
+					'rgba(255, 159, 64, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+				],
+				borderWidth: 1,
+			},
+		],
+	};
+
+	const additionalData2 = {
+		labels: ['Total Active Cases', 'Total Cases', 'deaths', 'population', 'recovered', 'tests'],
+		datasets: [
+			{
+				label: 'DataSet #3',
+				fill: true,
+				data: [
+					allWorldData.active,
+					allWorldData.cases,
+					allWorldData.deaths,
+					allWorldData.population,
+					allWorldData.recovered,
+					allWorldData.tests,
+				],
+				backgroundColor: [
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)',
+				],
+				borderColor: [
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 99, 132, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)',
+				],
+				borderWidth: 1,
+			},
+		],
+	};
+
+	return (
+		<Container maxWidth="lg">
+			{!loading ? (
+				<>
+					<h1 className="title">Get World COVID 19 Information</h1>
+					<Line data={initialData} options={lineOptions} />
+					<Line data={additionalData1} options={lineOptions} />
+					<Line data={additionalData2} options={lineOptions} />
+				</>
+			) : (
+				<div className={classes.progress}>
+					<CircularProgress />
+				</div>
+			)}
+		</Container>
+	);
 };
 
-export default Chart;
+export default HorizontalBarChart;
