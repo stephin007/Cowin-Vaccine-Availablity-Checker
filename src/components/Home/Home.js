@@ -41,12 +41,11 @@ const Home = () => {
   ]);
   const [vaccinePerPage, setVaccinePerPage] = useState(3);
 
-  const infiniteScroll = () => {
-    setVaccinePerPage(vaccinePerPage + 3);
-  };
+  const currentVaccine = vaccineData.slice(0, vaccinePerPage);
+
+  const infiniteScroll = () => {};
 
   window.onscroll = () => {
-    setLoading(true);
     if (
       window.innerHeight + document.documentElement.scrollTop ===
       document.documentElement.offsetHeight
@@ -72,6 +71,10 @@ const Home = () => {
         setState(data.states);
       });
     GetFormattedDate();
+
+    if (currentVaccine.length < vaccinePerPage) {
+      setLoading(true);
+    }
     // eslint-disable-next-line
   }, [selectedDate, formattedDate]);
 
@@ -430,11 +433,11 @@ const Home = () => {
               <CircularProgress />
             </div>
           ) : (
-            <VaccineDataMain vaccineData={vaccineData} />
+            <VaccineDataMain vaccineData={currentVaccine} />
           )}
           <NullState
             toSearchValue={toSearchValue}
-            vaccineData={vaccineData}
+            vaccineData={currentVaccine}
             districtCode={districtCode}
             VaccineDataMain={VaccineDataMain}
             pin={pin}
