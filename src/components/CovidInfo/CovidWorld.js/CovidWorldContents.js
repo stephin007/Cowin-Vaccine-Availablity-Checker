@@ -1,4 +1,13 @@
-import { Paper, CircularProgress } from "@material-ui/core";
+import { useState } from "react";
+import {
+  Paper,
+  CircularProgress,
+  FormControl,
+  Select,
+  InputLabel,
+  MenuItem,
+  FormHelperText,
+} from "@material-ui/core";
 
 export const WorldPaperInformation = ({ WorldPaperContents, loading }) => {
   return (
@@ -74,6 +83,70 @@ export const ContinentPaperInformation = ({ dataByContinent, loading }) => {
               );
             })}
           </div>
+        </>
+      ) : (
+        <>
+          <div
+            style={{
+              textAlign: "center",
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <CircularProgress />
+          </div>
+        </>
+      )}
+    </>
+  );
+};
+
+export const SingleContinentPaperInformation = ({
+  loading,
+  getCovidDataOfSingleContinent,
+}) => {
+  const [continentNames] = useState([
+    "North America",
+    "Asia",
+    "South America",
+    "Europe",
+    "Africa",
+    "Australia-Oceania",
+  ]);
+  const [continentValue, setContinentValue] = useState("");
+  return (
+    <>
+      {!loading ? (
+        <>
+          <FormControl variant="filled">
+            <InputLabel id="demo-simple-select-filled-label">
+              Search...
+            </InputLabel>
+            <Select
+              labelId="world_select_options"
+              id="world_select_options"
+              value={continentValue}
+              fullWidth
+              onChange={(e) => {
+                setContinentValue(e.target.value);
+                getCovidDataOfSingleContinent(e.target.value);
+              }}
+              error={continentValue === ""}
+            >
+              {continentNames.map((option, index) => {
+                return (
+                  <MenuItem key={index} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            <FormHelperText style={{ color: "red" }}>
+              {continentValue === "" ? "Please Select a value" : " "}
+            </FormHelperText>
+          </FormControl>
         </>
       ) : (
         <>

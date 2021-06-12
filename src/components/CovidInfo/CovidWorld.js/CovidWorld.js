@@ -11,6 +11,7 @@ import "./CovidWorld.css";
 import {
   WorldPaperInformation,
   ContinentPaperInformation,
+  SingleContinentPaperInformation,
 } from "./CovidWorldContents";
 
 const CovidWorld = ({ value, index }) => {
@@ -29,7 +30,7 @@ const CovidWorld = ({ value, index }) => {
   const SelectOptions = [
     "Get COVID19 World Information",
     "Get COVID19 Data by continents",
-    // "Get COVID19 Data by specific continent",
+    "Get COVID19 Data by specific a Continent",
     // "Get COVID19 Data by countries",
     // "Get COVID19 Data by country",
   ];
@@ -126,8 +127,20 @@ const CovidWorld = ({ value, index }) => {
       });
   };
 
-  const getCovidDataByContinent = async () => {
+  const getCovidDataByAllContinents = async () => {
     await fetch(`https://disease.sh/v3/covid-19/continents`)
+      .then((response) => response.json())
+      .then((data) => {
+        setDataByContinent(data);
+        setLoading(false);
+        console.log(data);
+      });
+  };
+
+  const getCovidDataOfSingleContinent = async (continentValue) => {
+    await fetch(
+      `https://disease.sh/v3/covid-19/continents/${continentValue}?strict=true`
+    )
       .then((response) => response.json())
       .then((data) => {
         setDataByContinent(data);
@@ -138,7 +151,7 @@ const CovidWorld = ({ value, index }) => {
 
   useEffect(() => {
     getAllWorldCovidData();
-    getCovidDataByContinent();
+    getCovidDataByAllContinents();
   }, []);
   return (
     <>
@@ -188,6 +201,17 @@ const CovidWorld = ({ value, index }) => {
                   <ContinentPaperInformation
                     dataByContinent={dataByContinent}
                     loading={loading}
+                  />
+                </>
+              )}
+
+              {selectOptions === "Get COVID19 Data by specific a Continent" && (
+                <>
+                  <SingleContinentPaperInformation
+                    loading={loading}
+                    getCovidDataOfSingleContinent={
+                      getCovidDataOfSingleContinent
+                    }
                   />
                 </>
               )}
