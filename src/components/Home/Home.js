@@ -111,6 +111,7 @@ const Home = () => {
   };
 
   const onStateChange = async (e) => {
+    console.log(`state change detected, getting districts...`);
     const stateCode = e.target.value;
 
     setDistricts([]);

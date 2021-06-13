@@ -110,27 +110,13 @@ export const HomePage = () => {
   }, [selectedCriteria]);
 
   React.useEffect(() => {
-    if (!districts) {
-      getDistricts();
-    }
+    getDistricts();
   }, [selectedState]);
 
   React.useEffect(() => {
-    console.log({ selectedState, selectedDistrict });
     if (selectedDistrict || selectedPin) {
       getVaccines();
     }
-    /*
-    if (
-      states &&
-      states.length > 0 &&
-      districts &&
-      districts.length > 0 &&
-      (selectedDistrict || selectedPin)
-    ) {
-      getVaccines();
-    }
-    */
   }, [selectedDistrict, selectedPin, date, selectedCriteria]);
 
   const generateURL = (
