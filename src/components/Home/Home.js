@@ -47,10 +47,7 @@ const Home = () => {
   const onScroll = () => {
     setLoadMore(true);
     setTimeout(() => {
-      if (vaccineData.length < currentVaccine.length) {
-        setVaccinePerPage(vaccinePerPage + 3);
-        setLoadMore(false);
-      }
+      setVaccinePerPage(vaccinePerPage + 3);
       setLoadMore(false);
     }, 1000);
   };
