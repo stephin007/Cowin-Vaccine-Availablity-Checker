@@ -79,6 +79,7 @@ export const HomePage = () => {
         setPages((old) => [...old, i]);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vaccines, currentPage]);
 
   const paginate = (pageNumber) => {
@@ -101,22 +102,28 @@ export const HomePage = () => {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     if (!states) {
       if (/district/gi.test(selectedCriteria)) {
         getStates();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCriteria]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     getDistricts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedState]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     if (selectedDistrict || selectedPin) {
       getVaccines();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDistrict, selectedPin, date, selectedCriteria]);
 
   const generateURL = (
