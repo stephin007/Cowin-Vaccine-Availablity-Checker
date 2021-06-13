@@ -42,10 +42,11 @@ const Home = () => {
   const [vaccinePerPage, setVaccinePerPage] = useState(3);
   const [loadMore, setLoadMore] = useState(false);
 
-  console.log(vaccineData.slice(0, 3).length);
+  const currentVaccine = vaccineData.slice(0, vaccinePerPage);
+
   const onScroll = () => {
-    console.info("fetch more");
     setLoadMore(true);
+
     setTimeout(() => {
       setVaccinePerPage(vaccinePerPage + 3);
       setLoadMore(false);
@@ -456,16 +457,14 @@ const Home = () => {
                 </>
               ) : (
                 <>
-                  <VaccineDataMain
-                    vaccineData={vaccineData.slice(0, vaccinePerPage)}
-                  />
+                  <VaccineDataMain vaccineData={currentVaccine} />
                 </>
               )}
             </>
           )}
           <NullState
             toSearchValue={toSearchValue}
-            vaccineData={vaccineData.slice(0, vaccinePerPage)}
+            vaccineData={currentVaccine}
             districtCode={districtCode}
             VaccineDataMain={VaccineDataMain}
             pin={pin}
