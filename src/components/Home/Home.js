@@ -39,6 +39,27 @@ const Home = () => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
+  const [vaccinePerPage, setVaccinePerPage] = useState(3);
+  const [loadMore, setLoadMore] = useState(false);
+
+  console.log(vaccineData.slice(0, 3).length);
+  const onScroll = () => {
+    console.info("fetch more");
+    setLoadMore(true);
+    setTimeout(() => {
+      setVaccinePerPage(vaccinePerPage + 3);
+      setLoadMore(false);
+    }, 1000);
+  };
+
+  window.onscroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      onScroll();
+    }
+  };
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
@@ -71,6 +92,7 @@ const Home = () => {
     setDistricts([]);
     setVaccineData([]);
     setPinCodeSearch(false);
+    setVaccinePerPage(3);
 
     const url =
       stateCode === "States"
@@ -88,6 +110,8 @@ const Home = () => {
 
   const findByDistrict = async (e) => {
     const districtCode = e.target.value;
+
+    setVaccinePerPage(3);
 
     const url =
       districtCode === "PLEASE SELECT A STATE FIRST"
@@ -415,11 +439,33 @@ const Home = () => {
               <CircularProgress />
             </div>
           ) : (
-            <VaccineDataMain vaccineData={vaccineData} />
+            <>
+              {loadMore === true ? (
+                <>
+                  <VaccineDataMain
+                    vaccineData={vaccineData.slice(0, vaccinePerPage)}
+                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <CircularProgress />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <VaccineDataMain
+                    vaccineData={vaccineData.slice(0, vaccinePerPage)}
+                  />
+                </>
+              )}
+            </>
           )}
           <NullState
             toSearchValue={toSearchValue}
-            vaccineData={vaccineData}
+            vaccineData={vaccineData.slice(0, vaccinePerPage)}
             districtCode={districtCode}
             VaccineDataMain={VaccineDataMain}
             pin={pin}
