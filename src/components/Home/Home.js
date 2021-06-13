@@ -46,9 +46,11 @@ const Home = () => {
 
   const onScroll = () => {
     setLoadMore(true);
-
     setTimeout(() => {
-      setVaccinePerPage(vaccinePerPage + 3);
+      if (vaccineData.length < currentVaccine.length) {
+        setVaccinePerPage(vaccinePerPage + 3);
+        setLoadMore(false);
+      }
       setLoadMore(false);
     }, 1000);
   };
@@ -86,6 +88,7 @@ const Home = () => {
     setSelectedDate(date);
     setVaccineData([]);
     setDistrictCode("");
+    setLoadMore(false);
   };
 
   const onStateChange = async (e) => {
@@ -94,6 +97,7 @@ const Home = () => {
     setVaccineData([]);
     setPinCodeSearch(false);
     setVaccinePerPage(3);
+    setLoadMore(false);
 
     const url =
       stateCode === "States"
