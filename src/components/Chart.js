@@ -17,7 +17,6 @@ const useStyles = makeStyles({
 
 const Chart = ({ allWorldData, loading }) => {
 	const classes = useStyles();
-
 	const initialData = {
 		labels: [
 			'Active per one million',
@@ -63,7 +62,6 @@ const Chart = ({ allWorldData, loading }) => {
 			},
 		],
 	};
-
 	const additionalData1 = {
 		labels: [
 			'Active Cases per million',
@@ -105,7 +103,6 @@ const Chart = ({ allWorldData, loading }) => {
 			},
 		],
 	};
-
 	const additionalData2 = {
 		labels: ['Total Active Cases', 'Total Cases', 'deaths', 'population', 'recovered', 'tests'],
 		datasets: [
@@ -140,7 +137,7 @@ const Chart = ({ allWorldData, loading }) => {
 			},
 		],
 	};
-
+	
 	return (
 		<Container maxWidth="lg">
 			{!loading ? (

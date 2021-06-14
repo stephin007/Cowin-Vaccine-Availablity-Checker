@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FormControl, Select, InputLabel, MenuItem, FormHelperText } from '@material-ui/core';
+
 import './CovidWorld.css';
-// import { WorldPaperInformation, ContinentPaperInformation } from './CovidWorldContents';
+
 import Chart from '../../Chart';
 import ContinentChart from '../../ContinentChart';
 
@@ -125,10 +126,12 @@ const CovidWorld = ({ value, index }) => {
 				console.log(data);
 			});
 	};
+
 	useEffect(() => {
 		getAllWorldCovidData();
 		getCovidDataByContinent();
 	}, []);
+
 	return (
 		<>
 			{value === index && (
@@ -163,7 +166,6 @@ const CovidWorld = ({ value, index }) => {
 						<div className="world_head">
 							{selectOptions === 'Get COVID19 World Information' && (
 								<>
-									{/* <WorldPaperInformation WorldPaperContents={WorldPaperContents} loading={loading} /> */}
 									<Chart
 										allWorldData={allWorldData}
 										WorldPaperContents={WorldPaperContents}
@@ -173,7 +175,6 @@ const CovidWorld = ({ value, index }) => {
 							)}
 							{selectOptions === 'Get COVID19 Data by continents' && (
 								<>
-									{/* <ContinentPaperInformation dataByContinent={dataByContinent} loading={loading} /> */}
 									<ContinentChart dataByContinent={dataByContinent} loading={loading} />
 								</>
 							)}

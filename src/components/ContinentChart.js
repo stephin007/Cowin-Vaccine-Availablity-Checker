@@ -61,7 +61,7 @@ const borderColor = [
 const ContinentChart = ({ dataByContinent, loading }) => {
 	const classes = useStyles();
 	let count = 0;
-
+	
 	return (
 		<Container maxWidth="lg">
 			{!loading ? (
