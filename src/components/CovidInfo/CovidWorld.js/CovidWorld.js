@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { FormControl, Select, InputLabel, MenuItem, FormHelperText } from '@material-ui/core';
-
 import './CovidWorld.css';
 // import { WorldPaperInformation, ContinentPaperInformation } from './CovidWorldContents';
 import Chart from '../../Chart';
@@ -109,7 +108,6 @@ const CovidWorld = ({ value, index }) => {
 			paperAnswer: allWorldData.todayRecovered,
 		},
 	];
-
 	const getAllWorldCovidData = async () => {
 		await fetch(`https://disease.sh/v3/covid-19/all`)
 			.then((response) => response.json())
@@ -118,7 +116,6 @@ const CovidWorld = ({ value, index }) => {
 				setLoading(false);
 			});
 	};
-
 	const getCovidDataByContinent = async () => {
 		await fetch(`https://disease.sh/v3/covid-19/continents`)
 			.then((response) => response.json())
@@ -128,7 +125,6 @@ const CovidWorld = ({ value, index }) => {
 				console.log(data);
 			});
 	};
-
 	useEffect(() => {
 		getAllWorldCovidData();
 		getCovidDataByContinent();
@@ -175,7 +171,6 @@ const CovidWorld = ({ value, index }) => {
 									/>
 								</>
 							)}
-
 							{selectOptions === 'Get COVID19 Data by continents' && (
 								<>
 									{/* <ContinentPaperInformation dataByContinent={dataByContinent} loading={loading} /> */}
