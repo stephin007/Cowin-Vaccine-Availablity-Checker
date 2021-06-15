@@ -1,6 +1,6 @@
 import { Container, makeStyles, CircularProgress } from '@material-ui/core';
 import React from 'react';
-import { Doughnut, Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 const lineOptions = {
 	scales: {
@@ -61,88 +61,11 @@ const borderColor = [
 const ContinentChart = ({ dataByContinent, loading }) => {
 	const classes = useStyles();
 	let count = 0;
-	
+
 	return (
 		<Container maxWidth="lg">
 			{!loading ? (
 				<>
-					<Doughnut
-						data={{
-							labels: [
-								'Active Cases in North America',
-								'Cases in North America',
-								'Critical in North America',
-								'Deaths in North America',
-								'Recovered in North America',
-								'Active Cases in Asia',
-								'Cases in Asia',
-								'Critical in Asia',
-								'Deaths in Asia',
-								'Recovered in Asia',
-								'Active Cases in South America',
-								'Cases in South America',
-								'Critical in South America',
-								'Deaths in South America',
-								'Recovered in South America',
-								'Active Cases in Europe',
-								'Cases in Europe',
-								'Critical in Europe',
-								'Deaths in Europe',
-								'Recovered in Europe',
-								'Active Cases in Africa',
-								'Cases in Africa',
-								'Critical in Africa',
-								'Deaths in Africa',
-								'Recovered in Africa',
-								'Active Cases in Australia-Oceania',
-								'Cases in Australia-Oceania',
-								'Critical in Australia-Oceania',
-								'Deaths in Australia-Oceania',
-								'Recovered in Australia-Oceania',
-							],
-							datasets: [
-								{
-									label: dataByContinent[0].continent,
-									fill: true,
-									data: [
-										dataByContinent[0].active,
-										dataByContinent[0].cases,
-										dataByContinent[0].critical,
-										dataByContinent[0].deaths,
-										dataByContinent[0].recovered,
-										dataByContinent[1].active,
-										dataByContinent[1].cases,
-										dataByContinent[1].critical,
-										dataByContinent[1].deaths,
-										dataByContinent[1].recovered,
-										dataByContinent[2].active,
-										dataByContinent[2].cases,
-										dataByContinent[2].critical,
-										dataByContinent[2].deaths,
-										dataByContinent[2].recovered,
-										dataByContinent[3].active,
-										dataByContinent[3].cases,
-										dataByContinent[3].critical,
-										dataByContinent[3].deaths,
-										dataByContinent[3].recovered,
-										dataByContinent[4].active,
-										dataByContinent[4].cases,
-										dataByContinent[4].critical,
-										dataByContinent[4].deaths,
-										dataByContinent[4].recovered,
-										dataByContinent[5].active,
-										dataByContinent[5].cases,
-										dataByContinent[5].critical,
-										dataByContinent[5].deaths,
-										dataByContinent[5].recovered,
-									],
-									backgroundColor: bgColor,
-									borderColor: borderColor,
-									borderWidth: 1,
-								},
-							],
-						}}
-					/>
 					{dataByContinent.map((data) => {
 						count = count + 1;
 						return (
