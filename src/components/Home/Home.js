@@ -52,10 +52,6 @@ const Home = () => {
     setTimeout(() => {
       setVaccinePerPage(vaccinePerPage + 3);
       setLoadMore(false);
-
-      if (vaccineData.length < vaccinePerPage + 3) {
-        setLoadMore(false);
-      }
     }, 1000);
   };
 
