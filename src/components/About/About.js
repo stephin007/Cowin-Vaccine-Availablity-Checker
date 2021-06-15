@@ -38,7 +38,7 @@ const About = () => {
             <div className="about_section_main_heading">
               <h4>
                 App to checkout the latest COVID19 Vaccination Slots Across
-                India🎨.
+                India💉.
               </h4>
             </div>
             <br />
@@ -60,6 +60,10 @@ const About = () => {
                   using postal codes
                 </li>
                 <li> Details about free and paid vaccines is also available</li>
+                <li>
+                  You can now graphically visualize the whole world's COVID19
+                  Situation.
+                </li>
                 <li>
                   Fully open sourced information made on the latest technology
                   stack
