@@ -118,7 +118,8 @@ const Home = (props) => {
 
   window.onscroll = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.clientHeight +
+        document.documentElement.scrollTop ===
       document.documentElement.offsetHeight
     ) {
       onScroll();
