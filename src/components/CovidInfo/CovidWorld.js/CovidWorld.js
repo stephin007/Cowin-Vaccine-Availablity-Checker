@@ -8,10 +8,8 @@ import {
 } from "@material-ui/core";
 
 import "./CovidWorld.css";
-import {
-  WorldPaperInformation,
-  ContinentPaperInformation,
-} from "./CovidWorldContents";
+
+import { WorldChart, ContinentChart } from "./CovidWorldContents";
 
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
@@ -20,8 +18,6 @@ const CovidWorld = ({ value, index }) => {
   const [loading, setLoading] = useState(true);
   // TODOs
   // 1. make a select field to filter out the slection
-  //    - get whole world (done)
-  //    - get Data by continents (done)
   //    - get Data by specific continent
   //    - get Data by countries
   //    - get Data by country
@@ -116,7 +112,6 @@ const CovidWorld = ({ value, index }) => {
       paperAnswer: allWorldData.todayRecovered,
     },
   ];
-
   const getAllWorldCovidData = async () => {
     await fetch(`https://disease.sh/v3/covid-19/all`)
       .then((response) => response.json())
@@ -125,7 +120,6 @@ const CovidWorld = ({ value, index }) => {
         setLoading(false);
       });
   };
-
   const getCovidDataByContinent = async () => {
     await fetch(`https://disease.sh/v3/covid-19/continents`)
       .then((response) => response.json())
@@ -140,6 +134,7 @@ const CovidWorld = ({ value, index }) => {
     getAllWorldCovidData();
     getCovidDataByContinent();
   }, []);
+
   return (
     <>
       {value === index && (
@@ -176,16 +171,16 @@ const CovidWorld = ({ value, index }) => {
             <div className="world_head">
               {selectOptions === "Get COVID19 World Information" && (
                 <>
-                  <WorldPaperInformation
+                  <WorldChart
+                    allWorldData={allWorldData}
                     WorldPaperContents={WorldPaperContents}
                     loading={loading}
                   />
                 </>
               )}
-
               {selectOptions === "Get COVID19 Data by continents" && (
                 <>
-                  <ContinentPaperInformation
+                  <ContinentChart
                     dataByContinent={dataByContinent}
                     loading={loading}
                   />
