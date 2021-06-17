@@ -23,34 +23,21 @@
   margin-top: 10px;
   font-family: monospace;
 }
-
-.world_head_paper {
-  display: flex;
-  flex-direction: column;
-  text-transform: capitalize;
-  width: 32%;
-  height: 50%;
-  margin-top: 10px;
-}
-
-.world_head_paper h3 {
-  text-align: center;
-}
-
-.world_head_paper .paper_title {
-  background-color: #00917c;
-  color: whitesmoke;
-  padding: 5px;
-}
-
-.world_head_paper .count {
-  padding: 5px;
-  text-align: center;
-  font-size: 25px;
-  font-weight: 400;
-}
-
 /* WORLD CARD CSS ENDS */
+
+/* WorldChart CSS STARTS */
+.world_head .world_head__WorldChart {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+}
+
+.world_head .world_head__WorldChart .world_head__WorldChart_doughnut {
+  margin-top: 2rem;
+  height: 764px !important;
+  width: 717px !important;
+}
+/* WorldChart CSS ENDS */
 
 /* CONTINENTS CARD CSS STARTS */
 .continents_head {

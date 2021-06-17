@@ -206,9 +206,20 @@ export const WorldChart = ({ allWorldData, loading }) => {
     <Container maxWidth="lg">
       {!loading ? (
         <>
-          <Doughnut data={initialData} className={classes.chart} />
-          <Doughnut data={additionalData1} className={classes.chart} />
-          <Doughnut data={additionalData2} className={classes.chart} />
+          <div className="world_head__WorldChart">
+            <Doughnut
+              data={initialData}
+              className="world_head__WorldChart_doughnut"
+            />
+            <Doughnut
+              data={additionalData1}
+              className="world_head__WorldChart_doughnut"
+            />
+            <Doughnut
+              data={additionalData2}
+              className="world_head__WorldChart_doughnut"
+            />
+          </div>
         </>
       ) : (
         <div className={classes.progress}>
