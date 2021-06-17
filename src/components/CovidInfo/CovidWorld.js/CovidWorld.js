@@ -8,16 +8,17 @@ import {
 } from "@material-ui/core";
 
 import "./CovidWorld.css";
+
 import {
-  WorldPaperInformation,
-  ContinentPaperInformation,
+  WorldChart,
+  ContinentChart,
   SingleContinentPaperInformation,
 } from "./CovidWorldContents";
 
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
   const [continentsData, setContinentsData] = useState({});
-  const [dataByAllContinents, setDataByAllContinents] = useState([]);
+  const [dataByContinent, setDataByContinent] = useState([]);
   const [selectOptions, setSelectOptions] = useState("");
   const [loading, setLoading] = useState(true);
   // TODOs
@@ -118,7 +119,6 @@ const CovidWorld = ({ value, index }) => {
       paperAnswer: allWorldData.todayRecovered,
     },
   ];
-
   const getAllWorldCovidData = async () => {
     await fetch(`https://disease.sh/v3/covid-19/all`)
       .then((response) => response.json())
@@ -127,12 +127,11 @@ const CovidWorld = ({ value, index }) => {
         setLoading(false);
       });
   };
-
-  const getCovidDataByAllContinents = async () => {
+  const getCovidDataByContinent = async () => {
     await fetch(`https://disease.sh/v3/covid-19/continents`)
       .then((response) => response.json())
       .then((data) => {
-        setDataByAllContinents(data);
+        setDataByContinent(data);
         setLoading(false);
         console.log(data);
       });
@@ -152,8 +151,9 @@ const CovidWorld = ({ value, index }) => {
 
   useEffect(() => {
     getAllWorldCovidData();
-    getCovidDataByAllContinents();
+    getCovidDataByContinent();
   }, []);
+
   return (
     <>
       {value === index && (
@@ -190,17 +190,17 @@ const CovidWorld = ({ value, index }) => {
             <div className="world_head">
               {selectOptions === "Get COVID19 World Information" && (
                 <>
-                  <WorldPaperInformation
+                  <WorldChart
+                    allWorldData={allWorldData}
                     WorldPaperContents={WorldPaperContents}
                     loading={loading}
                   />
                 </>
               )}
-
               {selectOptions === "Get COVID19 Data by continents" && (
                 <>
-                  <ContinentPaperInformation
-                    dataByAllContinents={dataByAllContinents}
+                  <ContinentChart
+                    dataByContinent={dataByContinent}
                     loading={loading}
                   />
                 </>

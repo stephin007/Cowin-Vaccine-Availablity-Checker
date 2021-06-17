@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   FormControl,
   MenuItem,
@@ -7,6 +8,9 @@ import {
   TextField,
   Container,
   CircularProgress,
+  useScrollTrigger,
+  Fab,
+  Zoom,
 } from "@material-ui/core";
 import {
   KeyboardDatePicker,
@@ -14,12 +18,69 @@ import {
 } from "@material-ui/pickers";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
-import SearchIcon from "@material-ui/icons/Search";
+import { Search, KeyboardArrowUp } from "@material-ui/icons";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+
 import "./Home.css";
 import NullState from "../NullState";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
-const Home = () => {
+// Scroll to Top Fucntion(START)
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+}));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#fdb82f",
+    },
+  },
+});
+
+const ScrollTop = (props) => {
+  const { children, window } = props;
+  const classes = useStyles();
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role="presentation" className={classes.root}>
+        {children}
+      </div>
+    </Zoom>
+  );
+};
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+  window: PropTypes.func,
+};
+// Scroll to Top Function(END)
+
+const Home = (props) => {
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(false);
   const [stateCode, setStateCode] = useState("States");
@@ -163,7 +224,7 @@ const Home = () => {
       <Container maxWidth="md">
         <div className="home">
           <div className="home__intro">
-            <h2>Vaccine Availablity</h2>
+            <h2 id="back-to-top-anchor">Vaccine Availablity</h2>
             <hr />
           </div>
           <div className="home_selectionHeader">
@@ -330,7 +391,7 @@ const Home = () => {
                     setPin(e.target.value);
                   }}
                 />
-                <SearchIcon
+                <Search
                   onClick={fetchDataUsingCalendarByPin}
                   data-testId="home-fetch-calender-by-pin"
                   style={{
@@ -375,7 +436,7 @@ const Home = () => {
                     setPin(e.target.value);
                   }}
                 />
-                <SearchIcon
+                <Search
                   onClick={fetchDataUsingByPin}
                   data-testId="home-fetch-by-pin"
                   style={{
@@ -427,6 +488,13 @@ const Home = () => {
           />
         </div>
       </Container>
+      <ThemeProvider theme={theme}>
+        <ScrollTop {...props}>
+          <Fab color="primary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUp />
+          </Fab>
+        </ScrollTop>
+      </ThemeProvider>
     </>
   );
 };
