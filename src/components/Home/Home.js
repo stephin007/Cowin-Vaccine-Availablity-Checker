@@ -28,6 +28,9 @@ import {
 import "./Home.css";
 import NullState from "../NullState";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
+import Filter from "../Filter/Filter";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 // Scroll to Top Fucntion(START)
 const useStyles = makeStyles((theme) => ({
@@ -100,6 +103,7 @@ const Home = (props) => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
+  const [viewFilter, setViewFilter] = useState(false);
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
@@ -476,7 +480,20 @@ const Home = (props) => {
               <CircularProgress />
             </div>
           ) : (
-            <VaccineDataMain vaccineData={vaccineData} />
+            <>
+              {vaccineData.length === 0 ? null : (
+                <>
+                  <FormControlLabel
+                    control={<Checkbox name="checkedC" />}
+                    label="Add Filters"
+                    value={viewFilter}
+                    onChange={() => setViewFilter(!viewFilter)}
+                  />
+                  {viewFilter === true ? <Filter /> : null}
+                  <VaccineDataMain vaccineData={vaccineData} />
+                </>
+              )}
+            </>
           )}
           <NullState
             toSearchValue={toSearchValue}
