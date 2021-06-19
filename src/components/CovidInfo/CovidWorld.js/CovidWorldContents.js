@@ -206,6 +206,7 @@ export const WorldChart = ({ allWorldData, loading }) => {
     <Container maxWidth="lg">
       {!loading ? (
         <>
+          Swipe Through to see more details...
           <div className="world_head__WorldChart">
             <Doughnut
               data={initialData}
@@ -294,6 +295,7 @@ export const SingleContinentPaperInformation = ({
     "Australia-Oceania",
   ]);
   const [continentValue, setContinentValue] = useState("");
+  const classes = useStyles();
   return (
     <>
       {!loading ? (
@@ -332,15 +334,7 @@ export const SingleContinentPaperInformation = ({
         </>
       ) : (
         <>
-          <div
-            style={{
-              textAlign: "center",
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
+          <div className={classes.progress}>
             <CircularProgress />
           </div>
         </>
