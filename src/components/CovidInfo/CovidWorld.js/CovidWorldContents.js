@@ -206,7 +206,7 @@ export const WorldChart = ({ allWorldData, loading }) => {
     <Container maxWidth="lg">
       {!loading ? (
         <>
-          Swipe Through to see more details...
+          Swipe left to see more details...
           <div className="world_head__WorldChart">
             <Doughnut
               data={initialData}
