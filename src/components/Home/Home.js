@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   FormControl,
   MenuItem,
@@ -6,6 +7,10 @@ import {
   InputLabel,
   TextField,
   Container,
+  CircularProgress,
+  useScrollTrigger,
+  Fab,
+  Zoom,
 } from "@material-ui/core";
 import {
   KeyboardDatePicker,
@@ -13,13 +18,71 @@ import {
 } from "@material-ui/pickers";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
-import SearchIcon from "@material-ui/icons/Search";
+import { Search, KeyboardArrowUp } from "@material-ui/icons";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 
 import "./Home.css";
+import NullState from "../NullState";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
 
-const Home = () => {
+// Scroll to Top Fucntion(START)
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+}));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#fdb82f",
+    },
+  },
+});
+
+const ScrollTop = (props) => {
+  const { children, window } = props;
+  const classes = useStyles();
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role="presentation" className={classes.root}>
+        {children}
+      </div>
+    </Zoom>
+  );
+};
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+  window: PropTypes.func,
+};
+// Scroll to Top Function(END)
+
+const Home = (props) => {
   const [state, setState] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState(
@@ -29,6 +92,7 @@ const Home = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [vaccineData, setVaccineData] = useState([]);
+  const [pinCodeSearch, setPinCodeSearch] = useState(false);
   const [toSearchValue, setToSearchValue] = useState("");
   const [toSearch] = useState([
     "Find By District",
@@ -41,6 +105,7 @@ const Home = () => {
     var month = selectedDate.getMonth() + 1;
     var day = selectedDate.getDate();
     var year = selectedDate.getFullYear();
+
     var finalDate = day + "-" + month + "-" + year;
 
     setFormattedDate(finalDate);
@@ -64,19 +129,19 @@ const Home = () => {
 
   const onStateChange = async (e) => {
     const stateCode = e.target.value;
-
     setDistricts([]);
-
-    console.log(stateCode);
+    setVaccineData([]);
+    setPinCodeSearch(false);
 
     const url =
       stateCode === "States"
         ? null
         : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
-
+    setLoading(true);
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        setLoading(false);
         setStateCode(stateCode);
         setDistricts(data.districts);
       });
@@ -89,20 +154,23 @@ const Home = () => {
       districtCode === "PLEASE SELECT A STATE FIRST"
         ? null
         : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${formattedDate}`;
-
+    setLoading(true);
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        setLoading(false);
         setDistrictCode(districtCode);
         setVaccineData(data.sessions);
+        setPinCodeSearch(true);
       });
   };
 
-  const fetchDataUsingCalendarByPin = () => {
+  const fetchDataUsingCalendarByPin = async () => {
     if (pin.length !== 6) {
       alert("A Pincode must be of 6 digits");
     } else {
-      fetch(
+      setLoading(true);
+      await fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${formattedDate}`
       )
         .then((res) => res.json())
@@ -126,22 +194,27 @@ const Home = () => {
             fee_type: res?.fee_type,
             slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
           }));
+          setLoading(false);
           setVaccineData(pincodeData);
+          setPinCodeSearch(true);
         });
     }
   };
 
-  const fetchDataUsingByPin = () => {
+  const fetchDataUsingByPin = async () => {
     if (pin.length !== 6) {
       alert("A Pincode must be of 6 digits");
     } else {
-      fetch(
+      setLoading(true);
+      await fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=${pin}&date=${formattedDate}`
       )
         .then((res) => res.json())
         .then((data) => {
+          setLoading(false);
           console.log(data);
           setVaccineData(data.sessions);
+          setPinCodeSearch(true);
         });
     }
   };
@@ -151,7 +224,7 @@ const Home = () => {
       <Container maxWidth="md">
         <div className="home">
           <div className="home__intro">
-            <h2>Vaccine Availablity</h2>
+            <h2 id="back-to-top-anchor">Vaccine Availablity</h2>
             <hr />
           </div>
           <div className="home_selectionHeader">
@@ -166,11 +239,17 @@ const Home = () => {
                 onChange={(e) => {
                   setToSearchValue(e.target.value);
                   setVaccineData([]);
+                  setPinCodeSearch(false);
+                  setLoading(false);
                 }}
               >
                 {toSearch.map((functionName, index) => {
                   return (
-                    <MenuItem key={index} value={functionName}>
+                    <MenuItem
+                      className="search__values"
+                      key={index}
+                      value={functionName}
+                    >
                       {functionName}
                     </MenuItem>
                   );
@@ -307,10 +386,14 @@ const Home = () => {
                   variant="outlined"
                   className="textField"
                   value={pin}
-                  onChange={(e) => setPin(e.target.value)}
+                  onChange={(e) => {
+                    setPinCodeSearch(false);
+                    setPin(e.target.value);
+                  }}
                 />
-                <SearchIcon
+                <Search
                   onClick={fetchDataUsingCalendarByPin}
+                  data-testId="home-fetch-calender-by-pin"
                   style={{
                     background: "#3f51b5",
                     color: "#fff",
@@ -348,10 +431,14 @@ const Home = () => {
                   variant="outlined"
                   className="textField"
                   value={pin}
-                  onChange={(e) => setPin(e.target.value)}
+                  onChange={(e) => {
+                    setPinCodeSearch(false);
+                    setPin(e.target.value);
+                  }}
                 />
-                <SearchIcon
+                <Search
                   onClick={fetchDataUsingByPin}
+                  data-testId="home-fetch-by-pin"
                   style={{
                     background: "#3f51b5",
                     color: "#fff",
@@ -378,9 +465,36 @@ const Home = () => {
             </div>
           ) : null}
 
-          <VaccineDataMain vaccineData={vaccineData} />
+          {loading === true ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "2rem 0",
+              }}
+            >
+              <CircularProgress />
+            </div>
+          ) : (
+            <VaccineDataMain vaccineData={vaccineData} />
+          )}
+          <NullState
+            toSearchValue={toSearchValue}
+            vaccineData={vaccineData}
+            districtCode={districtCode}
+            VaccineDataMain={VaccineDataMain}
+            pin={pin}
+            pinCodeSearch={pinCodeSearch}
+          />
         </div>
       </Container>
+      <ThemeProvider theme={theme}>
+        <ScrollTop {...props}>
+          <Fab color="primary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUp />
+          </Fab>
+        </ScrollTop>
+      </ThemeProvider>
     </>
   );
 };

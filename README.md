@@ -1,50 +1,40 @@
 # CoWIN Vaccination Slots Checking App.
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker?ref=badge_shield)  [![CodeQL](https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/actions/workflows/codeql-analysis.yml/badge.svg?branch=NEW-UI)](https://github.com/stephin007/Cowin-Vaccine-Availablity-Checker/actions/workflows/codeql-analysis.yml)
 
----
 
-## Installation
-
-This repository is easily accessible , so just run the following commands when setting up for the first time:
-
-- `yarn install or npm install  `
-- `yarn start or npm start `
-- Visit your app at [http://localhost:3000](http://localhost:3000).
+CoWIN Vaccination Slots Checking App is a user-friendly website
+that allow users to find vaccine in nearby available Center.
 
 ## Features
 
-CoWIN Vaccination Slots Checking App is a user Friendly website
-that allow users to find vaccine in nearby available Center.
-
-> The overall design goal for this project is
-> helping people around nation to
-> book their slots by providing details of
-> available COVID19 vaccine at a particular Center
+- Easy to use
+- Ability to search for vaccines based on both pincode and state-disctrict combination
+- Installable: can be installed as a native app on any mobile device. [Learn More](https://medium.com/progressivewebapps/how-to-install-a-pwa-to-your-device-68a8d37fadc1)
 
 ## Technologies Used
 
 CoWIN Vaccination Slots Checking App uses a number of open source projects :
 
-- REACT  JS
-<br />
-- MATERIAL-UI
-<br />
-- STYLED COMPONENTS
-<br />
+- [ReactJS](https://reactjs.org)
+- [MaterialUI](https://material-ui.com/)
+- [StyledComponents](https://www.styled-components.com/)
+
+## Releases(ChangeLog for Each Branch Coming Soon)
+
+- [Production](https://cowinvaccinetracker.forcommunity.tech/)
+- [Staging](https://cowin-vaccine-availablity-checker.vercel.app/)
+- [New Features Demo](https://cowinvaccinetracker.stephinreji.me/)
+
+## Contribution
+
+Please see our [Contribution Guidelines](./CONTRIBUTING.md).
 
 ---
 
 > _DON'T JUST CLONE, PLEASE LEAVE A STAR 🌟, MOTIVATES US TO ADD MORE FEATURES TO THE PROJECT_
 
 ---
-<br />
 
-#### CHECK THE FOLLOWING LINKS FOR LATEST UPDATES :
 
- -   Production Link : https://cowinvaccinetracker.forcommunity.tech/
-   -   Staging Link: https://cowin-vaccine-availablity-checker.vercel.app/
-- New UI demo : https://cowinvaccinetracker.stephinreji.me/
-
-<br />
-<br />
-
-#### *NOTE* : Please check the Projects section to see the progress and the discussion panel to add your ideas, which will eventually be picked up for development
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fstephin007%2FCowin-Vaccine-Availablity-Checker?ref=badge_large)
