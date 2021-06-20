@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+
 body {
   background-color: #f9fafb;
 }
@@ -8,7 +10,7 @@ body {
   margin-top: 10px;
   overflow: hidden;
   padding: 0 2rem;
-  font-family: "Fira Code Medium", "monospace";
+  font-family: "Fira Code", "monospace";
 }
 
 .about-head {
