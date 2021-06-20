@@ -307,8 +307,8 @@ export const SingleContinentPaperInformation = ({
                   Select a Continent
                 </InputLabel>
                 <Select
-                  labelId="world_select_options"
-                  id="world_select_options"
+                  labelId="continent_select_options"
+                  id="continent_select_options"
                   value={continentValue}
                   fullWidth
                   onChange={(e) => {
