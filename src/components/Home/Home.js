@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   MenuItem,
@@ -7,10 +6,6 @@ import {
   InputLabel,
   TextField,
   Container,
-  CircularProgress,
-  useScrollTrigger,
-  Fab,
-  Zoom,
 } from "@material-ui/core";
 import {
   KeyboardDatePicker,
@@ -18,71 +13,13 @@ import {
 } from "@material-ui/pickers";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
-import { Search, KeyboardArrowUp } from "@material-ui/icons";
-import {
-  makeStyles,
-  createMuiTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
-
+import SearchIcon from "@material-ui/icons/Search";
 import "./Home.css";
-import NullState from "../NullState";
 import VaccineDataMain from "../VaccineData/VaccineDataMain";
+import Pagination from "../Pagination/Pagination";
 
-// Scroll to Top Fucntion(START)
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: "fixed",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#fdb82f",
-    },
-  },
-});
-
-const ScrollTop = (props) => {
-  const { children, window } = props;
-  const classes = useStyles();
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-    disableHysteresis: true,
-    threshold: 100,
-  });
-
-  const handleClick = (event) => {
-    const anchor = (event.target.ownerDocument || document).querySelector(
-      "#back-to-top-anchor"
-    );
-
-    if (anchor) {
-      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  };
-
-  return (
-    <Zoom in={trigger}>
-      <div onClick={handleClick} role="presentation" className={classes.root}>
-        {children}
-      </div>
-    </Zoom>
-  );
-};
-
-ScrollTop.propTypes = {
-  children: PropTypes.element.isRequired,
-  window: PropTypes.func,
-};
-// Scroll to Top Function(END)
-
-const Home = (props) => {
+const Home = () => {
   const [state, setState] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [stateCode, setStateCode] = useState("States");
   const [districts, setDistricts] = useState([]);
   const [districtCode, setDistrictCode] = useState(
@@ -92,7 +29,6 @@ const Home = (props) => {
   const [formattedDate, setFormattedDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [vaccineData, setVaccineData] = useState([]);
-  const [pinCodeSearch, setPinCodeSearch] = useState(false);
   const [toSearchValue, setToSearchValue] = useState("");
   const [toSearch] = useState([
     "Find By District",
@@ -100,14 +36,46 @@ const Home = (props) => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [vaccinePerPage] = useState(3);
+  const indexOfLastVaccine = currentPage * vaccinePerPage;
+  const indexOfFirstVaccine = indexOfLastVaccine - vaccinePerPage;
+  const currentVaccine = vaccineData.slice(
+    indexOfFirstVaccine,
+    indexOfLastVaccine
+  );
+
+  const pageNumber = [];
+
+  for (let i = 1; i <= Math.ceil(vaccineData.length / vaccinePerPage); i++) {
+    pageNumber.push(i);
+  }
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > pageNumber.length) {
+      setCurrentPage(pageNumber.length);
+    }
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+
+    if (currentPage - 1 <= 0 && pageNumber.length) {
+      setCurrentPage(pageNumber.slice(0, 1));
+    }
+  };
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
     var day = selectedDate.getDate();
     var year = selectedDate.getFullYear();
-
     var finalDate = day + "-" + month + "-" + year;
-
     setFormattedDate(finalDate);
   };
 
@@ -125,23 +93,26 @@ const Home = (props) => {
     setSelectedDate(date);
     setVaccineData([]);
     setDistrictCode("");
+    setCurrentPage(1);
   };
 
   const onStateChange = async (e) => {
     const stateCode = e.target.value;
+
     setDistricts([]);
+
+    setCurrentPage(1);
+
     setVaccineData([]);
-    setPinCodeSearch(false);
 
     const url =
       stateCode === "States"
         ? null
         : `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`;
-    setLoading(true);
+
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setLoading(false);
         setStateCode(stateCode);
         setDistricts(data.districts);
       });
@@ -149,28 +120,26 @@ const Home = (props) => {
 
   const findByDistrict = async (e) => {
     const districtCode = e.target.value;
+    setCurrentPage(1);
 
     const url =
       districtCode === "PLEASE SELECT A STATE FIRST"
         ? null
         : `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${formattedDate}`;
-    setLoading(true);
+
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setLoading(false);
         setDistrictCode(districtCode);
         setVaccineData(data.sessions);
-        setPinCodeSearch(true);
       });
   };
 
-  const fetchDataUsingCalendarByPin = async () => {
+  const fetchDataUsingCalendarByPin = () => {
     if (pin.length !== 6) {
       alert("A Pincode must be of 6 digits");
     } else {
-      setLoading(true);
-      await fetch(
+      fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${formattedDate}`
       )
         .then((res) => res.json())
@@ -194,27 +163,22 @@ const Home = (props) => {
             fee_type: res?.fee_type,
             slots: res?.sessions?.slice(0, 1).map((res) => res.slots),
           }));
-          setLoading(false);
           setVaccineData(pincodeData);
-          setPinCodeSearch(true);
         });
     }
   };
 
-  const fetchDataUsingByPin = async () => {
+  const fetchDataUsingByPin = () => {
     if (pin.length !== 6) {
       alert("A Pincode must be of 6 digits");
     } else {
-      setLoading(true);
-      await fetch(
+      fetch(
         `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=${pin}&date=${formattedDate}`
       )
         .then((res) => res.json())
         .then((data) => {
-          setLoading(false);
           console.log(data);
           setVaccineData(data.sessions);
-          setPinCodeSearch(true);
         });
     }
   };
@@ -224,7 +188,7 @@ const Home = (props) => {
       <Container maxWidth="md">
         <div className="home">
           <div className="home__intro">
-            <h2 id="back-to-top-anchor">Vaccine Availablity</h2>
+            <h2>Vaccine Availablity</h2>
             <hr />
           </div>
           <div className="home_selectionHeader">
@@ -239,8 +203,6 @@ const Home = (props) => {
                 onChange={(e) => {
                   setToSearchValue(e.target.value);
                   setVaccineData([]);
-                  setPinCodeSearch(false);
-                  setLoading(false);
                 }}
               >
                 {toSearch.map((functionName, index) => {
@@ -386,14 +348,10 @@ const Home = (props) => {
                   variant="outlined"
                   className="textField"
                   value={pin}
-                  onChange={(e) => {
-                    setPinCodeSearch(false);
-                    setPin(e.target.value);
-                  }}
+                  onChange={(e) => setPin(e.target.value)}
                 />
-                <Search
+                <SearchIcon
                   onClick={fetchDataUsingCalendarByPin}
-                  data-testId="home-fetch-calender-by-pin"
                   style={{
                     background: "#3f51b5",
                     color: "#fff",
@@ -431,14 +389,10 @@ const Home = (props) => {
                   variant="outlined"
                   className="textField"
                   value={pin}
-                  onChange={(e) => {
-                    setPinCodeSearch(false);
-                    setPin(e.target.value);
-                  }}
+                  onChange={(e) => setPin(e.target.value)}
                 />
-                <Search
+                <SearchIcon
                   onClick={fetchDataUsingByPin}
-                  data-testId="home-fetch-by-pin"
                   style={{
                     background: "#3f51b5",
                     color: "#fff",
@@ -465,36 +419,23 @@ const Home = (props) => {
             </div>
           ) : null}
 
-          {loading === true ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                padding: "2rem 0",
-              }}
-            >
-              <CircularProgress />
-            </div>
-          ) : (
-            <VaccineDataMain vaccineData={vaccineData} />
+          {vaccineData.length === 0 ? null : (
+            <>
+              <VaccineDataMain vaccineData={currentVaccine} />
+              {pageNumber.length === 1 ? null : (
+                <Pagination
+                  pageNumber={pageNumber}
+                  paginate={paginate}
+                  prevPage={prevPage}
+                  currentPageChange={currentPage}
+                  nextPage={nextPage}
+                  currentPage={currentPage}
+                />
+              )}
+            </>
           )}
-          <NullState
-            toSearchValue={toSearchValue}
-            vaccineData={vaccineData}
-            districtCode={districtCode}
-            VaccineDataMain={VaccineDataMain}
-            pin={pin}
-            pinCodeSearch={pinCodeSearch}
-          />
         </div>
       </Container>
-      <ThemeProvider theme={theme}>
-        <ScrollTop {...props}>
-          <Fab color="primary" size="small" aria-label="scroll back to top">
-            <KeyboardArrowUp />
-          </Fab>
-        </ScrollTop>
-      </ThemeProvider>
     </>
   );
 };

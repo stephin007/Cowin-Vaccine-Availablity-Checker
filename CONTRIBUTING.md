@@ -84,13 +84,7 @@
           understand that this tool wouldn’t be useful if you couldn’t customize
           it when you are ready for it.
         </li>
-        <li><code>test</code>: 
-          <ol>
-            <li> Start:- Run <i><code>npm test</code></i> from root of the project.</li>
-            <li>Update Snapshots:- To Update all failing snapshots run <i><code>npm run test:snap</code></i> from root of the project.</li>
-            <li>Test Coverage:- To get the test coverage run <i> <code> npm run test:cover</code></i> from root of the project.</li>
-          </ol>
-        </li>
+        <li><code>test</code>: Run tests using Jest</li>
       </ul>
     </li>
   </ul>

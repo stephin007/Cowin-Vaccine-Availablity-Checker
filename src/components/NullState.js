@@ -10,10 +10,7 @@ const NullState = ({
   pinCodeSearch,
 }) => {
   console.log(pinCodeSearch);
-  if (
-    toSearchValue === "Find By District" ||
-    toSearchValue === "Find By District & Date(Slots for next 7 days)"
-  ) {
+  if (/district/gi.test(toSearchValue)) {
     if (districtCode === "PLEASE SELECT A STATE FIRST") {
       return <div></div>;
     } else if (vaccineData.length > 0) {
@@ -31,10 +28,7 @@ const NullState = ({
     } else {
       return <div></div>;
     }
-  } else if (
-    toSearchValue === "Find By PinCode & Date" ||
-    toSearchValue === "Find By Pincode & Date(Slots for next 7 days)"
-  ) {
+  } else if (/pin/gi.test(toSearchValue)) {
     if (vaccineData.length > 0) {
       return (
         <div>
