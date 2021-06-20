@@ -11,28 +11,25 @@ import "./CovidWorld.css";
 
 import {
   WorldChart,
-  ContinentChart,
-  SingleContinentPaperInformation,
+  SingleContinentChartInformation,
 } from "./CovidWorldContents";
 
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
   const [continentsData, setContinentsData] = useState({});
-  const [dataByContinent, setDataByContinent] = useState([]);
   const [selectOptions, setSelectOptions] = useState("");
   const [loading, setLoading] = useState(true);
   // TODOs
   // 1. make a select field to filter out the slection
   //    - get whole world (done)
-  //    - get Data by continents (done)
+  //    - get Data by continents (removed as 2 and 3 are the same)
   //    - get Data by specific continent (done)
   //    - get Data by countries
   //    - get Data by country
 
   const SelectOptions = [
     "Get COVID19 World Information",
-    "Get COVID19 Data by continents",
-    "Get COVID19 Data by specific a Continent",
+    "Get COVID19 Data by a specific Continent",
     // "Get COVID19 Data by countries",
     // "Get COVID19 Data by country",
   ];
@@ -43,16 +40,6 @@ const CovidWorld = ({ value, index }) => {
       .then((data) => {
         setAllWorldData(data);
         setLoading(false);
-        console.log(data);
-      });
-  };
-  const getCovidDataByContinent = async () => {
-    await fetch(`https://disease.sh/v3/covid-19/continents`)
-      .then((response) => response.json())
-      .then((data) => {
-        setDataByContinent(data);
-        setLoading(false);
-        console.log(data);
       });
   };
 
@@ -64,13 +51,11 @@ const CovidWorld = ({ value, index }) => {
       .then((data) => {
         setLoading(false);
         setContinentsData(data);
-        console.log(continentsData);
       });
   };
 
   useEffect(() => {
     getAllWorldCovidData();
-    getCovidDataByContinent();
   }, []);
 
   return (
@@ -112,18 +97,9 @@ const CovidWorld = ({ value, index }) => {
                   <WorldChart allWorldData={allWorldData} loading={loading} />
                 </>
               )}
-              {selectOptions === "Get COVID19 Data by continents" && (
+              {selectOptions === "Get COVID19 Data by a specific Continent" && (
                 <>
-                  <ContinentChart
-                    dataByContinent={dataByContinent}
-                    loading={loading}
-                  />
-                </>
-              )}
-
-              {selectOptions === "Get COVID19 Data by specific a Continent" && (
-                <>
-                  <SingleContinentPaperInformation
+                  <SingleContinentChartInformation
                     loading={loading}
                     getCovidDataOfSingleContinent={
                       getCovidDataOfSingleContinent
