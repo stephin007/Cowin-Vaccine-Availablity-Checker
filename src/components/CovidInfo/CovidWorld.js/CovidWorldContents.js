@@ -275,7 +275,7 @@ export const SingleContinentChartInformation = ({
                 </FormHelperText>
               </FormControl>
               <br />
-              <Line data={continentData} />
+              {continentValue !== "" && <Line data={continentData} />}
             </div>
           </div>
         </>
