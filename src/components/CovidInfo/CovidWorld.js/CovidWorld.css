@@ -23,34 +23,19 @@
   margin-top: 10px;
   font-family: monospace;
 }
-
-.world_head_paper {
-  display: flex;
-  flex-direction: column;
-  text-transform: capitalize;
-  width: 32%;
-  height: 50%;
-  margin-top: 10px;
-}
-
-.world_head_paper h3 {
-  text-align: center;
-}
-
-.world_head_paper .paper_title {
-  background-color: #00917c;
-  color: whitesmoke;
-  padding: 5px;
-}
-
-.world_head_paper .count {
-  padding: 5px;
-  text-align: center;
-  font-size: 25px;
-  font-weight: 400;
-}
-
 /* WORLD CARD CSS ENDS */
+
+/* WorldChart CSS STARTS */
+.world_head .world_head__WorldChart {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+}
+
+.world_head .world_head__WorldChart .world_head__WorldChart_doughnut {
+  margin-top: 2rem;
+}
+/* WorldChart CSS ENDS */
 
 /* CONTINENTS CARD CSS STARTS */
 .continents_head {
@@ -71,6 +56,23 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+
+/* CONTINENTS CARD CSS ENDS */
+
+/* SINGLE CONTINENT CARD CSS STARTS */
+
+.single_continent_head {
+  width: 100%;
+  margin-top: -10px;
+}
+
+.continent_select_options {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+/* SINGLE CONTINENT CARD CSS ENDS */
 
 @media screen and (max-width: 750px) {
   .world_head_paper h3 {
