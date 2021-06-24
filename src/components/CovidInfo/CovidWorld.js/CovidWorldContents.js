@@ -1,5 +1,17 @@
-import { Container, makeStyles, CircularProgress } from "@material-ui/core";
+import { useState } from "react";
+import {
+  CircularProgress,
+  FormControl,
+  Select,
+  InputLabel,
+  MenuItem,
+  FormHelperText,
+  Container,
+  makeStyles,
+} from "@material-ui/core";
+
 import { Line, Doughnut } from "react-chartjs-2";
+import "./CovidWorld.css";
 
 const useStyles = makeStyles({
   progress: {
@@ -13,52 +25,6 @@ const useStyles = makeStyles({
     marginTop: "2rem",
   },
 });
-
-const lineOptions = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    ],
-  },
-};
-
-const bgColor = [
-  "rgba(153, 102, 255, 0.2)",
-  "rgba(255, 99, 132, 0.2)",
-  "rgba(54, 162, 235, 0.2)",
-  "rgba(255, 206, 86, 0.2)",
-  "rgba(75, 192, 192, 0.2)",
-  "rgba(255, 159, 64, 0.2)",
-  "rgba(237, 247, 86,0.2)",
-  "rgba(255, 168, 182,0.2)",
-  "rgba(162, 128, 137,0.2)",
-  "rgba(143, 130, 85, 0.2)",
-  "rgba(232, 177, 135, 0.2)",
-  "rgba(220, 207, 236, 0.2)",
-  "rgba(169, 151, 223, 0.2)",
-  "rgba(79, 81, 125, 0.2)",
-];
-
-const borderColor = [
-  "rgba(153, 102, 255, 1)",
-  "rgba(255, 99, 132, 1)",
-  "rgba(54, 162, 235, 1)",
-  "rgba(255, 206, 86, 1)",
-  "rgba(75, 192, 192, 1)",
-  "rgba(255, 159, 64, 1)",
-  "#edf756",
-  "#ffa8B6",
-  "#a28089",
-  "#8F8255",
-  "#E8B187",
-  "#dccfec",
-  "#a997df",
-  "#4f517d",
-];
 
 export const WorldChart = ({ allWorldData, loading }) => {
   const classes = useStyles();
@@ -194,9 +160,21 @@ export const WorldChart = ({ allWorldData, loading }) => {
     <Container maxWidth="lg">
       {!loading ? (
         <>
-          <Doughnut data={initialData} className={classes.chart} />
-          <Doughnut data={additionalData1} className={classes.chart} />
-          <Doughnut data={additionalData2} className={classes.chart} />
+          <p>Swipe left to see more details...</p>
+          <div className="world_head__WorldChart">
+            <Doughnut
+              data={initialData}
+              className="world_head__WorldChart_doughnut"
+            />
+            <Doughnut
+              data={additionalData1}
+              className="world_head__WorldChart_doughnut"
+            />
+            <Doughnut
+              data={additionalData2}
+              className="world_head__WorldChart_doughnut"
+            />
+          </div>
         </>
       ) : (
         <div className={classes.progress}>
@@ -207,53 +185,107 @@ export const WorldChart = ({ allWorldData, loading }) => {
   );
 };
 
-export const ContinentChart = ({ dataByContinent, loading }) => {
+export const SingleContinentChartInformation = ({
+  loading,
+  getCovidDataOfSingleContinent,
+  continentsData,
+}) => {
+  const [continentNames] = useState([
+    "North America",
+    "South America",
+    "Europe",
+    "Africa",
+    "Asia",
+    "Australia-Oceania",
+  ]);
+  const [continentValue, setContinentValue] = useState("");
   const classes = useStyles();
-  let count = 0;
-
+  const continentData = {
+    labels: [
+      "Active Cases per million",
+      "Critical",
+      "Recovered Per One Million",
+      "Tests Per One Million",
+      "Today's Cases",
+      "Today's Recoveries",
+    ],
+    datasets: [
+      {
+        label: "Continent Covid19 data",
+        fill: true,
+        data: [
+          continentsData.casesPerOneMillion,
+          continentsData.critical,
+          continentsData.recoveredPerOneMillion,
+          continentsData.testsPerOneMillion,
+          continentsData.todayCases,
+          continentsData.todayRecovered,
+        ],
+        backgroundColor: [
+          "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 159, 64, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
   return (
-    <Container maxWidth="lg">
+    <>
       {!loading ? (
         <>
-          {dataByContinent.map((data) => {
-            count = count + 1;
-            return (
-              <Line
-                data={{
-                  labels: [
-                    "Active Cases",
-                    "Cases",
-                    "Critical",
-                    "Deaths",
-                    "Recovered",
-                  ],
-                  datasets: [
-                    {
-                      label: data.continent,
-                      fill: true,
-                      data: [
-                        data.active,
-                        data.cases,
-                        data.critical,
-                        data.deaths,
-                        data.recovered,
-                      ],
-                      backgroundColor: bgColor[count],
-                      borderColor: borderColor[count],
-                      borderWidth: 1,
-                    },
-                  ],
-                }}
-                options={lineOptions}
-              />
-            );
-          })}
+          <div className="single_continent_head">
+            <div className="continent_select_options">
+              <FormControl variant="filled">
+                <InputLabel id="demo-simple-select-filled-label">
+                  Select a Continent
+                </InputLabel>
+                <Select
+                  labelId="continent_select_options"
+                  id="continent_select_options"
+                  value={continentValue}
+                  fullWidth
+                  onChange={(e) => {
+                    setContinentValue(e.target.value);
+                    getCovidDataOfSingleContinent(e.target.value);
+                  }}
+                  error={continentValue === ""}
+                >
+                  {continentNames.map((option, index) => {
+                    return (
+                      <MenuItem key={index} value={option}>
+                        {option}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText style={{ color: "red" }}>
+                  {continentValue === "" ? "Please Select a value" : " "}
+                </FormHelperText>
+              </FormControl>
+              <br />
+              {continentValue !== "" && <Line data={continentData} />}
+            </div>
+          </div>
         </>
       ) : (
-        <div className={classes.progress}>
-          <CircularProgress />
-        </div>
+        <>
+          <div className={classes.progress}>
+            <CircularProgress />
+          </div>
+        </>
       )}
-    </Container>
+    </>
   );
 };
