@@ -5,6 +5,7 @@ on:
     branches:
       - NEW-UI
       - master
+      - staging
   pull_request_review_comment:
     types: [created, deleted]
 jobs:
