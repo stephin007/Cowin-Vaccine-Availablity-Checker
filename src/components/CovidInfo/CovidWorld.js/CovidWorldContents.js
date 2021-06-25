@@ -384,7 +384,7 @@ export const SingleCountryInformation = ({
               </FormHelperText>
             </FormControl>
           </FormControl>
-          <img src={flag}></img>
+          <img src={flag} alt="country flag" />
         </>
       ) : (
         <>
