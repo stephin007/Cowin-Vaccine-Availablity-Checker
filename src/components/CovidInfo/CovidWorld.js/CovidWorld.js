@@ -12,11 +12,13 @@ import "./CovidWorld.css";
 import {
   WorldChart,
   SingleContinentChartInformation,
+  SingleCountryInformation,
 } from "./CovidWorldContents";
 
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
   const [continentsData, setContinentsData] = useState({});
+  const [countryNames, setCountryNames] = useState([]);
   const [selectOptions, setSelectOptions] = useState("");
   const [loading, setLoading] = useState(true);
   // TODOs
@@ -51,7 +53,9 @@ const CovidWorld = ({ value, index }) => {
       .then((data) => {
         setLoading(false);
         setContinentsData(data);
+        setCountryNames(data.countries);
         console.log(data);
+        console.log(data.countries);
       });
   };
 
@@ -106,6 +110,17 @@ const CovidWorld = ({ value, index }) => {
                       getCovidDataOfSingleContinent
                     }
                     continentsData={continentsData}
+                  />
+                </>
+              )}
+              {selectOptions === "Get COVID19 Data by countries" && (
+                <>
+                  <SingleCountryInformation
+                    loading={loading}
+                    countryNames={countryNames}
+                    getCovidDataOfSingleContinent={
+                      getCovidDataOfSingleContinent
+                    }
                   />
                 </>
               )}
