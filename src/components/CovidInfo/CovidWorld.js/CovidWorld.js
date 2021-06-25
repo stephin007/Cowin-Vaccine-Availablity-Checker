@@ -19,6 +19,7 @@ const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
   const [continentsData, setContinentsData] = useState({});
   const [countryNames, setCountryNames] = useState([]);
+  const [countryData, setCountryData] = useState({});
   const [selectOptions, setSelectOptions] = useState("");
   const [loading, setLoading] = useState(true);
   // TODOs
@@ -54,8 +55,18 @@ const CovidWorld = ({ value, index }) => {
         setLoading(false);
         setContinentsData(data);
         setCountryNames(data.countries);
-        console.log(data);
-        console.log(data.countries);
+      });
+  };
+
+  const getCovidDataOfSingleCountry = async (countryValue) => {
+    await fetch(
+      `https://disease.sh/v3/covid-19/countries/${countryValue}?yesterday=yesterday&strict=true`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setLoading(false);
+        setCountryData(data);
+        console.log(countryData);
       });
   };
 
@@ -121,6 +132,8 @@ const CovidWorld = ({ value, index }) => {
                     getCovidDataOfSingleContinent={
                       getCovidDataOfSingleContinent
                     }
+                    getCovidDataOfSingleCountry={getCovidDataOfSingleCountry}
+                    countryData={countryData}
                   />
                 </>
               )}

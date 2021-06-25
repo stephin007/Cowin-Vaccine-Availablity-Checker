@@ -309,10 +309,15 @@ export const SingleCountryInformation = ({
   loading,
   countryNames,
   getCovidDataOfSingleContinent,
+  getCovidDataOfSingleCountry,
+  countryData,
 }) => {
   const classes = useStyles();
   const [continentValueforCountry, setContinentValueforCountry] = useState("");
   const [valueOfCountry, setValueOfCountry] = useState("");
+
+  const { flag } = countryData.countryInfo;
+
   return (
     <>
       {!loading ? (
@@ -356,6 +361,7 @@ export const SingleCountryInformation = ({
                 fullWidth
                 onChange={(e) => {
                   setValueOfCountry(e.target.value);
+                  getCovidDataOfSingleCountry(e.target.value);
                 }}
                 error={valueOfCountry === ""}
               >
@@ -378,7 +384,7 @@ export const SingleCountryInformation = ({
               </FormHelperText>
             </FormControl>
           </FormControl>
-          {/* {valueOfCountry} */}
+          <img src={flag}></img>
         </>
       ) : (
         <>
