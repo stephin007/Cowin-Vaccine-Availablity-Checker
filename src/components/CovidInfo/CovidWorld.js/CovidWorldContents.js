@@ -202,23 +202,26 @@ export const SingleContinentChartInformation = ({
   const classes = useStyles();
   const continentData = {
     labels: [
-      "Active Cases per million",
+      "Active",
+      "Cases",
       "Critical",
-      "Recovered Per One Million",
-      "Tests Per One Million",
+      "Recovered",
+      "Tests",
       "Today's Cases",
+      "Today's Deaths",
       "Today's Recoveries",
     ],
     datasets: [
       {
-        label: "Continent Covid19 data",
         fill: true,
         data: [
-          continentsData.casesPerOneMillion,
+          continentsData.active,
+          continentsData.cases,
           continentsData.critical,
-          continentsData.recoveredPerOneMillion,
-          continentsData.testsPerOneMillion,
+          continentsData.recovered,
+          continentsData.tests,
           continentsData.todayCases,
+          continentsData.todayDeaths,
           continentsData.todayRecovered,
         ],
         backgroundColor: [
@@ -275,7 +278,18 @@ export const SingleContinentChartInformation = ({
                 </FormHelperText>
               </FormControl>
               <br />
-              {continentValue !== "" && <Line data={continentData} />}
+              {continentValue !== "" && (
+                <Line
+                  data={continentData}
+                  options={{
+                    plugins: {
+                      legend: {
+                        display: false,
+                      },
+                    },
+                  }}
+                />
+              )}
             </div>
           </div>
         </>
