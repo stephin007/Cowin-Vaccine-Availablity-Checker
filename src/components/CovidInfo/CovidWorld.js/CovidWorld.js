@@ -30,7 +30,7 @@ const CovidWorld = ({ value, index }) => {
   const SelectOptions = [
     "Get COVID19 World Information",
     "Get COVID19 Data by a specific Continent",
-    // "Get COVID19 Data by countries",
+    "Get COVID19 Data by countries",
     // "Get COVID19 Data by country",
   ];
 
