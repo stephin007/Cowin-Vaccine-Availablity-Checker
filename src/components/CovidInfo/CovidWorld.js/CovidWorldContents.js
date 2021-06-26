@@ -316,7 +316,7 @@ export const SingleCountryInformation = ({
   const [continentValueforCountry, setContinentValueforCountry] = useState("");
   const [valueOfCountry, setValueOfCountry] = useState("");
 
-  const { flag } = countryData.countryInfo;
+  const flag = countryData.countryInfo.flag;
 
   return (
     <>
