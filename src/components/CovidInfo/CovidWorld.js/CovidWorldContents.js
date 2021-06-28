@@ -388,15 +388,20 @@ export const SingleCountryInformation = ({
             </div>
             <div className="single_country_card">
               {countryData.countryInfo && (
-                <img
-                  src={countryData.countryInfo.flag}
-                  className="country_flag_left"
-                  alt="Country Flag"
-                />
+                <>
+                  <img
+                    src={countryData.countryInfo.flag}
+                    className="country_flag_left"
+                    alt="Country Flag"
+                  />
+                  <Paper className="country_card_right">
+                    <div className="country_title">
+                      <h1>{countryData.country}</h1>
+                      <hr />
+                    </div>
+                  </Paper>
+                </>
               )}
-              <Paper className="country_card_right">
-                <h1>{countryData.country}</h1>
-              </Paper>
             </div>
           </div>
         </>

@@ -110,6 +110,10 @@
   width: 100%;
 }
 
+.country_title {
+  padding: 10px;
+}
+
 /* SINGLE COUNTRY CSS ENDS */
 
 @media screen and (max-width: 850px) {
