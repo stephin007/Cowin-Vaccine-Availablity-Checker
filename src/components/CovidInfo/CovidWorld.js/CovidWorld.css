@@ -77,17 +77,31 @@
 /* SINGLE COUNTRY CSS STARTS */
 
 .single_country_head {
-  /* height: 100vh; */
   display: flex;
-}
-
-.single_country_dropdowns {
-  flex-direction: row;
-  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
+.single_country_dropdowns {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.single_select_option {
+  min-width: 49% !important;
+}
+
 /* SINGLE COUNTRY CSS ENDS */
+
+@media screen and (max-width: 850px) {
+  .single_country_dropdowns {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+}
 
 @media screen and (max-width: 750px) {
   .world_head_paper h3 {
