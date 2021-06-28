@@ -100,6 +100,7 @@
 .country_flag_left {
   width: 50%;
   height: 50%;
+  border-radius: 5px;
 }
 
 .country_card_right {
