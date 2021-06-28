@@ -93,6 +93,21 @@
   min-width: 49% !important;
 }
 
+.single_country_card {
+  display: flex;
+}
+
+.country_flag_left {
+  width: 50%;
+  height: 50%;
+}
+
+.country_card_right {
+  margin-left: 10px;
+  height: 50%;
+  width: 100%;
+}
+
 /* SINGLE COUNTRY CSS ENDS */
 
 @media screen and (max-width: 850px) {
@@ -110,6 +125,21 @@
 
   .world_head_paper .count {
     font-size: 20px;
+  }
+
+  .single_country_card {
+    flex-direction: column;
+  }
+
+  .country_flag_left {
+    width: 100%;
+    height: 50%;
+  }
+
+  .country_card_right {
+    height: 100%;
+    width: 100%;
+    margin: 10px 0 10px 0;
   }
 }
 
