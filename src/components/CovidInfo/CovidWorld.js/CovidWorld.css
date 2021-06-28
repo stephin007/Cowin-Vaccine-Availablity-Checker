@@ -95,17 +95,18 @@
 
 .single_country_card {
   display: flex;
+  height: 100;
 }
 
 .country_flag_left {
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
 }
 
 .country_card_right {
   margin-left: 10px;
-  height: 50%;
+  height: 100%;
   width: 100%;
 }
 
@@ -134,7 +135,7 @@
 
   .country_flag_left {
     width: 100%;
-    height: 50%;
+    height: 100%;
   }
 
   .country_card_right {
