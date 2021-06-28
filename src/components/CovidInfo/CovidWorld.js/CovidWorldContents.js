@@ -8,6 +8,7 @@ import {
   FormHelperText,
   Container,
   makeStyles,
+  Paper,
 } from "@material-ui/core";
 
 import { Line, Doughnut } from "react-chartjs-2";
@@ -25,6 +26,15 @@ const useStyles = makeStyles({
     marginTop: "2rem",
   },
 });
+
+const continentNames = [
+  "North America",
+  "South America",
+  "Europe",
+  "Africa",
+  "Asia",
+  "Australia-Oceania",
+];
 
 export const WorldChart = ({ allWorldData, loading }) => {
   const classes = useStyles();
@@ -190,35 +200,30 @@ export const SingleContinentChartInformation = ({
   getCovidDataOfSingleContinent,
   continentsData,
 }) => {
-  const [continentNames] = useState([
-    "North America",
-    "South America",
-    "Europe",
-    "Africa",
-    "Asia",
-    "Australia-Oceania",
-  ]);
   const [continentValue, setContinentValue] = useState("");
   const classes = useStyles();
   const continentData = {
     labels: [
-      "Active Cases per million",
+      "Active",
+      "Cases",
       "Critical",
-      "Recovered Per One Million",
-      "Tests Per One Million",
+      "Recovered",
+      "Tests",
       "Today's Cases",
+      "Today's Deaths",
       "Today's Recoveries",
     ],
     datasets: [
       {
-        label: "Continent Covid19 data",
         fill: true,
         data: [
-          continentsData.casesPerOneMillion,
+          continentsData.active,
+          continentsData.cases,
           continentsData.critical,
-          continentsData.recoveredPerOneMillion,
-          continentsData.testsPerOneMillion,
+          continentsData.recovered,
+          continentsData.tests,
           continentsData.todayCases,
+          continentsData.todayDeaths,
           continentsData.todayRecovered,
         ],
         backgroundColor: [
@@ -275,7 +280,142 @@ export const SingleContinentChartInformation = ({
                 </FormHelperText>
               </FormControl>
               <br />
-              {continentValue !== "" && <Line data={continentData} />}
+              {continentValue !== "" && (
+                <Line
+                  data={continentData}
+                  options={{
+                    plugins: {
+                      legend: {
+                        display: false,
+                      },
+                    },
+                  }}
+                />
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={classes.progress}>
+            <CircularProgress />
+          </div>
+        </>
+      )}
+    </>
+  );
+};
+
+export const SingleCountryInformation = ({
+  loading,
+  countryNames,
+  getCovidDataOfSingleContinent,
+  getCovidDataOfSingleCountry,
+  countryData,
+}) => {
+  const classes = useStyles();
+  const [continentValueforCountry, setContinentValueforCountry] = useState("");
+  const [valueOfCountry, setValueOfCountry] = useState("");
+
+  return (
+    <>
+      {!loading ? (
+        <>
+          <div className="single_country_head">
+            <div className="single_country_dropdowns">
+              <FormControl variant="filled" className="single_select_option">
+                <InputLabel id="demo-simple-select-filled-label">
+                  Select a Continent
+                </InputLabel>
+                <Select
+                  labelId="continent_select_options"
+                  id="continent_select_options"
+                  value={continentValueforCountry}
+                  fullWidth
+                  onChange={(e) => {
+                    setContinentValueforCountry(e.target.value);
+                    getCovidDataOfSingleContinent(e.target.value);
+                  }}
+                  error={continentValueforCountry === ""}
+                >
+                  {continentNames.map((option, index) => {
+                    return (
+                      <MenuItem key={index} value={option}>
+                        {option}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText style={{ color: "red" }}>
+                  {continentValueforCountry === ""
+                    ? "Please Select a continent"
+                    : " "}
+                </FormHelperText>
+              </FormControl>
+              <FormControl variant="filled" className="single_select_option">
+                <InputLabel id="demo-simple-select-filled-label">
+                  Select a Country
+                </InputLabel>
+                <Select
+                  labelId="country_select_options"
+                  id="country_select_options"
+                  value={valueOfCountry}
+                  fullWidth
+                  onChange={(e) => {
+                    setValueOfCountry(e.target.value);
+                    getCovidDataOfSingleCountry(e.target.value);
+                  }}
+                  error={valueOfCountry === ""}
+                >
+                  {continentValueforCountry === "" ? (
+                    <MenuItem value="" disabled>
+                      Select a Continent First
+                    </MenuItem>
+                  ) : null}
+                  {continentValueforCountry !== "" &&
+                    countryNames.map((option, index) => {
+                      return (
+                        <MenuItem key={index} value={option}>
+                          {option}
+                        </MenuItem>
+                      );
+                    })}
+                </Select>
+                <FormHelperText style={{ color: "red" }}>
+                  {valueOfCountry === "" ? "Please Select a country" : " "}
+                </FormHelperText>
+              </FormControl>
+            </div>
+            <div className="single_country_card">
+              {countryData.countryInfo && (
+                <>
+                  <img
+                    src={countryData.countryInfo.flag}
+                    className="country_flag_left"
+                    alt="Country Flag"
+                  />
+                  <Paper className="country_card_right">
+                    <div className="country_title">
+                      <h1>{countryData.country}</h1>
+                      <hr />
+                    </div>
+                    <div className="country_data">
+                      <div className="country_data_value">
+                        <h4 style={{ color: "orange" }}>Total Active Cases</h4>
+                        <p>{countryData.active}</p>
+                      </div>
+                      <div className="country_data_value">
+                        <h4 style={{ color: "red" }}>Total Cases</h4>
+                        <p>{countryData.cases}</p>
+                      </div>
+                      <div className="country_data_value">
+                        <h4 style={{ color: "green" }}>Total Recovered</h4>
+                        <p>{countryData.recovered}</p>
+                      </div>
+                    </div>
+                  </Paper>
+                </>
+              )}
             </div>
           </div>
         </>

@@ -74,6 +74,77 @@
 
 /* SINGLE CONTINENT CARD CSS ENDS */
 
+/* SINGLE COUNTRY CSS STARTS */
+
+.single_country_head {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: "Nunito", monospace !important;
+}
+
+.single_country_dropdowns {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.single_select_option {
+  min-width: 49% !important;
+}
+
+.single_country_card {
+  display: flex;
+  height: 100;
+}
+
+.country_flag_left {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.country_card_right {
+  margin-left: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+.country_title {
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+.country_data {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.country_data_value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.country_data_value h4 {
+  font-size: 25px;
+}
+
+.country_data_value p {
+  font-size: 20px;
+}
+
+/* SINGLE COUNTRY CSS ENDS */
+
+@media screen and (max-width: 850px) {
+  .single_country_dropdowns {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
 @media screen and (max-width: 750px) {
   .world_head_paper h3 {
     font-size: 13px;
@@ -81,6 +152,21 @@
 
   .world_head_paper .count {
     font-size: 20px;
+  }
+
+  .single_country_card {
+    flex-direction: column;
+  }
+
+  .country_flag_left {
+    width: 100%;
+    height: 100%;
+  }
+
+  .country_card_right {
+    height: 100%;
+    width: 100%;
+    margin: 10px 0 10px 0;
   }
 }
 
