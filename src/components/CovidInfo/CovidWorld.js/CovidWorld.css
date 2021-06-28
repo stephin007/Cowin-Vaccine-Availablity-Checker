@@ -80,6 +80,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  font-family: "Nunito", monospace !important;
 }
 
 .single_country_dropdowns {
@@ -99,7 +100,6 @@
 }
 
 .country_flag_left {
-  width: 100%;
   height: 100%;
   border-radius: 5px;
 }
@@ -112,6 +112,27 @@
 
 .country_title {
   padding: 10px;
+  text-transform: uppercase;
+}
+
+.country_data {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.country_data_value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.country_data_value h4 {
+  font-size: 25px;
+}
+
+.country_data_value p {
+  font-size: 20px;
 }
 
 /* SINGLE COUNTRY CSS ENDS */

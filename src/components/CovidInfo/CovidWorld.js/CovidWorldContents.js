@@ -399,6 +399,20 @@ export const SingleCountryInformation = ({
                       <h1>{countryData.country}</h1>
                       <hr />
                     </div>
+                    <div className="country_data">
+                      <div className="country_data_value">
+                        <h4 style={{ color: "orange" }}>Total Active Cases</h4>
+                        <p>{countryData.active}</p>
+                      </div>
+                      <div className="country_data_value">
+                        <h4 style={{ color: "red" }}>Total Cases</h4>
+                        <p>{countryData.cases}</p>
+                      </div>
+                      <div className="country_data_value">
+                        <h4 style={{ color: "green" }}>Total Recovered</h4>
+                        <p>{countryData.recovered}</p>
+                      </div>
+                    </div>
                   </Paper>
                 </>
               )}
