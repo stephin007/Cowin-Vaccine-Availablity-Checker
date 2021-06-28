@@ -25,16 +25,13 @@ const CovidWorld = ({ value, index }) => {
   // TODOs
   // 1. make a select field to filter out the slection
   //    - get whole world (done)
-  //    - get Data by continents (removed as 2 and 3 are the same)
   //    - get Data by specific continent (done)
-  //    - get Data by countries
-  //    - get Data by country
+  //    - get Data by country (WIP)
 
   const SelectOptions = [
     "Get COVID19 World Information",
     "Get COVID19 Data by a specific Continent",
-    "Get COVID19 Data by countries",
-    // "Get COVID19 Data by country",
+    "Get COVID19 Data by country",
   ];
 
   const getAllWorldCovidData = async () => {
@@ -66,7 +63,7 @@ const CovidWorld = ({ value, index }) => {
       .then((data) => {
         setLoading(false);
         setCountryData(data);
-        console.log(countryData);
+        console.log(data);
       });
   };
 
@@ -124,7 +121,7 @@ const CovidWorld = ({ value, index }) => {
                   />
                 </>
               )}
-              {selectOptions === "Get COVID19 Data by countries" && (
+              {selectOptions === "Get COVID19 Data by country" && (
                 <>
                   <SingleCountryInformation
                     loading={loading}

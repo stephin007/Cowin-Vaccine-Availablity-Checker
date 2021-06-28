@@ -316,75 +316,79 @@ export const SingleCountryInformation = ({
   const [continentValueforCountry, setContinentValueforCountry] = useState("");
   const [valueOfCountry, setValueOfCountry] = useState("");
 
-  const flag = countryData.countryInfo.flag;
-
   return (
     <>
       {!loading ? (
         <>
-          <FormControl variant="filled">
-            <InputLabel id="demo-simple-select-filled-label">
-              Select a Continent
-            </InputLabel>
-            <Select
-              labelId="continent_select_options"
-              id="continent_select_options"
-              value={continentValueforCountry}
-              fullWidth
-              onChange={(e) => {
-                setContinentValueforCountry(e.target.value);
-                getCovidDataOfSingleContinent(e.target.value);
-              }}
-              error={continentValueforCountry === ""}
-            >
-              {continentNames.map((option, index) => {
-                return (
-                  <MenuItem key={index} value={option}>
-                    {option}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-            <FormHelperText style={{ color: "red" }}>
-              {continentValueforCountry === ""
-                ? "Please Select a continent"
-                : " "}
-            </FormHelperText>
-            <FormControl variant="filled">
-              <InputLabel id="demo-simple-select-filled-label">
-                Select a Country
-              </InputLabel>
-              <Select
-                labelId="country_select_options"
-                id="country_select_options"
-                value={valueOfCountry}
-                fullWidth
-                onChange={(e) => {
-                  setValueOfCountry(e.target.value);
-                  getCovidDataOfSingleCountry(e.target.value);
-                }}
-                error={valueOfCountry === ""}
-              >
-                {continentValueforCountry !== "" ? null : (
-                  <MenuItem value="" disabled>
-                    Select a Country First
-                  </MenuItem>
-                )}
-                {continentValueforCountry !== "" &&
-                  countryNames.map((option, index) => {
+          <div className="single_country_head">
+            <div className="single_country_dropdowns">
+              <FormControl variant="filled">
+                <InputLabel id="demo-simple-select-filled-label">
+                  Select a Continent
+                </InputLabel>
+                <Select
+                  labelId="continent_select_options"
+                  id="continent_select_options"
+                  value={continentValueforCountry}
+                  fullWidth
+                  onChange={(e) => {
+                    setContinentValueforCountry(e.target.value);
+                    getCovidDataOfSingleContinent(e.target.value);
+                  }}
+                  error={continentValueforCountry === ""}
+                >
+                  {continentNames.map((option, index) => {
                     return (
                       <MenuItem key={index} value={option}>
                         {option}
                       </MenuItem>
                     );
                   })}
-              </Select>
-              <FormHelperText style={{ color: "red" }}>
-                {valueOfCountry === "" ? "Please Select a country" : " "}
-              </FormHelperText>
-            </FormControl>
-          </FormControl>
-          <img src={flag} alt="country flag" />
+                </Select>
+                <FormHelperText style={{ color: "red" }}>
+                  {continentValueforCountry === ""
+                    ? "Please Select a continent"
+                    : " "}
+                </FormHelperText>
+                <FormControl variant="filled">
+                  <InputLabel id="demo-simple-select-filled-label">
+                    Select a Country
+                  </InputLabel>
+                  <Select
+                    labelId="country_select_options"
+                    id="country_select_options"
+                    value={valueOfCountry}
+                    fullWidth
+                    onChange={(e) => {
+                      setValueOfCountry(e.target.value);
+                      getCovidDataOfSingleCountry(e.target.value);
+                    }}
+                    error={valueOfCountry === ""}
+                  >
+                    {continentValueforCountry === "" ? (
+                      <MenuItem value="" disabled>
+                        Select a Continent First
+                      </MenuItem>
+                    ) : null}
+                    {continentValueforCountry !== "" &&
+                      countryNames.map((option, index) => {
+                        return (
+                          <MenuItem key={index} value={option}>
+                            {option}
+                          </MenuItem>
+                        );
+                      })}
+                  </Select>
+                  <FormHelperText style={{ color: "red" }}>
+                    {valueOfCountry === "" ? "Please Select a country" : " "}
+                  </FormHelperText>
+                </FormControl>
+              </FormControl>
+            </div>
+            {countryData.countryInfo && (
+              <img src={countryData.countryInfo.flag} alt="Country Flag" />
+            )}
+          </div>
         </>
       ) : (
         <>

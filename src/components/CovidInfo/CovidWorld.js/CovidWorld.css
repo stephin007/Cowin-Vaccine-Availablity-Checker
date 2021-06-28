@@ -74,6 +74,21 @@
 
 /* SINGLE CONTINENT CARD CSS ENDS */
 
+/* SINGLE COUNTRY CSS STARTS */
+
+.single_country_head {
+  /* height: 100vh; */
+  display: flex;
+}
+
+.single_country_dropdowns {
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+}
+
+/* SINGLE COUNTRY CSS ENDS */
+
 @media screen and (max-width: 750px) {
   .world_head_paper h3 {
     font-size: 13px;
