@@ -8,113 +8,30 @@ import {
 } from "@material-ui/core";
 
 import "./CovidWorld.css";
+
 import {
-  WorldPaperInformation,
-  ContinentPaperInformation,
+  WorldChart,
+  SingleContinentChartInformation,
+  SingleCountryInformation,
 } from "./CovidWorldContents";
 
 const CovidWorld = ({ value, index }) => {
   const [allWorldData, setAllWorldData] = useState([]);
-  const [dataByContinent, setDataByContinent] = useState([]);
+  const [continentsData, setContinentsData] = useState({});
+  const [countryNames, setCountryNames] = useState([]);
+  const [countryData, setCountryData] = useState({});
   const [selectOptions, setSelectOptions] = useState("");
   const [loading, setLoading] = useState(true);
   // TODOs
   // 1. make a select field to filter out the slection
   //    - get whole world (done)
-  //    - get Data by continents (done)
-  //    - get Data by specific continent
-  //    - get Data by countries
-  //    - get Data by country
+  //    - get Data by specific continent (done)
+  //    - get Data by country (WIP)
 
   const SelectOptions = [
     "Get COVID19 World Information",
-    "Get COVID19 Data by continents",
-    // "Get COVID19 Data by specific continent",
-    // "Get COVID19 Data by countries",
-    // "Get COVID19 Data by country",
-  ];
-
-  const WorldPaperContents = [
-    {
-      paperTitle: "Total Active Cases",
-      paperAnswer: allWorldData.active,
-    },
-    {
-      paperTitle: "Active per one million",
-      paperAnswer: allWorldData.activePerOneMillion,
-    },
-    {
-      paperTitle: "Affected Countries",
-      paperAnswer: allWorldData.affectedCountries,
-    },
-    {
-      paperTitle: "Total Cases",
-      paperAnswer: allWorldData.cases,
-    },
-    {
-      paperTitle: "Active Cases per million",
-      paperAnswer: allWorldData.casesPerOneMillion,
-    },
-    {
-      paperTitle: "critical",
-      paperAnswer: allWorldData.critical,
-    },
-    {
-      paperTitle: "critical per million",
-      paperAnswer: allWorldData.criticalPerOneMillion,
-    },
-    {
-      paperTitle: "deaths",
-      paperAnswer: allWorldData.deaths,
-    },
-    {
-      paperTitle: "deaths Per OneMillion",
-      paperAnswer: allWorldData.deathsPerOneMillion,
-    },
-    {
-      paperTitle: "one Case Per People",
-      paperAnswer: allWorldData.oneCasePerPeople,
-    },
-    {
-      paperTitle: "one Death Per People",
-      paperAnswer: allWorldData.oneDeathPerPeople,
-    },
-    {
-      paperTitle: "one Test Per People",
-      paperAnswer: allWorldData.oneTestPerPeople,
-    },
-    {
-      paperTitle: "population",
-      paperAnswer: allWorldData.population,
-    },
-    {
-      paperTitle: "recovered",
-      paperAnswer: allWorldData.recovered,
-    },
-    {
-      paperTitle: "recovered Per One Million",
-      paperAnswer: allWorldData.recoveredPerOneMillion,
-    },
-    {
-      paperTitle: "tests",
-      paperAnswer: allWorldData.tests,
-    },
-    {
-      paperTitle: "tests Per One Million",
-      paperAnswer: allWorldData.testsPerOneMillion,
-    },
-    {
-      paperTitle: "today's Cases",
-      paperAnswer: allWorldData.todayCases,
-    },
-    {
-      paperTitle: "today's Deaths",
-      paperAnswer: allWorldData.todayDeaths,
-    },
-    {
-      paperTitle: "today's Recoveries",
-      paperAnswer: allWorldData.todayRecovered,
-    },
+    "Get COVID19 Data by a specific Continent",
+    "Get COVID19 Data by country",
   ];
 
   const getAllWorldCovidData = async () => {
@@ -126,20 +43,34 @@ const CovidWorld = ({ value, index }) => {
       });
   };
 
-  const getCovidDataByContinent = async () => {
-    await fetch(`https://disease.sh/v3/covid-19/continents`)
+  const getCovidDataOfSingleContinent = async (continentValue) => {
+    await fetch(
+      `https://disease.sh/v3/covid-19/continents/${continentValue}?strict=true`
+    )
       .then((response) => response.json())
       .then((data) => {
-        setDataByContinent(data);
         setLoading(false);
+        setContinentsData(data);
+        setCountryNames(data.countries);
+      });
+  };
+
+  const getCovidDataOfSingleCountry = async (countryValue) => {
+    await fetch(
+      `https://disease.sh/v3/covid-19/countries/${countryValue}?yesterday=yesterday&strict=true`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setLoading(false);
+        setCountryData(data);
         console.log(data);
       });
   };
 
   useEffect(() => {
     getAllWorldCovidData();
-    getCovidDataByContinent();
   }, []);
+
   return (
     <>
       {value === index && (
@@ -176,18 +107,30 @@ const CovidWorld = ({ value, index }) => {
             <div className="world_head">
               {selectOptions === "Get COVID19 World Information" && (
                 <>
-                  <WorldPaperInformation
-                    WorldPaperContents={WorldPaperContents}
+                  <WorldChart allWorldData={allWorldData} loading={loading} />
+                </>
+              )}
+              {selectOptions === "Get COVID19 Data by a specific Continent" && (
+                <>
+                  <SingleContinentChartInformation
                     loading={loading}
+                    getCovidDataOfSingleContinent={
+                      getCovidDataOfSingleContinent
+                    }
+                    continentsData={continentsData}
                   />
                 </>
               )}
-
-              {selectOptions === "Get COVID19 Data by continents" && (
+              {selectOptions === "Get COVID19 Data by country" && (
                 <>
-                  <ContinentPaperInformation
-                    dataByContinent={dataByContinent}
+                  <SingleCountryInformation
                     loading={loading}
+                    countryNames={countryNames}
+                    getCovidDataOfSingleContinent={
+                      getCovidDataOfSingleContinent
+                    }
+                    getCovidDataOfSingleCountry={getCovidDataOfSingleCountry}
+                    countryData={countryData}
                   />
                 </>
               )}

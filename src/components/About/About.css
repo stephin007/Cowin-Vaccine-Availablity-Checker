@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+
 body {
   background-color: #f9fafb;
 }
@@ -8,7 +10,7 @@ body {
   margin-top: 10px;
   overflow: hidden;
   padding: 0 2rem;
-  font-family: "Fira Code Medium", "monospace";
+  font-family: "Fira Code", "monospace";
 }
 
 .about-head {
@@ -77,9 +79,10 @@ body {
   background-color: #004d4d;
   display: flex;
   align-items: center;
-  padding: 10px;
-  width: 10px;
-  height: 10px;
+  justify-content: center;
+  padding: 5px;
+  width: auto;
+  height: 30px;
   margin-left: 10px;
   border-radius: 5px;
 }
@@ -145,9 +148,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
-  width: 20px;
-  height: 20px;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   color: whitesmoke;
 }
