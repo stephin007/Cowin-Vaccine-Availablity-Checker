@@ -35,7 +35,6 @@ const continentNames = [
   "Asia",
   "Australia-Oceania",
 ];
-
 export const WorldChart = ({ allWorldData, loading }) => {
   const classes = useStyles();
   const initialData = {

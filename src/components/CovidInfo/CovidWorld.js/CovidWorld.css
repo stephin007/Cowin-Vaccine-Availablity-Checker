@@ -144,7 +144,6 @@
     flex-direction: column;
   }
 }
-
 @media screen and (max-width: 750px) {
   .world_head_paper h3 {
     font-size: 13px;
