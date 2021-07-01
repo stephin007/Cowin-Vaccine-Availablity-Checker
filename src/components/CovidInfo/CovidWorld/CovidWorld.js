@@ -26,7 +26,7 @@ const CovidWorld = ({ value, index }) => {
   // 1. make a select field to filter out the slection
   //    - get whole world (done)
   //    - get Data by specific continent (done)
-  //    - get Data by country (WIP)
+  //    - get Data by country (done)
 
   const SelectOptions = [
     "Get COVID19 World Information",
