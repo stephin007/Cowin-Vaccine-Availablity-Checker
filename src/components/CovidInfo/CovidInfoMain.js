@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   appbar: {
     background: "#16222f",
     marginTop: "10px",
-    borderRadius: "10px",
+    borderRadius: "5px",
   },
   section_title: {
     textAlign: "center",
