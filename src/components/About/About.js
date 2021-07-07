@@ -15,7 +15,6 @@ const About = () => {
       .then((response) => response.json())
       .then((data) => {
         setContributors(data);
-        console.log(data);
         setContributorCount(data.length);
         setLoading(false);
       });
@@ -107,9 +106,7 @@ const About = () => {
                           <strong>{contributions}</strong>
                         </div>
                         <div className="contributor_type">
-                          {login === "stephin007" ||
-                          login === "Justinnn07" ||
-                          login === "wise-introvert" ? (
+                          {login === "stephin007" || login === "Justinnn07" ? (
                             <p>Maintainer</p>
                           ) : (
                             <p>{type}</p>
