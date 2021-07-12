@@ -90,6 +90,11 @@ const Home = (props) => {
   );
   const [pin, setPin] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
+  const [filterValue, setfilterValue] = useState("ALL");
+  const [filtervalueAge, setfiltervalueAge] = useState("ALL");
+  const [filtervalueFare, setfiltervalueFare] = useState("ALL");
+  const [filtervalueVaccine, setfiltervalueVaccine] = useState("ALL");
+
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [vaccineData, setVaccineData] = useState([]);
   const [pinCodeSearch, setPinCodeSearch] = useState(false);
@@ -129,8 +134,10 @@ const Home = (props) => {
 
   const onStateChange = async (e) => {
     const stateCode = e.target.value;
+
     setDistricts([]);
     setVaccineData([]);
+
     setPinCodeSearch(false);
 
     const url =
@@ -218,7 +225,18 @@ const Home = (props) => {
         });
     }
   };
-
+  const filterValuechange = (e) => {
+    setfilterValue(e.target.value);
+  };
+  const filterValueVaccineChange = (e) => {
+    setfiltervalueVaccine(e.target.value);
+  };
+  const filterValueAgeChange = (e) => {
+    setfiltervalueAge(e.target.value);
+  };
+  const filterValueFareChange = (e) => {
+    setfiltervalueFare(e.target.value);
+  };
   return (
     <>
       <Container maxWidth="md">
@@ -464,8 +482,47 @@ const Home = (props) => {
               </MuiPickersUtilsProvider>
             </div>
           ) : null}
-
-          {loading === true ? (
+          {vaccineData.length > 0 ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <FormControl style={{ width: "150px" }}>
+                <InputLabel value="ALL">FILTER</InputLabel>
+                <Select onChange={filterValuechange}>
+                  <MenuItem value="ALL">ALL</MenuItem>
+                  <MenuItem value="VACCINE_TYPE">VACCINE TYPE</MenuItem>
+                  <MenuItem value="AGE_GROUP">AGE GROUP</MenuItem>
+                  <MenuItem value="FARE_TYPE">FARE TYPE</MenuItem>
+                </Select>
+              </FormControl>
+              {filterValue === "AGE_GROUP" ? (
+                <FormControl style={{ width: "150px", marginLeft: "20px" }}>
+                  <InputLabel value="ALL">AGE</InputLabel>
+                  <Select onChange={filterValueAgeChange}>
+                    <MenuItem value="18">18-45</MenuItem>
+                    <MenuItem value="45">ABOVE 45</MenuItem>
+                  </Select>
+                </FormControl>
+              ) : filterValue === "FARE_TYPE" ? (
+                <FormControl style={{ width: "150px", marginLeft: "20px" }}>
+                  <InputLabel value="ALL">MINIMUM FARE</InputLabel>
+                  <Select onChange={filterValueFareChange}>
+                    <MenuItem value="Free">FREE</MenuItem>
+                    <MenuItem value="Paid">PAID</MenuItem>
+                  </Select>
+                </FormControl>
+              ) : filterValue === "VACCINE_TYPE" ? (
+                <FormControl style={{ width: "150px", marginLeft: "20px" }}>
+                  <InputLabel value="ALL">VACCINE</InputLabel>
+                  <Select onChange={filterValueVaccineChange}>
+                    <MenuItem value="COVISHIELD">COVISHEILD</MenuItem>
+                    <MenuItem value="COVAXIN">COVAXIN</MenuItem>
+                  </Select>
+                </FormControl>
+              ) : (
+                <></>
+              )}
+            </div>
+          ) : null}
+          {vaccineData.length === 0 && loading === true ? (
             <div
               style={{
                 display: "flex",
@@ -476,7 +533,13 @@ const Home = (props) => {
               <CircularProgress />
             </div>
           ) : (
-            <VaccineDataMain vaccineData={vaccineData} />
+            <VaccineDataMain
+              vaccineData={vaccineData}
+              filterValue={filterValue}
+              filtervalueAge={filtervalueAge}
+              filtervalueFare={filtervalueFare}
+              filtervalueVaccine={filtervalueVaccine}
+            />
           )}
           <NullState
             toSearchValue={toSearchValue}
