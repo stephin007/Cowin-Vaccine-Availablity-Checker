@@ -100,6 +100,31 @@ const Home = (props) => {
     "Find By Pincode & Date(Slots for next 7 days)",
     "Find By District & Date(Slots for next 7 days)",
   ]);
+  const [vaccinePerPage, setVaccinePerPage] = useState(3);
+  const [loadMore, setLoadMore] = useState(false);
+
+  const currentVaccine = vaccineData.slice(0, vaccinePerPage);
+
+  const onScroll = () => {
+    setLoadMore(true);
+    if (vaccineData.length < vaccinePerPage + 3) {
+      setLoadMore(false);
+    }
+    setTimeout(() => {
+      setVaccinePerPage(vaccinePerPage + 3);
+      setLoadMore(false);
+    }, 1000);
+  };
+
+  window.onscroll = () => {
+    if (
+      document.documentElement.clientHeight +
+        document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      onScroll();
+    }
+  };
 
   const GetFormattedDate = () => {
     var month = selectedDate.getMonth() + 1;
@@ -125,6 +150,7 @@ const Home = (props) => {
     setSelectedDate(date);
     setVaccineData([]);
     setDistrictCode("");
+    setLoadMore(false);
   };
 
   const onStateChange = async (e) => {
@@ -132,6 +158,8 @@ const Home = (props) => {
     setDistricts([]);
     setVaccineData([]);
     setPinCodeSearch(false);
+    setVaccinePerPage(3);
+    setLoadMore(false);
 
     const url =
       stateCode === "States"
@@ -149,6 +177,8 @@ const Home = (props) => {
 
   const findByDistrict = async (e) => {
     const districtCode = e.target.value;
+
+    setVaccinePerPage(3);
 
     const url =
       districtCode === "PLEASE SELECT A STATE FIRST"
@@ -476,11 +506,31 @@ const Home = (props) => {
               <CircularProgress />
             </div>
           ) : (
-            <VaccineDataMain vaccineData={vaccineData} />
+            <>
+              {loadMore === true ? (
+                <>
+                  <VaccineDataMain
+                    vaccineData={vaccineData.slice(0, vaccinePerPage)}
+                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <CircularProgress />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <VaccineDataMain vaccineData={currentVaccine} />
+                </>
+              )}
+            </>
           )}
           <NullState
             toSearchValue={toSearchValue}
-            vaccineData={vaccineData}
+            vaccineData={currentVaccine}
             districtCode={districtCode}
             VaccineDataMain={VaccineDataMain}
             pin={pin}
